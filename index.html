@@ -14,11 +14,263 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/community.css">
 </head>
 <body>
 
   <!-- Google Signature 4-Color Accent Stripe -->
   <div class="google-top-stripe"></div>
+
+  <!-- ==========================================================================
+       PUBLIC GDG COMMUNITY SHOWCASE & "TAP TO ENTER" GATEWAY
+       ========================================================================== -->
+  <div id="community-landing" class="community-landing" style="display: none;">
+    <!-- Public Community Top Navbar -->
+    <header class="comm-navbar">
+      <div class="comm-nav-brand">
+        <div class="comm-brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.5 5L10.5 19" stroke="#34A853" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="1.5" fill="#FBBC04"/>
+          </svg>
+        </div>
+        <div class="comm-brand-text">
+          <span class="comm-brand-title">Google Developer Groups</span>
+          <span class="comm-brand-sub">On Campus Chapter</span>
+        </div>
+      </div>
+
+      <nav class="comm-nav-links">
+        <a href="#comm-about">About GDG</a>
+        <a href="#comm-tracks">Tech Tracks</a>
+        <a href="#comm-impact">Impact</a>
+        <a href="#comm-mentorship">Mentorship</a>
+        <button type="button" class="btn-comm-portal" id="btn-nav-enter-portal">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+          <span>GDGconnect Portal</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero Section with Tap to Enter -->
+    <section class="comm-hero">
+      <div class="comm-hero-badge">
+        <span class="comm-dot"></span> Google Developer Groups on Campus (GDGoC)
+      </div>
+
+      <h1 class="comm-hero-title">
+        Connect. Learn. Grow.<br>
+        <span class="comm-gradient-text">Build for Global & Local Impact.</span>
+      </h1>
+
+      <p class="comm-hero-desc">
+        A vibrant university developer ecosystem bridging classroom theory with Google developer technologies. Together with our faculty mentors and student ambassadors, we host workshops, study jams, and community hackathons.
+      </p>
+
+      <!-- Primary "Tap to Enter" Button -->
+      <div class="comm-cta-group">
+        <button type="button" class="btn-comm-primary" id="btn-tap-to-enter-portal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Tap to Enter GDGconnect Portal</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+
+        <a href="#comm-about" class="btn-comm-secondary">
+          <span>Explore Community Details</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </a>
+      </div>
+
+      <div class="comm-credentials-hint">
+        <span>🔑 Appointed Ambassadors & Faculty Mentors: Tap above to sign in with your issued credentials</span>
+      </div>
+
+      <!-- Live Community Numbers -->
+      <div class="comm-stats-grid" id="comm-impact">
+        <div class="comm-stat-card">
+          <div class="comm-stat-num blue">1,200+</div>
+          <div class="comm-stat-label">Active Student Developers</div>
+        </div>
+        <div class="comm-stat-card">
+          <div class="comm-stat-num green">4</div>
+          <div class="comm-stat-label">Faculty Research Mentors</div>
+        </div>
+        <div class="comm-stat-card">
+          <div class="comm-stat-num yellow">6</div>
+          <div class="comm-stat-label">Appointed Student Ambassadors</div>
+        </div>
+        <div class="comm-stat-card">
+          <div class="comm-stat-num red">8</div>
+          <div class="comm-stat-label">Hands-on Technology Labs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section & Three Pillars -->
+    <section class="comm-section" id="comm-about" style="border-top: 1px solid var(--border-subtle);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Core Mission</span>
+        <h2 class="comm-section-title">The Three Pillars of GDG on Campus</h2>
+        <p class="comm-section-desc">
+          Empowering student developers of all backgrounds to grow their technical knowledge, build meaningful projects, and solve real community challenges.
+        </p>
+      </div>
+
+      <div class="comm-pillars-grid">
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon blue">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="comm-pillar-title">1. Connect</h3>
+          <p class="comm-pillar-text">
+            Meet students passionate about developer technologies on your campus and globally. Build lifelong professional relationships, share ideas, and find teammates for international hackathons.
+          </p>
+        </div>
+
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon green">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </div>
+          <h3 class="comm-pillar-title">2. Learn</h3>
+          <p class="comm-pillar-text">
+            Gain practical, industry-aligned skills through interactive workshops, code labs, Google Cloud Study Jams, and machine learning sprints led by experienced mentors and ambassadors.
+          </p>
+        </div>
+
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon yellow">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+          </div>
+          <h3 class="comm-pillar-title">3. Grow</h3>
+          <p class="comm-pillar-text">
+            Apply your skills to build real-world products for local organizations and enter the global Google Solution Challenge addressing the United Nations 17 Sustainable Development Goals.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology Tracks -->
+    <section class="comm-section" id="comm-tracks" style="background-color: var(--bg-subtle); max-width: 100%; padding: 4.5rem 2rem;">
+      <div style="max-width: 1140px; margin: 0 auto;">
+        <div class="comm-section-header">
+          <span class="comm-section-tag">Learning Pathways</span>
+          <h2 class="comm-section-title">Google Developer Technology Tracks</h2>
+          <p class="comm-section-desc">
+            Hands-on curriculum tracks organized by student ambassadors and supervised by faculty mentors.
+          </p>
+        </div>
+
+        <div class="comm-tracks-grid">
+          <div class="comm-track-card">
+            <span class="comm-track-badge" style="background-color: #E8F0FE; color: #1A73E8;">Track 01</span>
+            <h4 class="comm-track-title">🤖 AI & Machine Learning</h4>
+            <p class="comm-track-desc">
+              Explore generative AI with Google Gemini, prompt engineering, TensorFlow, Keras, Vertex AI pipelines, and computer vision models.
+            </p>
+          </div>
+
+          <div class="comm-track-card">
+            <span class="comm-track-badge" style="background-color: #E6F4EA; color: #137333;">Track 02</span>
+            <h4 class="comm-track-title">☁️ Cloud & DevOps</h4>
+            <p class="comm-track-desc">
+              Master Google Cloud Platform (GCP), Docker containers, Kubernetes orchestration, serverless microservices, and CI/CD pipelines.
+            </p>
+          </div>
+
+          <div class="comm-track-card">
+            <span class="comm-track-badge" style="background-color: #FEF7E0; color: #B06000;">Track 03</span>
+            <h4 class="comm-track-title">📱 Flutter & Android</h4>
+            <p class="comm-track-desc">
+              Build cross-platform mobile apps using Flutter and Dart, alongside modern native Android development with Kotlin and Jetpack Compose.
+            </p>
+          </div>
+
+          <div class="comm-track-card">
+            <span class="comm-track-badge" style="background-color: #FCE8E6; color: #C5221F;">Track 04</span>
+            <h4 class="comm-track-title">🌐 Modern Web Technologies</h4>
+            <p class="comm-track-desc">
+              Develop responsive, accessible web applications using Angular, Progressive Web Apps (PWAs), WebAssembly, and modern browser APIs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership & Mentorship Structure -->
+    <section class="comm-section" id="comm-mentorship">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Governance & Community Model</span>
+        <h2 class="comm-section-title">Dual-Role Leadership Architecture</h2>
+        <p class="comm-section-desc">
+          GDGconnect operates on a structured peer-mentorship model combining senior faculty expertise with energetic student ambassador outreach.
+        </p>
+      </div>
+
+      <div class="comm-leadership-box">
+        <div class="comm-role-card">
+          <div class="comm-role-badge mentor">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Role: Faculty Mentors</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Academic & Research Leaders</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            Faculty mentors provide continuous guidance, review submitted deliverables, approve workshop proposals, conduct 1-on-1 mentoring sessions, and advise on campus outreach ethics.
+          </p>
+          <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem;">
+            <li>✓ Dr. Evelyn Vance (AI & Distributed Systems)</li>
+            <li>✓ Prof. Marcus Sterling (Cybersecurity & Networks)</li>
+            <li>✓ Dr. Alistair Chen (Human-Computer Interaction)</li>
+            <li>✓ Prof. Nadia Morales (DevOps & Software Eng)</li>
+          </ul>
+        </div>
+
+        <div class="comm-role-card">
+          <div class="comm-role-badge ambassador">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            <span>Role: Student Ambassadors</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Campus Outreach & Lab Organizers</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            Appointed student ambassadors spearhead student engagement, facilitate specialization labs, drive participant registrations, submit milestone reports, and coordinate community events.
+          </p>
+          <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem;">
+            <li>✓ Alex Rivera (Cloud Lead • School of Computing)</li>
+            <li>✓ Maya Patel (Cybersecurity Lead • College of Eng)</li>
+            <li>✓ Liam Zhang (Data Science Lead • Informatics)</li>
+            <li>✓ Sophia Torres (UI/UX Lead • Human-Centered Design)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Dedicated Portal Entry Banner -->
+      <div class="comm-portal-banner" id="comm-portal">
+        <h2 class="comm-portal-banner-title">GDGconnect Student Ambassador & Mentor Portal</h2>
+        <p class="comm-portal-banner-desc">
+          The authorized operations dashboard for student ambassadors and faculty mentors. Sign in with your assigned institutional credentials to access your personalized dashboard.
+        </p>
+        <button type="button" class="btn-comm-primary" id="btn-enter-portal-cta" style="background: #ffffff; color: #1A73E8; box-shadow: 0 4px 14px rgba(0,0,0,0.2);">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Sign In with Credentials</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Public Community Footer -->
+    <footer class="comm-footer">
+      <div class="comm-footer-links">
+        <a href="#comm-about">About GDGoC</a>
+        <a href="#comm-tracks">Learning Tracks</a>
+        <a href="#comm-mentorship">Mentorship Model</a>
+        <a href="#comm-portal">Ambassador Gateway</a>
+      </div>
+      <p style="margin: 0; font-size: 0.82rem;">
+        GDGconnect is an independent community platform for Google Developer Groups on Campus chapters. Google Developer Groups is an independent group; an organization whose activities should not be confused with Google, the corporation.
+      </p>
+    </footer>
+  </div>
 
   <div id="app">
     <!-- Mobile Sidebar Backdrop Overlay -->
@@ -65,9 +317,14 @@
 
       <!-- Sidebar Footer -->
       <div class="sidebar-footer">
-        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
-          <span style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--status-green); display: inline-block;"></span>
-          <span>Online • Local DB</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--status-green); display: inline-block;"></span>
+            <span>Online</span>
+          </div>
+          <button type="button" class="btn btn-xs btn-outline" id="sidebar-sign-out" title="Sign out to GDG Community Showcase">
+            Sign Out
+          </button>
         </div>
       </div>
     </aside>
@@ -98,6 +355,12 @@
         </div>
 
         <div class="topbar-right">
+          <!-- Community Showcase Hub Link -->
+          <button type="button" class="btn btn-sm btn-outline" id="btn-open-community-hub" title="View public GDG Community information and tracks" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span>Community Hub</span>
+          </button>
+
           <!-- Role Quick Switch Bar -->
           <div class="role-quick-switch" title="Toggle active role perspective">
             <button class="role-switch-btn active" id="role-btn-mentor">
@@ -169,6 +432,7 @@
   <script src="js/sections/achievements.js"></script>
   <script src="js/sections/calendar.js"></script>
   <script src="js/sections/profile-settings.js"></script>
+  <script src="js/community.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

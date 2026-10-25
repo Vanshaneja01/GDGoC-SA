@@ -596,10 +596,15 @@
             </div>
           </div>
 
-          <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
-            <button class="btn btn-secondary" id="btn-modal-goto-profile">
-              ${ui.icon('settings')} View Full Profile & Settings
-            </button>
+          <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary" id="btn-modal-goto-profile">
+                ${ui.icon('settings')} View Profile & Settings
+              </button>
+              <button class="btn btn-outline" id="btn-modal-sign-out" style="color: var(--color-danger);">
+                ${ui.icon('log-out')} Sign Out to Community
+              </button>
+            </div>
             <button class="btn btn-outline" data-close-modal>Close</button>
           </div>
         </div>
@@ -662,6 +667,14 @@
       modalHost.querySelector('#btn-modal-goto-profile')?.addEventListener('click', () => {
         ui.closeModal();
         window.CC.state.setSection('profile-settings');
+      });
+
+      // Sign out to community showcase
+      modalHost.querySelector('#btn-modal-sign-out')?.addEventListener('click', () => {
+        ui.closeModal();
+        if (window.CC.community) {
+          window.CC.community.signOut();
+        }
       });
     });
   }

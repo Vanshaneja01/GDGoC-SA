@@ -1,0 +1,353 @@
+/**
+ * GDGconnect - GDG Community Showcase & Portal Gateway
+ * Manages public community presentation, "Tap to Enter" gateway, and credential sign-in
+ */
+
+(function () {
+  'use strict';
+
+  const AUTH_SESSION_KEY = 'gdgconnect_auth_session';
+
+  const CommunityManager = {
+    init() {
+      this.bindPortalButtons();
+      this.checkInitialView();
+    },
+
+    // Check if user is already logged in or has a URL query
+    checkInitialView() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userParam = urlParams.get('user') || urlParams.get('id');
+      const forceCommunity = urlParams.get('view') === 'community';
+
+      if (forceCommunity) {
+        this.showCommunityView();
+        return;
+      }
+
+      if (userParam) {
+        // Direct link provided - authenticate directly
+        this.showPortalView();
+        return;
+      }
+
+      const session = this.getSession();
+      if (session && session.id && session.role) {
+        // Active session found - enter portal
+        this.showPortalView();
+      } else {
+        // Default to public GDG Community Portal with "Tap to Enter"
+        this.showCommunityView();
+      }
+    },
+
+    getSession() {
+      try {
+        const raw = localStorage.getItem(AUTH_SESSION_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    },
+
+    setSession(user, role) {
+      const session = {
+        id: user.id,
+        role: role,
+        name: user.name,
+        email: user.email,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(session));
+      window.CC.state.setRoleAndUser(role, user.id);
+    },
+
+    clearSession() {
+      localStorage.removeItem(AUTH_SESSION_KEY);
+    },
+
+    showCommunityView() {
+      const landing = document.getElementById('community-landing');
+      const app = document.getElementById('app');
+      if (landing) landing.style.display = 'block';
+      if (app) app.style.display = 'none';
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    showPortalView() {
+      const landing = document.getElementById('community-landing');
+      const app = document.getElementById('app');
+      if (landing) landing.style.display = 'none';
+      if (app) app.style.display = 'flex';
+
+      // Ensure active section is rendered
+      if (window.CC.app && typeof window.CC.app.init === 'function') {
+        window.CC.state.setSection(window.CC.state.activeSection || 'dashboard');
+      }
+    },
+
+    signOut() {
+      this.clearSession();
+      window.CC.ui.showToast("Signed out. Returned to GDG Community Showcase.", "info", "Signed Out");
+      this.showCommunityView();
+    },
+
+    bindPortalButtons() {
+      // Tap to Enter button in Hero
+      document.addEventListener('click', (e) => {
+        const tapBtn = e.target.closest('#btn-tap-to-enter-portal, .btn-comm-portal, #btn-enter-portal-cta');
+        if (tapBtn) {
+          e.preventDefault();
+          this.openAuthModal();
+        }
+
+        const signOutBtn = e.target.closest('#btn-sign-out, #sidebar-sign-out');
+        if (signOutBtn) {
+          e.preventDefault();
+          this.signOut();
+        }
+
+        const commHubBtn = e.target.closest('#btn-open-community-hub');
+        if (commHubBtn) {
+          e.preventDefault();
+          this.showCommunityView();
+        }
+      });
+    },
+
+    openAuthModal(defaultRole = 'Ambassador') {
+      const ui = window.CC.ui;
+      let activeRole = defaultRole;
+
+      const modalHtml = `
+        <div class="modal-backdrop">
+          <div class="auth-modal-dialog">
+            <div class="auth-header-stripe"></div>
+
+            <div class="auth-modal-header">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="comm-brand-logo" style="width: 38px; height: 38px;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.5 5L10.5 19" stroke="#34A853" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="12" cy="12" r="1.5" fill="#FBBC04"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">Sign in to GDGconnect</h3>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Mentor & Student Ambassador Portal</span>
+                </div>
+              </div>
+              <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
+            </div>
+
+            <div class="modal-body" style="padding: 1.25rem 1.75rem;">
+              <!-- Role Selector Tabs -->
+              <div class="auth-role-tabs">
+                <button type="button" class="auth-role-tab ${activeRole === 'Ambassador' ? 'active' : ''}" id="tab-auth-ambassador">
+                  🎓 Student Ambassador
+                </button>
+                <button type="button" class="auth-role-tab ${activeRole === 'Mentor' ? 'active' : ''}" id="tab-auth-mentor">
+                  🛡️ Faculty Mentor
+                </button>
+              </div>
+
+              <!-- Sign In Form -->
+              <form id="portal-auth-form">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="auth-id-input" style="font-size: 0.82rem; font-weight: 600;">
+                    <span id="label-id-type">Ambassador ID</span> or Official Email
+                  </label>
+                  <input 
+                    type="text" 
+                    id="auth-id-input" 
+                    class="form-control" 
+                    placeholder="e.g. AMB-201 or alex.rivera@student.gdgconnect.edu"
+                    value="${activeRole === 'Ambassador' ? 'AMB-201' : 'MTR-101'}"
+                    required 
+                  />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                    <label class="form-label" for="auth-password-input" style="font-size: 0.82rem; font-weight: 600; margin: 0;">
+                      Issued Access Key / Password
+                    </label>
+                    <span style="font-size: 0.72rem; color: var(--color-primary); cursor: pointer;" id="btn-autofill-pass">
+                      Auto-fill Key
+                    </span>
+                  </div>
+                  <input 
+                    type="password" 
+                    id="auth-password-input" 
+                    class="form-control" 
+                    placeholder="Enter your security access key"
+                    value="gdg2026"
+                    required 
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" style="padding: 0.85rem; font-size: 0.95rem; font-weight: 700;">
+                  ${ui.icon('log-in')} Sign In to Dashboard
+                </button>
+              </form>
+
+              <!-- One-Click Quick Credentials Helper -->
+              <div class="auth-demo-box">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                  <strong style="font-size: 0.78rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.5px;">
+                    🔑 Pre-Assigned Credentials (1-Click Access)
+                  </strong>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+                  <!-- Mentor Demo -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                    <div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Dr. Evelyn Vance <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
+                      <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: MTR-101 • Key: mentor@gdg</div>
+                    </div>
+                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-101">
+                      Sign In
+                    </button>
+                  </div>
+
+                  <!-- Ambassador Demo 1 -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                    <div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Alex Rivera <span class="badge badge-olive" style="font-size: 0.65rem;">Ambassador</span></div>
+                      <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: AMB-201 • Key: ambassador@gdg</div>
+                    </div>
+                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Ambassador:AMB-201">
+                      Sign In
+                    </button>
+                  </div>
+
+                  <!-- Ambassador Demo 2 -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                    <div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Maya Patel <span class="badge badge-olive" style="font-size: 0.65rem;">Ambassador</span></div>
+                      <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: AMB-202 • Key: ambassador@gdg</div>
+                    </div>
+                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Ambassador:AMB-202">
+                      Sign In
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="modal-footer" style="padding: 0.85rem 1.75rem; background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">
+                🔒 Protected by Campus Role-Based Authorization
+              </span>
+              <button class="btn btn-sm btn-outline" data-close-modal>Cancel</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      ui.openModal(modalHtml, (modalHost) => {
+        const idInput = modalHost.querySelector('#auth-id-input');
+        const passInput = modalHost.querySelector('#auth-password-input');
+        const labelIdType = modalHost.querySelector('#label-id-type');
+        const tabAmb = modalHost.querySelector('#tab-auth-ambassador');
+        const tabMtr = modalHost.querySelector('#tab-auth-mentor');
+
+        tabAmb.addEventListener('click', () => {
+          activeRole = 'Ambassador';
+          tabAmb.classList.add('active');
+          tabMtr.classList.remove('active');
+          labelIdType.textContent = 'Ambassador ID';
+          idInput.placeholder = 'e.g. AMB-201 or alex.rivera@student.gdgconnect.edu';
+          if (!idInput.value || idInput.value === 'MTR-101') idInput.value = 'AMB-201';
+          passInput.value = 'ambassador@gdg';
+        });
+
+        tabMtr.addEventListener('click', () => {
+          activeRole = 'Mentor';
+          tabMtr.classList.add('active');
+          tabAmb.classList.remove('active');
+          labelIdType.textContent = 'Mentor ID';
+          idInput.placeholder = 'e.g. MTR-101 or evelyn.vance@gdgconnect.edu';
+          if (!idInput.value || idInput.value === 'AMB-201') idInput.value = 'MTR-101';
+          passInput.value = 'mentor@gdg';
+        });
+
+        modalHost.querySelector('#btn-autofill-pass')?.addEventListener('click', () => {
+          passInput.value = activeRole === 'Mentor' ? 'mentor@gdg' : 'ambassador@gdg';
+        });
+
+        // Quick sign in buttons
+        modalHost.querySelectorAll('[data-quick-user]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const [role, id] = btn.getAttribute('data-quick-user').split(':');
+            const targetUser = role === 'Mentor'
+              ? window.CC.db.getMentorById(id)
+              : window.CC.db.getAmbassadorById(id);
+
+            if (targetUser) {
+              CommunityManager.setSession(targetUser, role);
+              ui.closeModal();
+              ui.showToast(`Authenticated as ${targetUser.name} (${targetUser.id})`, "success", `Welcome to ${role} Dashboard`);
+              CommunityManager.showPortalView();
+            }
+          });
+        });
+
+        // Form Submission
+        const form = modalHost.querySelector('#portal-auth-form');
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const rawId = idInput.value.trim();
+          const rawPass = passInput.value.trim();
+
+          if (!rawId) {
+            ui.showToast("Please enter your assigned ID or email.", "error", "Input Required");
+            return;
+          }
+
+          const upper = rawId.toUpperCase();
+          let matchedUser = null;
+          let matchedRole = activeRole;
+
+          // Check Mentor ID or Email
+          const mentor = window.CC.db.getMentorById(upper) || window.CC.db.getMentors().find(m => m.email.toLowerCase() === rawId.toLowerCase());
+          if (mentor) {
+            matchedUser = mentor;
+            matchedRole = 'Mentor';
+          } else {
+            // Check Ambassador ID or Email
+            const ambassador = window.CC.db.getAmbassadorById(upper) || window.CC.db.getAmbassadors().find(a => a.email.toLowerCase() === rawId.toLowerCase());
+            if (ambassador) {
+              matchedUser = ambassador;
+              matchedRole = 'Ambassador';
+            }
+          }
+
+          if (!matchedUser) {
+            ui.showToast(`Invalid credentials. No user found matching "${rawId}".`, "error", "Access Denied");
+            return;
+          }
+
+          // Complete login
+          CommunityManager.setSession(matchedUser, matchedRole);
+          ui.closeModal();
+          ui.showToast(`Authenticated successfully as ${matchedUser.name}!`, "success", `Welcome, ${matchedRole}`);
+          CommunityManager.showPortalView();
+        });
+      });
+    }
+  };
+
+  window.CC = window.CC || {};
+  window.CC.community = CommunityManager;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    CommunityManager.init();
+  });
+})();
