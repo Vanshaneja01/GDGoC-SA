@@ -154,31 +154,37 @@
 .badge-green {
   background-color: var(--status-green-bg);
   color: var(--status-green);
+  border: 1px solid rgba(30, 142, 62, 0.15);
 }
 
 .badge-olive {
   background-color: var(--color-olive-light);
   color: var(--color-olive);
+  border: 1px solid rgba(52, 168, 83, 0.15);
 }
 
 .badge-blue {
   background-color: var(--status-blue-bg);
   color: var(--status-blue);
+  border: 1px solid rgba(26, 115, 232, 0.15);
 }
 
 .badge-amber {
   background-color: var(--status-amber-bg);
   color: var(--status-amber);
+  border: 1px solid rgba(176, 96, 0, 0.15);
 }
 
 .badge-orange {
   background-color: var(--status-orange-bg);
   color: var(--status-orange);
+  border: 1px solid rgba(227, 116, 0, 0.15);
 }
 
 .badge-red {
   background-color: var(--status-red-bg);
   color: var(--status-red);
+  border: 1px solid rgba(217, 48, 37, 0.15);
 }
 
 .badge-gray {
@@ -190,7 +196,7 @@
 /* Avatars */
 .avatar {
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-olive));
+  background: linear-gradient(135deg, #4285F4, #34A853);
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -199,6 +205,7 @@
   text-transform: uppercase;
   flex-shrink: 0;
   user-select: none;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.2);
 }
 
 .avatar-sm { width: 28px; height: 28px; font-size: 0.72rem; }
@@ -777,7 +784,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-olive));
+  background: linear-gradient(90deg, #4285F4, #34A853);
   border-radius: var(--radius-full);
   transition: width var(--transition-normal);
 }

@@ -1,64 +1,72 @@
 /* ==========================================================================
-   CampusConnect - Modern SaaS Theme (Forest & Olive Green Aesthetic)
+   CampusConnect - Google Material Design & GDGoC Theme
+   Iconic 4-Color Palette: Google Blue, Red, Yellow & Green
    ========================================================================== */
 
 :root {
-  /* Color Palette - Forest & Olive Green */
-  --color-primary: #204B24;
-  --color-primary-hover: #17381A;
-  --color-primary-light: #EBF3EA;
-  --color-primary-ring: rgba(32, 75, 36, 0.2);
+  /* Google 4-Color Signature Palette */
+  --color-google-blue: #4285F4;
+  --color-google-red: #EA4335;
+  --color-google-yellow: #FBBC04;
+  --color-google-green: #34A853;
 
-  --color-olive: #4C6A2E;
-  --color-olive-hover: #3C5424;
-  --color-olive-light: #F0F5EB;
+  /* Primary Brand Accent (Google Blue 600) */
+  --color-primary: #1A73E8;
+  --color-primary-hover: #1557B0;
+  --color-primary-light: #E8F0FE;
+  --color-primary-ring: rgba(26, 115, 232, 0.28);
 
-  --color-accent: #2E7D32;
-  --color-accent-gold: #D4AF37;
+  /* Secondary Role Accent (Google Green 600 for Ambassadors / Outreach) */
+  --color-olive: #34A853;
+  --color-olive-hover: #1E8E3E;
+  --color-olive-light: #E6F4EA;
 
-  /* Neutrals (Light Mode) */
-  --bg-page: #F7F9F6;
+  --color-accent: #1A73E8;
+  --color-accent-gold: #F9AB00;
+
+  /* Neutrals (Google Light Surface - Material Design 3) */
+  --bg-page: #F8F9FA;
   --bg-surface: #FFFFFF;
   --bg-surface-elevated: #FFFFFF;
-  --bg-subtle: #F1F4EE;
-  --bg-hover: #E9EFE6;
+  --bg-subtle: #F1F3F4;
+  --bg-hover: #E8EAED;
 
-  --border-subtle: #E2E8DD;
-  --border-medium: #CBD5C4;
-  --border-strong: #A8B59E;
+  --border-subtle: #DADCE0;
+  --border-medium: #BDC1C6;
+  --border-strong: #9AA0A6;
 
-  --text-main: #1A2419;
-  --text-secondary: #4A5B47;
-  --text-muted: #72846E;
+  --text-main: #202124;
+  --text-secondary: #5F6368;
+  --text-muted: #80868B;
   --text-inverse: #FFFFFF;
 
-  /* Status Colors */
-  --status-green: #1E7E34;
-  --status-green-bg: #E8F5E9;
-  --status-blue: #1565C0;
-  --status-blue-bg: #E3F2FD;
-  --status-amber: #B78103;
-  --status-amber-bg: #FFF8E1;
-  --status-orange: #C75200;
-  --status-orange-bg: #FFF3E0;
-  --status-red: #C62828;
-  --status-red-bg: #FFEBEE;
+  /* Status Colors (Google Core Palette) */
+  --status-green: #1E8E3E;
+  --status-green-bg: #E6F4EA;
+  --status-blue: #1A73E8;
+  --status-blue-bg: #E8F0FE;
+  --status-amber: #B06000;
+  --status-amber-bg: #FEF7E0;
+  --status-orange: #E37400;
+  --status-orange-bg: #FFF0E0;
+  --status-red: #D93025;
+  --status-red-bg: #FCE8E6;
 
-  /* Typography */
-  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  /* Typography - Google Sans / Roboto Hierarchy */
+  --font-family-sans: 'Google Sans', 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Roboto Mono', 'Fira Code', monospace;
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(18, 38, 16, 0.04);
-  --shadow-sm: 0 1px 3px rgba(18, 38, 16, 0.08), 0 1px 2px rgba(18, 38, 16, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(18, 38, 16, 0.08), 0 2px 4px -1px rgba(18, 38, 16, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(18, 38, 16, 0.1), 0 4px 6px -2px rgba(18, 38, 16, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(18, 38, 16, 0.12), 0 10px 10px -5px rgba(18, 38, 16, 0.04);
+  /* Google Material Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(60, 64, 67, 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.15), 0 1px 3px 1px rgba(60, 64, 67, 0.08);
+  --shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.2), 0 4px 8px 3px rgba(60, 64, 67, 0.1);
+  --shadow-lg: 0 2px 6px 2px rgba(60, 64, 67, 0.15), 0 8px 16px 4px rgba(60, 64, 67, 0.1);
+  --shadow-xl: 0 4px 12px 4px rgba(60, 64, 67, 0.15), 0 12px 24px 6px rgba(60, 64, 67, 0.12);
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* Radii - Material You */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
   --radius-full: 9999px;
 
   /* Dimensions */
@@ -67,37 +75,53 @@
   --topbar-height: 70px;
 
   /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Theme Overrides */
+/* Dark Theme Overrides (Google Dark Mode Palette) */
 [data-theme="dark"] {
-  --color-primary: #529E57;
-  --color-primary-hover: #67B66D;
-  --color-primary-light: rgba(82, 158, 87, 0.15);
-  --color-primary-ring: rgba(82, 158, 87, 0.3);
+  --color-primary: #8AB4F8;
+  --color-primary-hover: #AECBFA;
+  --color-primary-light: rgba(138, 180, 248, 0.15);
+  --color-primary-ring: rgba(138, 180, 248, 0.35);
 
-  --color-olive: #7DA652;
-  --color-olive-hover: #90BA63;
-  --color-olive-light: rgba(125, 166, 82, 0.15);
+  --color-olive: #81C995;
+  --color-olive-hover: #A8DAB5;
+  --color-olive-light: rgba(129, 201, 149, 0.15);
 
-  --bg-page: #0C120C;
-  --bg-surface: #141C14;
-  --bg-surface-elevated: #1B261B;
-  --bg-subtle: #182218;
-  --bg-hover: #223022;
+  --bg-page: #202124;
+  --bg-surface: #292A2D;
+  --bg-surface-elevated: #35363A;
+  --bg-subtle: #303134;
+  --bg-hover: #3C4043;
 
-  --border-subtle: #243324;
-  --border-medium: #324632;
-  --border-strong: #4A634A;
+  --border-subtle: #3C4043;
+  --border-medium: #5F6368;
+  --border-strong: #80868B;
 
-  --text-main: #EBF3EA;
-  --text-secondary: #A6BAA2;
-  --text-muted: #748A70;
-  --text-inverse: #0C120C;
+  --text-main: #E8EAED;
+  --text-secondary: #9AA0A6;
+  --text-muted: #80868B;
+  --text-inverse: #202124;
 
-  --status-green: #66BB6A;
+  --status-green: #81C995;
+  --status-green-bg: rgba(129, 201, 149, 0.15);
+  --status-blue: #8AB4F8;
+  --status-blue-bg: rgba(138, 180, 248, 0.15);
+  --status-amber: #FDD663;
+  --status-amber-bg: rgba(253, 214, 99, 0.15);
+  --status-orange: #FCAD70;
+  --status-orange-bg: rgba(252, 173, 112, 0.15);
+  --status-red: #F28B82;
+  --status-red-bg: rgba(242, 139, 130, 0.15);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.7);
+}
   --status-green-bg: rgba(102, 187, 106, 0.15);
   --status-blue: #64B5F6;
   --status-blue-bg: rgba(100, 181, 246, 0.15);
@@ -113,6 +137,17 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Google Signature Top 4-Color Stripe */
+.google-top-stripe {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4285F4 0%, #4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC04 50%, #FBBC04 75%, #34A853 75%, #34A853 100%);
+  z-index: 1000;
 }
 
 /* Base Resets & Layout */
@@ -178,26 +213,28 @@ body.body-no-scroll {
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-olive));
-  color: #FFFFFF;
+  width: 38px;
+  height: 38px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
+  flex-shrink: 0;
 }
 
 .brand-badge {
   font-size: 0.65rem;
-  padding: 0.15rem 0.4rem;
-  border-radius: var(--radius-sm);
-  background-color: var(--color-primary-light);
+  padding: 0.18rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.12), rgba(52, 168, 83, 0.12));
   color: var(--color-primary);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border: 1px solid rgba(66, 133, 244, 0.25);
 }
 
 /* Role Selector in Sidebar */
@@ -230,11 +267,13 @@ body.body-no-scroll {
 .role-pill-mentor {
   background-color: var(--color-primary-light);
   color: var(--color-primary);
+  border: 1px solid rgba(26, 115, 232, 0.2);
 }
 
 .role-pill-ambassador {
   background-color: var(--color-olive-light);
   color: var(--color-olive);
+  border: 1px solid rgba(52, 168, 83, 0.2);
 }
 
 .role-user-brief {
@@ -420,7 +459,7 @@ body.body-no-scroll {
   outline: none;
   background-color: var(--bg-surface);
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-ring);
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
 }
 
 .global-search-shortcut {

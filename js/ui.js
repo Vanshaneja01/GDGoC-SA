@@ -124,7 +124,21 @@
         ? initialsOrUrl
         : (name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'CC');
 
-      return `<div class="avatar avatar-${size}" title="${this.escape(name)}">${this.escape(initials)}</div>`;
+      // Google 4-Color Signature palette for avatars
+      const googleColors = [
+        'linear-gradient(135deg, #4285F4, #1A73E8)', // Google Blue
+        'linear-gradient(135deg, #34A853, #1E8E3E)', // Google Green
+        'linear-gradient(135deg, #EA4335, #D93025)', // Google Red
+        'linear-gradient(135deg, #FBBC04, #F29900)'  // Google Yellow
+      ];
+      let sum = 0;
+      const str = (name || initials || 'G');
+      for (let i = 0; i < str.length; i++) {
+        sum += str.charCodeAt(i);
+      }
+      const bg = googleColors[sum % googleColors.length];
+
+      return `<div class="avatar avatar-${size}" style="background: ${bg};" title="${this.escape(name)}">${this.escape(initials)}</div>`;
     },
 
     // Toasts

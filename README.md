@@ -36,11 +36,14 @@ The application strictly implements the 13 navigation sections in the requested 
 
 ---
 
-## 🎨 Design System
+## 🎨 Design System: Google & Material Design 3 (GDGoC Theme)
 
-- **Palette**: Forest Green (`#204B24`) and Olive (`#4C6A2E`) accents on crisp, light card surfaces (`#F7F9F6`), with a complete Dark Theme (`#0C120C` / `#141C14`).
-- **Typography**: Clean sans-serif hierarchy powered by Google Font `Inter` with monospace accents (`JetBrains Mono`).
-- **Icons**: Crisp inline SVG icons (Lucide-inspired) embedded directly without external CDN dependencies.
+- **Google 4-Color Palette**: Google Blue (`#4285F4` / `#1A73E8`), Google Red (`#EA4335`), Google Yellow (`#FBBC04`), and Google Green (`#34A853`).
+- **Google Top Accent Stripe**: Signature 4-color gradient bar (`#4285F4` -> `#EA4335` -> `#FBBC04` -> `#34A853`) across the top of the portal.
+- **Google Avatars**: Avatars dynamically styled with Google's vibrant 4-color gradients.
+- **Material 3 Surfaces**: Clean Google Workspace surfaces (`#F8F9FA` background, `#FFFFFF` cards, `#DADCE0` borders), with a complete Google Dark Theme (`#202124` / `#292A2D`).
+- **Typography**: Clean hierarchy powered by Google's `Roboto` and `Inter` with monospace accents (`JetBrains Mono`).
+- **Google Search Bar**: Pill-shaped search with Google elevation on focus.
 - **Responsive**: Adapts fluidly to desktop, tablet, and mobile with a collapsible drawer sidebar.
 
 ---
