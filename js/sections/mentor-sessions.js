@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Mentor Sessions Section (One-to-One & Group Mentoring)
+ * GDGconnect - Mentor Sessions Section (One-to-One & Group Mentoring)
  * Distinct from Ambassador Sessions: manages faculty mentorship check-ins, requests & approvals
  */
 
@@ -484,7 +484,7 @@
           startTime: startTime,
           endTime: endTime,
           meetingType: formData.get('meetingType'),
-          location: formData.get('meetingType') === 'Virtual' ? `meet.campusconnect.edu/${mentor.id.toLowerCase()}-${currentUser.id.toLowerCase()}` : (mentor.officeLocation || 'Faculty Office'),
+          location: formData.get('meetingType') === 'Virtual' ? `meet.gdgconnect.edu/${mentor.id.toLowerCase()}-${currentUser.id.toLowerCase()}` : (mentor.officeLocation || 'Faculty Office'),
           agenda: formData.get('description').trim(),
           status: 'Requested'
         });
@@ -579,7 +579,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label form-label-required">Location or Virtual Link</label>
-                  <input type="text" class="form-control" name="location" value="CampusConnect Meet (meet.campusconnect.edu/session)" required>
+                  <input type="text" class="form-control" name="location" value="GDGconnect Meet (meet.gdgconnect.edu/session)" required>
                 </div>
               </div>
 

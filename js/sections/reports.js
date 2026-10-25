@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Reports & Progress Section
+ * GDGconnect - Reports & Progress Section
  * Weekly progress reports, mentor reviews, and dynamic metric calculations
  */
 

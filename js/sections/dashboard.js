@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Role-Based Dashboard Section
+ * GDGconnect - Role-Based Dashboard Section
  * Contextual KPI cards, quick actions, and tailored overview for Mentor and Ambassador roles
  */
 

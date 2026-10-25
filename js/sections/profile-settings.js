@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Profile & Settings Section
+ * GDGconnect - Profile & Settings Section
  * Identity switcher, user self-editing, JSON backup & restore, and production architecture documentation
  */
 
@@ -225,7 +225,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.setAttribute('href', url);
-      link.setAttribute('download', `campusconnect_backup_${new Date().toISOString().split('T')[0]}.json`);
+      link.setAttribute('download', `gdgconnect_backup_${new Date().toISOString().split('T')[0]}.json`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

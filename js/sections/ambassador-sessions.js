@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Ambassador Sessions Section
+ * GDGconnect - Ambassador Sessions Section
  * Workshops, lab orientations, registration drives, proposals & post-session reporting
  */
 
@@ -290,7 +290,7 @@
               <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem;">
                 ${ui.icon('external-link')}
                 <strong>Public RSVP URL:</strong>
-                <span style="font-family: var(--font-family-mono); color: var(--color-primary);">https://campusconnect.edu/events/${s.id.toLowerCase()}</span>
+                <span style="font-family: var(--font-family-mono); color: var(--color-primary);">https://gdgconnect.edu/events/${s.id.toLowerCase()}</span>
               </div>
               <button class="btn btn-sm btn-primary" id="btn-copy-rsvp-link">
                 ${ui.icon('copy')} Copy Link

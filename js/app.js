@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Application Controller & Bootstrap
+ * GDGconnect - Application Controller & Bootstrap
  * Orchestrates navigation, global search, notifications flyout, theme switching, and keyboard shortcuts
  */
 

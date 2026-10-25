@@ -1,5 +1,5 @@
 /**
- * CampusConnect - UI Helpers, Modals, Toasts & Icons
+ * GDGconnect - UI Helpers, Modals, Toasts & Icons
  * Zero-dependency SVG icon system and accessible modal/toast handling
  */
 

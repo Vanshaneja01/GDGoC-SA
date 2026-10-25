@@ -1,6 +1,6 @@
-# CampusConnect — Mentor & Ambassador Management Portal
+# GDGconnect — Mentor & Ambassador Management Portal
 
-CampusConnect is a modern, responsive web application designed to manage university faculty mentors, student ambassadors, task milestones, mentoring check-ins, student-led workshops, lab enrollments, participant verification, and team coordination.
+GDGconnect is a modern, responsive web application designed to manage university faculty mentors, student ambassadors, task milestones, mentoring check-ins, student-led workshops, lab enrollments, participant verification, and team coordination.
 
 The platform combines the best practices from ambassador management platforms (e.g. outreach tracking, tabling drives, gamified milestone recognition) and mentorship portals (1-on-1 advisement, session scheduling, task review workflows, and weekly progress appraisals).
 
@@ -50,7 +50,7 @@ The application strictly implements the 13 navigation sections in the requested 
 
 ## 🚀 How to Run
 
-Because CampusConnect is built with pure standards-compliant HTML5, CSS3, and modern vanilla JavaScript, no heavy build tools or npm installation are required.
+Because GDGconnect is built with pure standards-compliant HTML5, CSS3, and modern vanilla JavaScript, no heavy build tools or npm installation are required.
 
 ### Option 1: Direct Browser Launch
 Simply double-click `index.html` in Windows Explorer or open it in Google Chrome, Microsoft Edge, Firefox, or Safari:
@@ -89,7 +89,7 @@ npx serve -l 8080
    - As an Ambassador, open **Tasks**, click an assigned task, type submission notes, and click *"Submit Work for Review"*.
    - Switch to Mentor, open the task, write feedback, and click *"Approve & Mark Completed"*.
 5. **Lab Registration & CSV Tools**:
-   - Go to **Labs & Registrations**. Try registering a student with an email that already exists in that lab (e.g. `jordan.hayes@student.campusconnect.edu`) to see **Duplicate Detection** in action.
+   - Go to **Labs & Registrations**. Try registering a student with an email that already exists in that lab (e.g. `jordan.hayes@student.gdgconnect.edu`) to see **Duplicate Detection** in action.
    - Click **Export CSV** to download a clean spreadsheet of your participants.
    - Click **Import CSV** to batch import participants.
 

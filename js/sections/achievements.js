@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Achievements & Recognition Section
+ * GDGconnect - Achievements & Recognition Section
  * Gamified Leaderboard, Milestone Tiers (Bronze, Silver, Gold, Diamond), & Verified Badges
  */
 

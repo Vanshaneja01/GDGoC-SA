@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Announcements Section
+ * GDGconnect - Announcements Section
  * Pinned updates, audience targeting, priority badges & mentor authoring
  */
 

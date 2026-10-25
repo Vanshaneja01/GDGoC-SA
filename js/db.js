@@ -1,12 +1,13 @@
 /**
- * CampusConnect - Database & Storage Layer (localStorage with comprehensive seed data)
+ * GDGconnect - Database & Storage Layer (localStorage with comprehensive seed data)
  * Enforces dynamic relational integrity between Mentors, Ambassadors, Tasks, Sessions, Labs, etc.
  */
 
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'campusconnect_data_v1';
+  const STORAGE_KEY = 'gdgconnect_data_v1';
+  const LEGACY_STORAGE_KEY = 'campusconnect_data_v1';
 
   // Realistic seed data
   const SEED_DATA = {
@@ -14,7 +15,7 @@
       {
         id: "MTR-101",
         name: "Dr. Evelyn Vance",
-        email: "evelyn.vance@campusconnect.edu",
+        email: "evelyn.vance@gdgconnect.edu",
         phone: "+1 (555) 349-8821",
         institution: "School of Computing & Data Sciences",
         department: "AI & Distributed Systems",
@@ -30,7 +31,7 @@
       {
         id: "MTR-102",
         name: "Prof. Marcus Sterling",
-        email: "marcus.sterling@campusconnect.edu",
+        email: "marcus.sterling@gdgconnect.edu",
         phone: "+1 (555) 482-1923",
         institution: "College of Engineering",
         department: "Cybersecurity & Networks",
@@ -46,7 +47,7 @@
       {
         id: "MTR-103",
         name: "Dr. Alistair Chen",
-        email: "alistair.chen@campusconnect.edu",
+        email: "alistair.chen@gdgconnect.edu",
         phone: "+1 (555) 619-3345",
         institution: "School of Informatics",
         department: "Human-Computer Interaction",
@@ -62,7 +63,7 @@
       {
         id: "MTR-104",
         name: "Prof. Nadia Morales",
-        email: "nadia.morales@campusconnect.edu",
+        email: "nadia.morales@gdgconnect.edu",
         phone: "+1 (555) 902-4512",
         institution: "College of Sciences",
         department: "Software Engineering & DevOps",
@@ -81,7 +82,7 @@
       {
         id: "AMB-201",
         name: "Alex Rivera",
-        email: "alex.rivera@student.campusconnect.edu",
+        email: "alex.rivera@student.gdgconnect.edu",
         phone: "+1 (555) 782-9912",
         institution: "School of Computing & Data Sciences",
         department: "Computer Science",
@@ -96,7 +97,7 @@
       {
         id: "AMB-202",
         name: "Maya Patel",
-        email: "maya.patel@student.campusconnect.edu",
+        email: "maya.patel@student.gdgconnect.edu",
         phone: "+1 (555) 843-2219",
         institution: "College of Engineering",
         department: "Cybersecurity & IT",
@@ -111,7 +112,7 @@
       {
         id: "AMB-203",
         name: "Liam Zhang",
-        email: "liam.zhang@student.campusconnect.edu",
+        email: "liam.zhang@student.gdgconnect.edu",
         phone: "+1 (555) 321-7788",
         institution: "School of Informatics",
         department: "Data Science & Statistics",
@@ -126,7 +127,7 @@
       {
         id: "AMB-204",
         name: "Sophia Torres",
-        email: "sophia.torres@student.campusconnect.edu",
+        email: "sophia.torres@student.gdgconnect.edu",
         phone: "+1 (555) 914-6352",
         institution: "School of Informatics",
         department: "Human-Centered Design",
@@ -141,7 +142,7 @@
       {
         id: "AMB-205",
         name: "David Kim",
-        email: "david.kim@student.campusconnect.edu",
+        email: "david.kim@student.gdgconnect.edu",
         phone: "+1 (555) 601-8472",
         institution: "College of Sciences",
         department: "Software Engineering",
@@ -156,7 +157,7 @@
       {
         id: "AMB-206",
         name: "Chloe Bennett",
-        email: "chloe.bennett@student.campusconnect.edu",
+        email: "chloe.bennett@student.gdgconnect.edu",
         phone: "+1 (555) 249-1134",
         institution: "College of Engineering",
         department: "Electrical & Computer Eng",
@@ -207,7 +208,7 @@
         submission: {
           notes: "Processed all 45 pending registrations. 38 verified, 7 flagged for incomplete student IDs.",
           submittedAt: "2026-10-21T16:20:00Z",
-          links: ["https://campusconnect.edu/drive/lab-102-audit-report.xlsx"]
+          links: ["https://gdgconnect.edu/drive/lab-102-audit-report.xlsx"]
         },
         feedback: {
           mentorId: "MTR-102",
@@ -233,7 +234,7 @@
         submission: {
           notes: "All 3 creative banners rendered and scheduled for auto-posting.",
           submittedAt: "2026-10-19T11:00:00Z",
-          links: ["https://figma.com/file/campusconnect-assets"]
+          links: ["https://figma.com/file/gdgconnect-assets"]
         },
         feedback: {
           mentorId: "MTR-103",
@@ -273,7 +274,7 @@
         startDate: "2026-10-19",
         deadline: "2026-10-26",
         status: "To Do",
-        instructions: "Pull raw signup counts from Google Sheets and input verified counts into CampusConnect database.",
+        instructions: "Pull raw signup counts from Google Sheets and input verified counts into GDGconnect database.",
         attachments: [],
         submission: null,
         feedback: null,
@@ -318,7 +319,7 @@
         startTime: "15:00",
         endTime: "15:45",
         meetingType: "Virtual",
-        location: "CampusConnect Meet (meet.campusconnect.edu/vance-alex)",
+        location: "GDGconnect Meet (meet.gdgconnect.edu/vance-alex)",
         agenda: "1. Review sprint tasks\n2. Discuss lab participant recruitment tactics\n3. Q&A and blockers",
         prepInstructions: "Please bring your current registration roster and week 42 report draft.",
         status: "Approved",
@@ -352,7 +353,7 @@
         startTime: "14:00",
         endTime: "14:45",
         meetingType: "Virtual",
-        location: "meet.campusconnect.edu/chen-sophia",
+        location: "meet.gdgconnect.edu/chen-sophia",
         agenda: "1. Review consent form\n2. Discuss usability task scenarios\n3. Data anonymization best practices",
         prepInstructions: "Review IRB human subjects guidelines v4.",
         status: "Requested", // Pending mentor approval!
@@ -523,7 +524,7 @@
       {
         id: "REG-1001",
         name: "Jordan Hayes",
-        email: "jordan.hayes@student.campusconnect.edu",
+        email: "jordan.hayes@student.gdgconnect.edu",
         phone: "+1 (555) 234-5678",
         labId: "LAB-101",
         ambassadorId: "AMB-201",
@@ -535,7 +536,7 @@
       {
         id: "REG-1002",
         name: "Samantha Wright",
-        email: "samantha.w@student.campusconnect.edu",
+        email: "samantha.w@student.gdgconnect.edu",
         phone: "+1 (555) 345-6789",
         labId: "LAB-101",
         ambassadorId: "AMB-201",
@@ -547,7 +548,7 @@
       {
         id: "REG-1003",
         name: "Marcus Brody",
-        email: "m.brody@student.campusconnect.edu",
+        email: "m.brody@student.gdgconnect.edu",
         phone: "+1 (555) 456-7890",
         labId: "LAB-101",
         ambassadorId: "AMB-203",
@@ -559,7 +560,7 @@
       {
         id: "REG-1004",
         name: "Elena Rostova",
-        email: "elena.r@student.campusconnect.edu",
+        email: "elena.r@student.gdgconnect.edu",
         phone: "+1 (555) 567-8901",
         labId: "LAB-102",
         ambassadorId: "AMB-202",
@@ -571,7 +572,7 @@
       {
         id: "REG-1005",
         name: "Tariq Al-Mansoor",
-        email: "tariq.m@student.campusconnect.edu",
+        email: "tariq.m@student.gdgconnect.edu",
         phone: "+1 (555) 678-9012",
         labId: "LAB-102",
         ambassadorId: "AMB-202",
@@ -583,7 +584,7 @@
       {
         id: "REG-1006",
         name: "Chloe Vance (Fictional)",
-        email: "chloe.v@student.campusconnect.edu",
+        email: "chloe.v@student.gdgconnect.edu",
         phone: "+1 (555) 789-0123",
         labId: "LAB-103",
         ambassadorId: "AMB-204",
@@ -595,7 +596,7 @@
       {
         id: "REG-1007",
         name: "Aiden Scott",
-        email: "aiden.scott@student.campusconnect.edu",
+        email: "aiden.scott@student.gdgconnect.edu",
         phone: "+1 (555) 890-1234",
         labId: "LAB-104",
         ambassadorId: "AMB-205",
@@ -607,7 +608,7 @@
       {
         id: "REG-1008",
         name: "Devon Miller",
-        email: "devon.m@student.campusconnect.edu",
+        email: "devon.m@student.gdgconnect.edu",
         phone: "+1 (555) 901-2345",
         labId: "LAB-101",
         ambassadorId: "AMB-201",
@@ -619,7 +620,7 @@
       {
         id: "REG-1009",
         name: "Hannah Lee",
-        email: "hannah.lee@student.campusconnect.edu",
+        email: "hannah.lee@student.gdgconnect.edu",
         phone: "+1 (555) 012-3456",
         labId: "LAB-102",
         ambassadorId: "AMB-202",
@@ -729,7 +730,7 @@
     resources: [
       {
         id: "RES-801",
-        title: "CampusConnect Ambassador Handbook & Code of Conduct 2026",
+        title: "GDGconnect Ambassador Handbook & Code of Conduct 2026",
         category: "Onboarding",
         description: "Official guide covering expectations, campus permissions, code of ethics, and communication standards.",
         author: "Dr. Evelyn Vance",
@@ -804,7 +805,7 @@
         title: "Frequently Asked Questions for Ambassadors & Mentors",
         category: "FAQs",
         description: "Answers to common queries regarding room booking, equipment checkout, participant dispute resolution, and milestone points.",
-        author: "CampusConnect Operations",
+        author: "GDGconnect Operations",
         format: "PDF",
         size: "820 KB",
         url: "#download-faq",
@@ -1038,7 +1039,7 @@
 
     init() {
       try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const stored = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
         if (stored) {
           this.data = JSON.parse(stored);
           // Check if data version or essential keys exist
@@ -1049,7 +1050,7 @@
           this.reset();
         }
       } catch (e) {
-        console.error("Failed to parse stored CampusConnect data, falling back to seed:", e);
+        console.error("Failed to parse stored GDGconnect data, falling back to seed:", e);
         this.reset();
       }
     }
@@ -1058,7 +1059,7 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
       } catch (e) {
-        console.error("Failed to save CampusConnect data to localStorage:", e);
+        console.error("Failed to save GDGconnect data to localStorage:", e);
       }
     }
 

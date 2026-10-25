@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Resources & Learning Hub
+ * GDGconnect - Resources & Learning Hub
  * Categorized manuals, SOPs, pitch decks, FAQs & mentor upload sharing
  */
 

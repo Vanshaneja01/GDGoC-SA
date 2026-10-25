@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Task Management Section
+ * GDGconnect - Task Management Section
  * Kanban Board, Table View, Task Creation, Submission Workflow, Mentor Reviews & Approvals
  */
 

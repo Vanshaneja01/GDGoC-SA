@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Mentors Directory & Profiles Section
+ * GDGconnect - Mentors Directory & Profiles Section
  * Searchable directory, detailed mentor profile drawer, permitted self-editing
  */
 

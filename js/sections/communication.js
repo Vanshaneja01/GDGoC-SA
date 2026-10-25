@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Communication & Help Desk Section
+ * GDGconnect - Communication & Help Desk Section
  * Interactive Direct Messaging between Mentors & Ambassadors + Support Ticket System
  */
 

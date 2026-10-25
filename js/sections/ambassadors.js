@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Ambassadors Directory & Profiles Section
+ * GDGconnect - Ambassadors Directory & Profiles Section
  * Dynamic relational link to mentors, mandatory prominent MY MENTOR card, self-editing
  */
 

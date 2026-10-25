@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Labs & Registrations Section
+ * GDGconnect - Labs & Registrations Section
  * Dedicated lab targets, participant CRUD, duplicate detection, CSV export & import, bulk verification
  */
 
@@ -411,7 +411,7 @@
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label form-label-required">Email Address</label>
-                  <input type="email" class="form-control" id="new-part-email" name="email" placeholder="student@campusconnect.edu" required>
+                  <input type="email" class="form-control" id="new-part-email" name="email" placeholder="student@gdgconnect.edu" required>
                   <span class="form-hint">Used for automatic duplicate detection within each lab.</span>
                 </div>
                 <div class="form-group">
@@ -662,7 +662,7 @@
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `campusconnect_participants_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `gdgconnect_participants_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -694,7 +694,7 @@
 
             <div class="form-group">
               <label class="form-label">Or Paste CSV Text</label>
-              <textarea class="form-textarea" id="csv-text-input" placeholder="Name, Email, Phone, LabId, Status, Notes&#10;Alice Wang, alice@campusconnect.edu, +15550001, LAB-101, Verified, CS Major"></textarea>
+              <textarea class="form-textarea" id="csv-text-input" placeholder="Name, Email, Phone, LabId, Status, Notes&#10;Alice Wang, alice@gdgconnect.edu, +15550001, LAB-101, Verified, CS Major"></textarea>
             </div>
 
             <div id="import-preview-box" style="display: none; padding: 0.75rem; border-radius: var(--radius-md); background-color: var(--bg-subtle); font-size: 0.8rem; margin-top: 0.5rem;">

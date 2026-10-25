@@ -1,5 +1,5 @@
 /**
- * CampusConnect - App State & Event Dispatcher
+ * GDGconnect - App State & Event Dispatcher
  * Manages active role, active user, active view, and cross-component reactivity
  */
 

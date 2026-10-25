@@ -1,5 +1,5 @@
 /**
- * CampusConnect - Calendar Section
+ * GDGconnect - Calendar Section
  * Unified calendar aggregating task deadlines, mentor sessions, ambassador workshops & lab milestones
  */
 
