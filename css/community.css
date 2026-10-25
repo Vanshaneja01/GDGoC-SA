@@ -617,3 +617,112 @@
 .comm-footer-links a:hover {
   color: var(--color-primary);
 }
+
+/* Mobile & Tablet Responsive Optimizations */
+@media (max-width: 768px) {
+  .comm-navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .comm-nav-links a:not(.btn-comm-portal) {
+    display: none;
+  }
+
+  .btn-comm-portal {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  .comm-hero {
+    padding: 2.25rem 1rem 1.75rem;
+  }
+
+  .comm-hero-title {
+    font-size: 1.85rem;
+    line-height: 1.2;
+  }
+
+  .comm-hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.75rem;
+  }
+
+  .comm-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-comm-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .btn-comm-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .comm-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem 0.75rem;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .comm-stat-num {
+    font-size: 1.7rem;
+  }
+
+  .comm-stat-label {
+    font-size: 0.75rem;
+  }
+
+  .comm-section {
+    padding: 2.75rem 1rem;
+  }
+
+  .comm-section-title {
+    font-size: 1.65rem;
+  }
+
+  .comm-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comm-tracks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comm-leadership-box {
+    padding: 1.25rem;
+  }
+
+  .comm-portal-banner {
+    padding: 2.25rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .comm-portal-banner-title {
+    font-size: 1.5rem;
+  }
+
+  .comm-portal-banner-desc {
+    font-size: 0.92rem;
+  }
+
+  .auth-modal-dialog {
+    width: 96%;
+    margin: 1rem auto;
+  }
+
+  .auth-modal-header {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+
+  .modal-body {
+    padding: 1rem 1.25rem !important;
+  }
+}

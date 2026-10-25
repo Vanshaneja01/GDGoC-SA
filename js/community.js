@@ -18,27 +18,16 @@
     checkInitialView() {
       const urlParams = new URLSearchParams(window.location.search);
       const userParam = urlParams.get('user') || urlParams.get('id');
-      const forceCommunity = urlParams.get('view') === 'community';
+      const portalParam = urlParams.get('portal');
 
-      if (forceCommunity) {
-        this.showCommunityView();
-        return;
-      }
-
-      if (userParam) {
-        // Direct link provided - authenticate directly
+      // If a specific user parameter or explicit portal parameter is present, enter the portal directly
+      if (userParam || portalParam === 'true') {
         this.showPortalView();
         return;
       }
 
-      const session = this.getSession();
-      if (session && session.id && session.role) {
-        // Active session found - enter portal
-        this.showPortalView();
-      } else {
-        // Default to public GDG Community Portal with "Tap to Enter"
-        this.showCommunityView();
-      }
+      // Default: Always display the public GDG Community Showcase first!
+      this.showCommunityView();
     },
 
     getSession() {
@@ -64,6 +53,7 @@
 
     clearSession() {
       localStorage.removeItem(AUTH_SESSION_KEY);
+      this.updateCtaButtonWithSession();
     },
 
     showCommunityView() {
@@ -72,8 +62,69 @@
       if (landing) landing.style.display = 'block';
       if (app) app.style.display = 'none';
 
+      this.updateCtaButtonWithSession();
+
       // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    updateCtaButtonWithSession() {
+      const session = this.getSession();
+      const heroBtn = document.getElementById('btn-tap-to-enter-portal');
+      const navBtn = document.getElementById('btn-nav-enter-portal');
+      const bannerBtn = document.getElementById('btn-enter-portal-cta');
+      const hint = document.querySelector('.comm-credentials-hint');
+
+      if (session && session.name) {
+        const shortName = session.name.split(' ')[0];
+        if (heroBtn) {
+          heroBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            <span>Enter GDGconnect (${shortName})</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          `;
+        }
+        if (navBtn) {
+          navBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            <span>Dashboard (${session.role})</span>
+          `;
+        }
+        if (bannerBtn) {
+          bannerBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Open ${session.role} Dashboard (${shortName})</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          `;
+        }
+        if (hint) {
+          hint.innerHTML = `<span>Active Session: <strong>${session.name}</strong> (${session.id}) &bull; <a href="#" id="link-switch-active-account" style="color: var(--color-primary); text-decoration: underline;">Switch Account</a></span>`;
+        }
+      } else {
+        if (heroBtn) {
+          heroBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Tap to Enter GDGconnect</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          `;
+        }
+        if (navBtn) {
+          navBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            <span>GDGconnect</span>
+          `;
+        }
+        if (bannerBtn) {
+          bannerBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Sign In with Credentials</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          `;
+        }
+        if (hint) {
+          hint.innerHTML = `<span>🔑 Appointed Ambassadors & Faculty Mentors: Tap above to sign in with your issued credentials</span>`;
+        }
+      }
     },
 
     showPortalView() {
@@ -97,10 +148,24 @@
     bindPortalButtons() {
       // Tap to Enter button in Hero
       document.addEventListener('click', (e) => {
+        const switchLink = e.target.closest('#link-switch-active-account');
+        if (switchLink) {
+          e.preventDefault();
+          this.openAuthModal();
+          return;
+        }
+
         const tapBtn = e.target.closest('#btn-tap-to-enter-portal, .btn-comm-portal, #btn-enter-portal-cta');
         if (tapBtn) {
           e.preventDefault();
-          this.openAuthModal();
+          const session = this.getSession();
+          if (session && session.id && session.role) {
+            window.CC.state.setRoleAndUser(session.role, session.id);
+            this.showPortalView();
+          } else {
+            this.openAuthModal();
+          }
+          return;
         }
 
         const signOutBtn = e.target.closest('#btn-sign-out, #sidebar-sign-out');
