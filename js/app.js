@@ -230,7 +230,7 @@
 
     // User profile quick trigger
     document.getElementById('user-menu-trigger')?.addEventListener('click', () => {
-      window.CC.state.setSection('profile-settings');
+      openAccountSwitcherModal();
     });
 
     // Mobile sidebar toggle
@@ -482,6 +482,186 @@
           ui.closeModal();
           window.CC.state.setSection('labs-registrations');
         });
+      });
+    });
+  }
+
+  // Account Switcher & ID Login Modal
+  function openAccountSwitcherModal() {
+    const ui = window.CC.ui;
+    const currentUser = window.CC.state.currentUser;
+    const currentRole = window.CC.state.role;
+    const mentors = window.CC.db.getMentors();
+    const ambassadors = window.CC.db.getAmbassadors();
+    const currentUrl = `${window.location.origin}${window.location.pathname}?user=${currentUser.id}`;
+
+    const modalHtml = `
+      <div class="modal-backdrop">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-header">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <h3 class="modal-title">${ui.icon('users')} Account & Identity Switcher</h3>
+              <span class="badge ${currentRole === 'Mentor' ? 'badge-green' : 'badge-olive'}">${currentRole} Active</span>
+            </div>
+            <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Active Persona Card -->
+            <div style="padding: 1rem 1.25rem; background: linear-gradient(135deg, rgba(66, 133, 244, 0.08), rgba(52, 168, 83, 0.08)); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                ${ui.renderAvatar(currentUser.avatar, currentUser.name, 'lg')}
+                <div>
+                  <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">${ui.escape(currentUser.name)}</span>
+                    <span class="badge ${currentRole === 'Mentor' ? 'badge-green' : 'badge-olive'}">${currentRole}</span>
+                  </div>
+                  <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">
+                    ${ui.escape(currentUser.email)} • ID: <strong style="font-family: var(--font-family-mono);">${currentUser.id}</strong>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <button class="btn btn-sm btn-outline" id="btn-copy-direct-link" title="Copy URL to directly log into this user's dashboard">
+                  ${ui.icon('link')} Copy Direct Link
+                </button>
+              </div>
+            </div>
+
+            <!-- Login / Access by ID Form -->
+            <div style="margin-bottom: 1.5rem; padding: 1rem; border: 1px dashed var(--border-subtle); border-radius: var(--radius-md); background: var(--bg-surface);">
+              <label style="font-size: 0.82rem; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 0.5rem;">
+                Access Dashboard by Unique ID or Email
+              </label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="input-account-id" class="form-control" placeholder="e.g. MTR-101, AMB-201, or email address" style="flex: 1;" />
+                <button class="btn btn-primary" id="btn-switch-by-id">
+                  ${ui.icon('log-in')} Access Dashboard
+                </button>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; display: block;">
+                Enter any Mentor ID (MTR-101 to 104) or Ambassador ID (AMB-201 to 206) to instantly switch dashboards.
+              </span>
+            </div>
+
+            <!-- Fast Select Persona Grid -->
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <strong style="font-size: 0.88rem; color: var(--text-main);">Quick Switch by Person:</strong>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                <!-- Mentors Column -->
+                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.75rem; color: var(--color-primary);">
+                    ${ui.icon('shield')} Faculty Mentors (4)
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    ${mentors.map(m => `
+                      <button type="button" class="btn btn-sm btn-outline ${currentUser.id === m.id ? 'active' : ''}" data-switch-to="Mentor:${m.id}" style="display: flex; align-items: center; justify-content: space-between; text-align: left; padding: 0.6rem 0.75rem; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                          ${ui.renderAvatar(m.avatar, m.name, 'sm')}
+                          <div>
+                            <div style="font-weight: 600; font-size: 0.82rem; color: var(--text-main);">${ui.escape(m.name)}</div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">${m.id}</div>
+                          </div>
+                        </div>
+                        <span class="badge badge-green" style="font-size: 0.68rem;">Mentor</span>
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+
+                <!-- Ambassadors Column -->
+                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.75rem; color: #7B1FA2;">
+                    ${ui.icon('award')} Student Ambassadors (6)
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 240px; overflow-y: auto;">
+                    ${ambassadors.map(a => `
+                      <button type="button" class="btn btn-sm btn-outline ${currentUser.id === a.id ? 'active' : ''}" data-switch-to="Ambassador:${a.id}" style="display: flex; align-items: center; justify-content: space-between; text-align: left; padding: 0.6rem 0.75rem; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                          ${ui.renderAvatar(a.avatar, a.name, 'sm')}
+                          <div>
+                            <div style="font-weight: 600; font-size: 0.82rem; color: var(--text-main);">${ui.escape(a.name)}</div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">${a.id}</div>
+                          </div>
+                        </div>
+                        <span class="badge badge-olive" style="font-size: 0.68rem;">Ambassador</span>
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn btn-secondary" id="btn-modal-goto-profile">
+              ${ui.icon('settings')} View Full Profile & Settings
+            </button>
+            <button class="btn btn-outline" data-close-modal>Close</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    ui.openModal(modalHtml, (modalHost) => {
+      // Switch by clicking persona
+      modalHost.querySelectorAll('[data-switch-to]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const [role, id] = btn.getAttribute('data-switch-to').split(':');
+          window.CC.state.setRoleAndUser(role, id);
+          ui.closeModal();
+          ui.showToast(`Switched active view to ${role}: ${id}`, "success", "Welcome");
+        });
+      });
+
+      // Switch by manual ID input
+      const inputId = modalHost.querySelector('#input-account-id');
+      const submitBtn = modalHost.querySelector('#btn-switch-by-id');
+      const handleManualSwitch = () => {
+        const query = (inputId?.value || '').trim();
+        if (!query) return;
+        const upper = query.toUpperCase();
+
+        const mentor = window.CC.db.getMentorById(upper) || window.CC.db.getMentors().find(m => m.email.toLowerCase() === query.toLowerCase());
+        if (mentor) {
+          window.CC.state.setRoleAndUser('Mentor', mentor.id);
+          ui.closeModal();
+          ui.showToast(`Logged in as Mentor: ${mentor.name} (${mentor.id})`, "success", "Dashboard Ready");
+          return;
+        }
+
+        const ambassador = window.CC.db.getAmbassadorById(upper) || window.CC.db.getAmbassadors().find(a => a.email.toLowerCase() === query.toLowerCase());
+        if (ambassador) {
+          window.CC.state.setRoleAndUser('Ambassador', ambassador.id);
+          ui.closeModal();
+          ui.showToast(`Logged in as Ambassador: ${ambassador.name} (${ambassador.id})`, "success", "Dashboard Ready");
+          return;
+        }
+
+        ui.showToast(`No user found with ID or email "${query}". Try MTR-101 or AMB-201.`, "error", "Invalid ID");
+      };
+
+      submitBtn?.addEventListener('click', handleManualSwitch);
+      inputId?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleManualSwitch();
+      });
+
+      // Copy direct link
+      modalHost.querySelector('#btn-copy-direct-link')?.addEventListener('click', () => {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+          ui.showToast("Direct access link copied to clipboard!", "success", "Link Copied");
+        }).catch(() => {
+          ui.showToast(currentUrl, "info", "Shareable Link");
+        });
+      });
+
+      // Go to profile settings
+      modalHost.querySelector('#btn-modal-goto-profile')?.addEventListener('click', () => {
+        ui.closeModal();
+        window.CC.state.setSection('profile-settings');
       });
     });
   }
