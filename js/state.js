@@ -21,13 +21,12 @@
     }
 
     init() {
-      // Load theme
+      // Load theme - default to dark (E-Cell CA tech theme)
       const savedTheme = localStorage.getItem(THEME_KEY);
       if (savedTheme) {
         this.theme = savedTheme;
       } else {
-        // default to light
-        this.theme = 'light';
+        this.theme = 'dark';
       }
       this.applyTheme();
 

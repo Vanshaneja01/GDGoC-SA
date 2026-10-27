@@ -1,79 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GDGconnect — Mentor & Ambassador Management Portal</title>
+  <title>GDGconnect — Student Ambassador & Mentor Management Portal</title>
   
-  <!-- Google Web Fonts: Product Sans, Roboto & Inter -->
+  <!-- Web Fonts: Plus Jakarta Sans (E-Cell CA style), Roboto & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
   <!-- Core Stylesheets -->
-  <link rel="stylesheet" href="css/main.css?v=2.2">
-  <link rel="stylesheet" href="css/components.css?v=2.2">
-  <link rel="stylesheet" href="css/sections.css?v=2.2">
-  <link rel="stylesheet" href="css/community.css?v=2.2">
+  <link rel="stylesheet" href="css/main.css?v=2.3">
+  <link rel="stylesheet" href="css/components.css?v=2.3">
+  <link rel="stylesheet" href="css/sections.css?v=2.3">
+  <link rel="stylesheet" href="css/community.css?v=2.3">
 </head>
-<body>
+<body data-theme="dark">
 
   <!-- Google Signature 4-Color Accent Stripe -->
   <div class="google-top-stripe"></div>
 
   <!-- ==========================================================================
-       PUBLIC GDG COMMUNITY SHOWCASE & "TAP TO ENTER" GATEWAY
+       PUBLIC GDG COMMUNITY SHOWCASE & "TAP TO ENTER" GATEWAY (E-CELL CA THEME)
        ========================================================================== -->
   <div id="community-landing" class="community-landing">
-    <!-- Public Community Top Navbar -->
+    <!-- Floating Glassmorphic Navbar (ecell.in/ca style) -->
     <header class="comm-navbar">
       <div class="comm-nav-brand">
         <div class="comm-brand-logo">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13.5 5L10.5 19" stroke="#34A853" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="12" cy="12" r="1.5" fill="#FBBC04"/>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M8 7L3 12L8 17" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 7L21 12L16 17" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.5 5L10.5 19" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="1.5" fill="#fde047"/>
           </svg>
         </div>
         <div class="comm-brand-text">
-          <span class="comm-brand-title">Google Developer Groups</span>
-          <span class="comm-brand-sub">On Campus IIMTU </span>
+          <span class="comm-brand-title">GDG<span>connect</span></span>
+          <span class="comm-brand-sub">On Campus IIMTU &bull; CA Portal</span>
         </div>
       </div>
 
       <nav class="comm-nav-links">
-        <a href="#comm-about">About GDG</a>
-        <a href="#comm-tracks">Tech Tracks</a>
-        <a href="#comm-impact">Impact</a>
-        <a href="#comm-mentorship">Mentorship</a>
+        <a href="#comm-about">Why CA?</a>
+        <a href="#comm-responsibilities">Responsibilities</a>
+        <a href="#comm-incentives">Incentives</a>
+        <a href="#comm-leaderboard">Leaderboard</a>
+        <a href="#comm-mentorship">Mentors</a>
+        <a href="#comm-faqs">FAQs</a>
         <button type="button" class="btn-comm-portal" id="btn-nav-enter-portal">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
-          <span>GDGconnect</span>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+          <span>Portal Login</span>
         </button>
       </nav>
     </header>
 
-    <!-- Hero Section with Tap to Enter -->
+    <!-- Hero Section (High-Energy Cyberpunk Style) -->
     <section class="comm-hero">
       <div class="comm-hero-badge">
-        <span class="comm-dot"></span> Google Developer Groups on Campus (GDGoC)
+        <span class="comm-dot"></span> GDGoC IIMTU &bull; CAMPUS AMBASSADOR PROGRAM 2026-27
       </div>
 
       <h1 class="comm-hero-title">
-        Join. Lead. Inspire. Grow with GDGoC IIMTU<br>
-        <span class="comm-gradient-text">Building a community of Innovators, Learners & Tech leaders.</span>
+        Join. Lead. Inspire.<br>
+        <span class="comm-gradient-text">The Ultimate Campus Leadership & Developer Internship.</span>
       </h1>
 
       <p class="comm-hero-desc">
-        Google Developer Groups on Campus (GDGoC) is a dynamic, student-led tech community at IIMT University, proudly powered by IIMTBIF. We are dedicated to bridging the gap between theory and practice by empowering students to learn, build, and innovate through collaborative peer-to-peer learning and hands-on projects.
+        Google Developer Groups on Campus (GDGoC) at IIMT University, proudly powered by IIMTBIF. Represent your department, lead groundbreaking tech initiatives, organize hands-on labs, and accelerate your career alongside elite student mentors.
       </p>
 
-      <!-- Primary "Tap to Enter" Button -->
+      <!-- Primary "Tap to Enter" Button (ecell.in/ca signature neon button) -->
       <div class="comm-cta-group">
         <button type="button" class="btn-comm-primary" id="btn-tap-to-enter-portal">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -82,16 +84,16 @@
         </button>
 
         <a href="#comm-about" class="btn-comm-secondary">
-          <span>Explore Community Details</span>
+          <span>Explore CA Perks & Roles</span>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </a>
       </div>
 
       <div class="comm-credentials-hint">
-        <span>🔑 Appointed Ambassadors & Faculty Mentors: Tap above to sign in with your issued credentials</span>
+        <span>🔑 Appointed Ambassadors & Student Mentors: Tap above to sign in with your issued credentials</span>
       </div>
 
-      <!-- Live Community Numbers -->
+      <!-- Live Community Numbers (Glassmorphic Stats Ribbon) -->
       <div class="comm-stats-grid" id="comm-impact">
         <div class="comm-stat-card">
           <div class="comm-stat-num blue">7,500+</div>
@@ -99,11 +101,11 @@
         </div>
         <div class="comm-stat-card">
           <div class="comm-stat-num green">5</div>
-          <div class="comm-stat-label">Student Ambassdor Mentors</div>
+          <div class="comm-stat-label">Student Ambassador Mentors</div>
         </div>
         <div class="comm-stat-card">
           <div class="comm-stat-num yellow">25</div>
-          <div class="comm-stat-label">Appointed Student Ambassadors</div>
+          <div class="comm-stat-label">Appointed Campus Ambassadors</div>
         </div>
         <div class="comm-stat-card">
           <div class="comm-stat-num red">50+</div>
@@ -112,103 +114,230 @@
       </div>
     </section>
 
-    <!-- About Section & Three Pillars -->
-    <section class="comm-section" id="comm-about" style="border-top: 1px solid var(--border-subtle);">
+    <!-- Why Become a Campus Ambassador? (ecell.in/ca signature pillars) -->
+    <section class="comm-section" id="comm-about" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
       <div class="comm-section-header">
-        <span class="comm-section-tag">Core Mission</span>
-        <h2 class="comm-section-title">The Three Pillars of GDG on Campus</h2>
+        <span class="comm-section-tag">Value Proposition</span>
+        <h2 class="comm-section-title">Why Become a Campus Ambassador?</h2>
         <p class="comm-section-desc">
-          Empowering student developers of all backgrounds to grow their technical knowledge, build meaningful projects, and solve real community challenges.
+          Step into the fast lane of student entrepreneurship and developer leadership. Gain unmatched exposure, industry credentials, and real-world execution experience.
         </p>
       </div>
 
       <div class="comm-pillars-grid">
         <div class="comm-pillar-card">
           <div class="comm-pillar-icon blue">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
-          <h3 class="comm-pillar-title">1. Connect</h3>
+          <h3 class="comm-pillar-title">1. Real-World Leadership</h3>
           <p class="comm-pillar-text">
-            Meet students passionate about developer technologies on your campus and globally. Build lifelong professional relationships, share ideas, and find teammates for international hackathons.
+            Lead your campus from the front. Plan, publicize, and host developer study jams, hackathons, and Google Solution Challenge teams while honing public speaking and project management.
           </p>
         </div>
 
         <div class="comm-pillar-card">
           <div class="comm-pillar-icon green">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </div>
-          <h3 class="comm-pillar-title">2. Learn</h3>
+          <h3 class="comm-pillar-title">2. Elite Networking</h3>
           <p class="comm-pillar-text">
-            Gain practical, industry-aligned skills through interactive workshops, code labs, Google Cloud Study Jams, and machine learning sprints led by experienced mentors and ambassadors.
+            Build lasting professional bonds with senior student mentors, university leadership at IIMTBIF, fellow campus ambassadors across departments, and Google Developer Experts.
           </p>
         </div>
 
         <div class="comm-pillar-card">
           <div class="comm-pillar-icon yellow">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </div>
-          <h3 class="comm-pillar-title">3. Grow</h3>
+          <h3 class="comm-pillar-title">3. Official Certification & LoR</h3>
           <p class="comm-pillar-text">
-            Apply your skills to build real-world products for local organizations and enter the global Google Solution Challenge addressing the United Nations 17 Sustainable Development Goals.
+            Earn a distinguished Certificate of Appreciation and formal Letter of Recommendation from GDGoC IIMTU and IIMTBIF, validating your verified contributions and tenure.
+          </p>
+        </div>
+
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon blue">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3 class="comm-pillar-title">4. Exclusive Perks & Swag</h3>
+          <p class="comm-pillar-text">
+            Unlock sponsored Google Cloud Skill Boost credits, developer merchandise, passes to premier tech conferences, and vouchers from incubation partners.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Technology Tracks -->
-    <section class="comm-section" id="comm-tracks" style="background-color: var(--bg-subtle); max-width: 100%; padding: 4.5rem 2rem;">
-      <div style="max-width: 1140px; margin: 0 auto;">
+    <!-- Ambassador Responsibilities (The 4 Tracks) -->
+    <section class="comm-section" id="comm-responsibilities" style="background: rgba(10, 15, 29, 0.4); max-width: 100%; padding: 6rem 2rem;">
+      <div style="max-width: 1240px; margin: 0 auto;">
         <div class="comm-section-header">
-          <span class="comm-section-tag">Learning Pathways</span>
-          <h2 class="comm-section-title">Google Developer Technology Tracks</h2>
+          <span class="comm-section-tag">Role Framework</span>
+          <h2 class="comm-section-title">Your Responsibilities as a CA</h2>
           <p class="comm-section-desc">
-            Hands-on curriculum tracks organized by student ambassadors and supervised by faculty mentors.
+            A structured, action-oriented track designed to simulate product evangelism and community organizing at scale.
           </p>
         </div>
 
         <div class="comm-tracks-grid">
           <div class="comm-track-card">
-            <span class="comm-track-badge" style="background-color: #E8F0FE; color: #1A73E8;">Track 01</span>
-            <h4 class="comm-track-title">🤖 AI & Machine Learning</h4>
+            <span class="comm-track-badge" style="background: rgba(0, 243, 255, 0.15); color: #00f3ff; border: 1px solid rgba(0, 243, 255, 0.3);">Track 01</span>
+            <h4 class="comm-track-title">📢 Ideate & Publicize</h4>
             <p class="comm-track-desc">
-              Explore generative AI with Google Gemini, prompt engineering, TensorFlow, Keras, Vertex AI pipelines, and computer vision models.
+              Be the primary voice of GDGoC on campus. Publicize tech initiatives, Solution Challenge sprints, and recruitment drives across campus batches and digital channels.
             </p>
           </div>
 
           <div class="comm-track-card">
-            <span class="comm-track-badge" style="background-color: #E6F4EA; color: #137333;">Track 02</span>
-            <h4 class="comm-track-title">☁️ Cloud & DevOps</h4>
+            <span class="comm-track-badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3);">Track 02</span>
+            <h4 class="comm-track-title">⚡ Host & Organize</h4>
             <p class="comm-track-desc">
-              Master Google Cloud Platform (GCP), Docker containers, Kubernetes orchestration, serverless microservices, and CI/CD pipelines.
+              Coordinate and facilitate hands-on workshops in AI with Gemini, Cloud DevOps, Flutter, and Modern Web, backed by curriculum support from student mentors.
             </p>
           </div>
 
           <div class="comm-track-card">
-            <span class="comm-track-badge" style="background-color: #FEF7E0; color: #B06000;">Track 03</span>
-            <h4 class="comm-track-title">📱 Flutter & Android</h4>
+            <span class="comm-track-badge" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);">Track 03</span>
+            <h4 class="comm-track-title">🎯 Drive Registrations</h4>
             <p class="comm-track-desc">
-              Build cross-platform mobile apps using Flutter and Dart, alongside modern native Android development with Kotlin and Jetpack Compose.
+              Manage specialized campus lab cohorts, assist participants with duplicate-checked onboarding, and maintain attendance logs for verified certifications.
             </p>
           </div>
 
           <div class="comm-track-card">
-            <span class="comm-track-badge" style="background-color: #FCE8E6; color: #C5221F;">Track 04</span>
-            <h4 class="comm-track-title">🌐 Modern Web Technologies</h4>
+            <span class="comm-track-badge" style="background: rgba(129, 140, 248, 0.15); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3);">Track 04</span>
+            <h4 class="comm-track-title">🤝 Mentorship & Review</h4>
             <p class="comm-track-desc">
-              Develop responsive, accessible web applications using Angular, Progressive Web Apps (PWAs), WebAssembly, and modern browser APIs.
+              Participate in bi-weekly 1-on-1 progress reviews with assigned student ambassador mentors, submit milestone reports, and level up through feedback.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Leadership & Mentorship Structure -->
-    <section class="comm-section" id="comm-mentorship">
+    <!-- Incentives & Rewards Matrix (ecell.in/ca signature rewards showcase) -->
+    <section class="comm-section" id="comm-incentives">
       <div class="comm-section-header">
-        <span class="comm-section-tag">Governance & Community Model</span>
-        <h2 class="comm-section-title">Dual-Role Leadership Architecture</h2>
+        <span class="comm-section-tag">Gamified Rewards</span>
+        <h2 class="comm-section-title">Incentives & Milestone Rewards</h2>
         <p class="comm-section-desc">
-          GDGconnect operates on a structured peer-mentorship model combining senior faculty expertise with energetic student ambassador outreach.
+          Every task completed and registration verified earns leaderboard points, unlocking higher tiers of exclusive perks.
+        </p>
+      </div>
+
+      <div class="comm-incentives-grid">
+        <div class="comm-incentive-card">
+          <span class="comm-tier-badge bronze">Bronze Tier &bull; 500 Pts</span>
+          <div class="comm-incentive-icon">🥉</div>
+          <h4 class="comm-incentive-title">Onboarding Milestone</h4>
+          <ul class="comm-incentive-list">
+            <li><span class="check">✓</span> Official Certificate of Selection</li>
+            <li><span class="check">✓</span> Access to Exclusive CA Community Hub</li>
+            <li><span class="check">✓</span> Virtual CA Branding Kit & Assets</li>
+          </ul>
+        </div>
+
+        <div class="comm-incentive-card">
+          <span class="comm-tier-badge silver">Silver Tier &bull; 1,000 Pts</span>
+          <div class="comm-incentive-icon">🥈</div>
+          <h4 class="comm-incentive-title">Growth Milestone</h4>
+          <ul class="comm-incentive-list">
+            <li><span class="check">✓</span> Official Certificate of Appreciation</li>
+            <li><span class="check">✓</span> 1-on-1 Career Mentorship Session</li>
+            <li><span class="check">✓</span> Google Cloud Skill Boost Vouchers</li>
+          </ul>
+        </div>
+
+        <div class="comm-incentive-card">
+          <span class="comm-tier-badge gold">Gold Tier &bull; 1,500 Pts</span>
+          <div class="comm-incentive-icon">🥇</div>
+          <h4 class="comm-incentive-title">High Performer</h4>
+          <ul class="comm-incentive-list">
+            <li><span class="check">✓</span> Official Letter of Recommendation (LoR)</li>
+            <li><span class="check">✓</span> Custom GDGoC IIMTU T-Shirt & Swag Pack</li>
+            <li><span class="check">✓</span> Fast-track Lead nomination for next term</li>
+          </ul>
+        </div>
+
+        <div class="comm-incentive-card">
+          <span class="comm-tier-badge diamond">Diamond Tier &bull; Top 3 CAs</span>
+          <div class="comm-incentive-icon">💎</div>
+          <h4 class="comm-incentive-title">Campus Champion</h4>
+          <ul class="comm-incentive-list">
+            <li><span class="check">✓</span> "Best Campus Ambassador" Trophy</li>
+            <li><span class="check">✓</span> Fully-sponsored Pass to Tech Flagship Summit</li>
+            <li><span class="check">✓</span> Spotlight on IIMTBIF Official Media</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaderboard Preview (ecell.in/ca signature live tracking) -->
+    <section class="comm-section" id="comm-leaderboard" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Live Performance</span>
+        <h2 class="comm-section-title">Campus Ambassador Leaderboard</h2>
+        <p class="comm-section-desc">
+          Live point standings based on verified task submissions, event attendance, and lab contributions.
+        </p>
+      </div>
+
+      <div class="comm-leaderboard-box">
+        <table class="comm-leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Ambassador Name</th>
+              <th>Department / Campus</th>
+              <th>Specialization</th>
+              <th>Tasks Done</th>
+              <th>Total Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="comm-rank-pill comm-rank-1">1</span></td>
+              <td><strong>Alex Rivera</strong> <span class="badge badge-green" style="font-size: 0.65rem; margin-left: 4px;">Diamond</span></td>
+              <td>School of Computing</td>
+              <td>Cloud & DevOps</td>
+              <td>28 Tasks</td>
+              <td><strong style="color: var(--ecell-cyan);">1,420 Pts</strong></td>
+            </tr>
+            <tr>
+              <td><span class="comm-rank-pill comm-rank-2">2</span></td>
+              <td><strong>Maya Patel</strong> <span class="badge badge-green" style="font-size: 0.65rem; margin-left: 4px;">Gold</span></td>
+              <td>College of Engineering</td>
+              <td>Cybersecurity</td>
+              <td>24 Tasks</td>
+              <td><strong style="color: var(--ecell-cyan);">1,290 Pts</strong></td>
+            </tr>
+            <tr>
+              <td><span class="comm-rank-pill comm-rank-3">3</span></td>
+              <td><strong>Liam Zhang</strong> <span class="badge badge-green" style="font-size: 0.65rem; margin-left: 4px;">Gold</span></td>
+              <td>School of Informatics</td>
+              <td>AI & Machine Learning</td>
+              <td>21 Tasks</td>
+              <td><strong style="color: var(--ecell-cyan);">1,180 Pts</strong></td>
+            </tr>
+            <tr>
+              <td><span class="comm-rank-pill" style="background: rgba(255, 255, 255, 0.1); color: #fff;">4</span></td>
+              <td><strong>Sophia Torres</strong> <span class="badge badge-olive" style="font-size: 0.65rem; margin-left: 4px;">Silver</span></td>
+              <td>Human-Centered Design</td>
+              <td>UI/UX & Web</td>
+              <td>19 Tasks</td>
+              <td><strong style="color: var(--ecell-cyan);">1,050 Pts</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Student Ambassador Mentors & Leadership Showcase -->
+    <section class="comm-section" id="comm-mentorship" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Guiding Lights</span>
+        <h2 class="comm-section-title">Student Ambassador Mentors</h2>
+        <p class="comm-section-desc">
+          Experienced senior peers dedicated to guiding you through technical challenges, reviewing deliverables, and unlocking your full potential.
         </p>
       </div>
 
@@ -216,48 +345,104 @@
         <div class="comm-role-card">
           <div class="comm-role-badge mentor">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <span>Role: Student Ambassador Mentors</span>
+            <span>Lead Mentors</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Academic & Research Leaders</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
-            Faculty mentors provide continuous guidance, review submitted deliverables, approve workshop proposals, conduct 1-on-1 mentoring sessions, and advise on campus outreach ethics.
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.6rem; color: #ffffff;">Senior Student Mentors</h3>
+          <p style="font-size: 0.92rem; color: var(--ecell-text-secondary); line-height: 1.65; margin-bottom: 1.25rem;">
+            Student Ambassador Mentors provide continuous 1-on-1 guidance, verify submitted lab tasks, approve proposed workshops, and ensure ethical community operations.
           </p>
-          <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem;">
-            <li>✓ Disha Agarwal (AI & Distributed Systems)</li>
-            <li>✓ Aarushi Singh (Cybersecurity & Networks)</li>
-            <li>✓ Akshita Tyagi (Human-Computer Interaction)</li>
-            <li>✓ Arsh Zehra (DevOps & Software Eng)</li>
-            <li>✓ Khyati (DevOps & Software Eng)</li>
+          <ul style="font-size: 0.9rem; color: var(--ecell-text-main); list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+            <li><span style="color: var(--ecell-cyan); font-weight: bold;">&bull;</span> <strong>Disha Agarwal</strong> &mdash; AI & Distributed Systems Mentor</li>
+            <li><span style="color: var(--ecell-cyan); font-weight: bold;">&bull;</span> <strong>Aarushi Singh</strong> &mdash; Cybersecurity & Networks Mentor</li>
+            <li><span style="color: var(--ecell-cyan); font-weight: bold;">&bull;</span> <strong>Akshita Tyagi</strong> &mdash; Human-Computer Interaction Mentor</li>
+            <li><span style="color: var(--ecell-cyan); font-weight: bold;">&bull;</span> <strong>Arsh Zehra</strong> &mdash; DevOps & Software Engineering Mentor</li>
+            <li><span style="color: var(--ecell-cyan); font-weight: bold;">&bull;</span> <strong>Khyati</strong> &mdash; Mobile & Cloud Technologies Mentor</li>
           </ul>
         </div>
 
         <div class="comm-role-card">
           <div class="comm-role-badge ambassador">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-            <span>Role: Student Ambassadors</span>
+            <span>Ambassador Fleet</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Campus Outreach & Lab Organizers</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
-            Appointed student ambassadors spearhead student engagement, facilitate specialization labs, drive participant registrations, submit milestone reports, and coordinate community events.
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.6rem; color: #ffffff;">25 Campus Ambassadors</h3>
+          <p style="font-size: 0.92rem; color: var(--ecell-text-secondary); line-height: 1.65; margin-bottom: 1.25rem;">
+            Passionate representatives across all schools and engineering batches running dedicated labs, handling participant verification, and spreading awareness.
           </p>
-          <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem;">
-            <li>✓ Alex Rivera (Cloud Lead • School of Computing)</li>
-            <li>✓ Maya Patel (Cybersecurity Lead • College of Eng)</li>
-            <li>✓ Liam Zhang (Data Science Lead • Informatics)</li>
-            <li>✓ Sophia Torres (UI/UX Lead • Human-Centered Design)</li>
+          <ul style="font-size: 0.9rem; color: var(--ecell-text-main); list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+            <li><span style="color: #34d399; font-weight: bold;">&bull;</span> <strong>Alex Rivera</strong> &mdash; Cloud & Distributed Systems Lead</li>
+            <li><span style="color: #34d399; font-weight: bold;">&bull;</span> <strong>Maya Patel</strong> &mdash; Cybersecurity & Ethical Hacking Lead</li>
+            <li><span style="color: #34d399; font-weight: bold;">&bull;</span> <strong>Liam Zhang</strong> &mdash; Machine Learning & Python Lead</li>
+            <li><span style="color: #34d399; font-weight: bold;">&bull;</span> <strong>Sophia Torres</strong> &mdash; UI/UX & Design Systems Lead</li>
+            <li><span style="color: #34d399; font-weight: bold;">&bull;</span> <em>+ 21 Active Ambassadors across all departments</em></li>
           </ul>
         </div>
       </div>
+    </section>
 
-      <!-- Dedicated Portal Entry Banner -->
-      <div class="comm-portal-banner" id="comm-portal">
-        <h2 class="comm-portal-banner-title">GDGconnect Student Ambassador & Mentor Portal</h2>
-        <p class="comm-portal-banner-desc">
-          The authorized operations dashboard for student ambassadors and faculty mentors. Sign in with your assigned institutional credentials to access your personalized dashboard.
+    <!-- Frequently Asked Questions (FAQ Accordion) -->
+    <section class="comm-section" id="comm-faqs" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Got Questions?</span>
+        <h2 class="comm-section-title">Frequently Asked Questions</h2>
+        <p class="comm-section-desc">
+          Everything you need to know about the GDGoC IIMTU Campus Ambassador program.
         </p>
-        <button type="button" class="btn-comm-primary" id="btn-enter-portal-cta" style="background: #ffffff; color: #1A73E8; box-shadow: 0 4px 14px rgba(0,0,0,0.2);">
+      </div>
+
+      <div class="comm-faq-container">
+        <div class="comm-faq-item open">
+          <div class="comm-faq-question">
+            <span>Who is eligible to become a Campus Ambassador?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            Any enrolled student from any year or discipline at IIMT University who is enthusiastic about technology, community building, and leadership is eligible. Prior experience is welcomed but passion and consistency matter most!
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <div class="comm-faq-question">
+            <span>What is the weekly time commitment required?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            The program is designed to comfortably fit around academic commitments. You typically need 3 to 5 hours per week to participate in mentoring sessions, coordinate lab events, and submit weekly progress reports.
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <div class="comm-faq-question">
+            <span>How do I earn points and move up the leaderboard?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            Points are awarded for completing tasks assigned in the portal—such as organizing a workshop (+100 pts), successfully verifying participant registrations (+10 pts per student), and submitting on-time weekly reports (+50 pts).
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <div class="comm-faq-question">
+            <span>What are the requirements for the official Certificate & LoR?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            To receive the Certificate of Completion and Letter of Recommendation, ambassadors must complete their compulsory tenure tasks, reach at least the Silver Tier (1,000 pts), and receive approval from their assigned student mentor.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom High-Voltage Gateway Banner (ecell.in/ca signature CTA) -->
+    <section class="comm-section" style="padding-top: 1rem;">
+      <div class="comm-portal-banner" id="comm-portal">
+        <h2 class="comm-portal-banner-title">Ready to Lead Your Campus? Step Into the Fast Lane.</h2>
+        <p class="comm-portal-banner-desc">
+          Access your personalized ambassador or mentor dashboard to track points, review submissions, and manage campus lab registrations.
+        </p>
+        <button type="button" class="btn-comm-primary" id="btn-enter-portal-cta">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span>Sign In with Credentials</span>
+          <span>Sign In to GDGconnect</span>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
       </div>
@@ -266,13 +451,16 @@
     <!-- Public Community Footer -->
     <footer class="comm-footer">
       <div class="comm-footer-links">
-        <a href="#comm-about">About GDGoC</a>
-        <a href="#comm-tracks">Learning Tracks</a>
-        <a href="#comm-mentorship">Mentorship Model</a>
-        <a href="#comm-portal">Ambassador Gateway</a>
+        <a href="#comm-about">Why CA?</a>
+        <a href="#comm-responsibilities">Responsibilities</a>
+        <a href="#comm-incentives">Incentives</a>
+        <a href="#comm-leaderboard">Leaderboard</a>
+        <a href="#comm-mentorship">Mentors</a>
+        <a href="#comm-faqs">FAQs</a>
+        <a href="#comm-portal">Sign In</a>
       </div>
-      <p style="margin: 0; font-size: 0.82rem;">
-        GDGconnect is an independent community platform for Google Developer Groups on Campus chapters. Google Developer Groups is an independent group; an organization whose activities should not be confused with Google, the corporation.
+      <p style="margin: 0; font-size: 0.84rem; color: var(--ecell-text-muted);">
+        GDGconnect &bull; Google Developer Groups on Campus (GDGoC) at IIMT University, powered by IIMTBIF. Inspired by the E-Cell IIT Bombay Campus Ambassador model.
       </p>
     </footer>
   </div>

@@ -148,6 +148,16 @@
     bindPortalButtons() {
       // Tap to Enter button in Hero
       document.addEventListener('click', (e) => {
+        // FAQ Accordion Toggle (E-Cell style)
+        const faqHeader = e.target.closest('.comm-faq-question');
+        if (faqHeader) {
+          const faqItem = faqHeader.closest('.comm-faq-item');
+          if (faqItem) {
+            faqItem.classList.toggle('open');
+            return;
+          }
+        }
+
         const switchLink = e.target.closest('#link-switch-active-account');
         if (switchLink) {
           e.preventDefault();
@@ -272,7 +282,7 @@
                   <!-- Mentor Demo -->
                   <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
                     <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Dr. Evelyn Vance <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Disha Agarwal <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
                       <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: MTR-101 • Key: mentor@gdg</div>
                     </div>
                     <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-101">

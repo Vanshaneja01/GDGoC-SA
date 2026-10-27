@@ -79,64 +79,48 @@
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Theme Overrides (Google Dark Mode Palette) */
+/* E-Cell CA Inspired Dark Glassmorphic Theme */
 [data-theme="dark"] {
-  --color-primary: #8AB4F8;
-  --color-primary-hover: #AECBFA;
-  --color-primary-light: rgba(138, 180, 248, 0.15);
-  --color-primary-ring: rgba(138, 180, 248, 0.35);
+  --color-primary: #00f3ff;
+  --color-primary-hover: #38bdf8;
+  --color-primary-light: rgba(0, 243, 255, 0.12);
+  --color-primary-ring: rgba(0, 243, 255, 0.35);
 
-  --color-olive: #81C995;
-  --color-olive-hover: #A8DAB5;
-  --color-olive-light: rgba(129, 201, 149, 0.15);
+  --color-olive: #34d399;
+  --color-olive-hover: #10b981;
+  --color-olive-light: rgba(52, 211, 153, 0.15);
 
-  --bg-page: #202124;
-  --bg-surface: #292A2D;
-  --bg-surface-elevated: #35363A;
-  --bg-subtle: #303134;
-  --bg-hover: #3C4043;
+  --bg-page: #070b14;
+  --bg-surface: #0e1526;
+  --bg-surface-elevated: #141e34;
+  --bg-subtle: #111a2e;
+  --bg-hover: #18243e;
 
-  --border-subtle: #3C4043;
-  --border-medium: #5F6368;
-  --border-strong: #80868B;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(0, 243, 255, 0.4);
 
-  --text-main: #E8EAED;
-  --text-secondary: #9AA0A6;
-  --text-muted: #80868B;
-  --text-inverse: #202124;
+  --text-main: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #070b14;
 
-  --status-green: #81C995;
-  --status-green-bg: rgba(129, 201, 149, 0.15);
-  --status-blue: #8AB4F8;
-  --status-blue-bg: rgba(138, 180, 248, 0.15);
-  --status-amber: #FDD663;
-  --status-amber-bg: rgba(253, 214, 99, 0.15);
-  --status-orange: #FCAD70;
-  --status-orange-bg: rgba(252, 173, 112, 0.15);
-  --status-red: #F28B82;
-  --status-red-bg: rgba(242, 139, 130, 0.15);
+  --status-green: #34d399;
+  --status-green-bg: rgba(52, 211, 153, 0.12);
+  --status-blue: #00f3ff;
+  --status-blue-bg: rgba(0, 243, 255, 0.12);
+  --status-amber: #fbbf24;
+  --status-amber-bg: rgba(251, 191, 36, 0.12);
+  --status-orange: #fb923c;
+  --status-orange-bg: rgba(251, 146, 60, 0.12);
+  --status-red: #f87171;
+  --status-red-bg: rgba(248, 113, 113, 0.12);
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.7);
-}
-  --status-green-bg: rgba(102, 187, 106, 0.15);
-  --status-blue: #64B5F6;
-  --status-blue-bg: rgba(100, 181, 246, 0.15);
-  --status-amber: #FFD54F;
-  --status-amber-bg: rgba(255, 213, 79, 0.15);
-  --status-orange: #FFB74D;
-  --status-orange-bg: rgba(255, 183, 77, 0.15);
-  --status-red: #E57373;
-  --status-red-bg: rgba(229, 115, 115, 0.15);
-
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.7);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.08);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 243, 255, 0.15);
 }
 
 /* Google Signature Top 4-Color Stripe */

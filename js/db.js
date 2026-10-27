@@ -6,75 +6,91 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'gdgconnect_data_v1';
-  const LEGACY_STORAGE_KEY = 'campusconnect_data_v1';
+  const STORAGE_KEY = 'gdgconnect_data_v2';
+  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v1';
 
   // Realistic seed data
   const SEED_DATA = {
     mentors: [
       {
         id: "MTR-101",
-        name: "Dr. Evelyn Vance",
-        email: "evelyn.vance@gdgconnect.edu",
-        phone: "+1 (555) 349-8821",
-        institution: "School of Computing & Data Sciences",
+        name: "Disha Agarwal",
+        email: "disha.agarwal@gdgconnect.edu",
+        phone: "+91 98765 43210",
+        institution: "IIMT University • IIMTBIF",
         department: "AI & Distributed Systems",
-        avatar: "EV",
-        expertise: ["Machine Learning", "Cloud Systems", "Research Methods", "Career Strategy"],
-        bio: "Senior research faculty and director of outreach with 12+ years mentoring collegiate engineering teams, lab leads, and tech ambassadors.",
+        avatar: "DA",
+        expertise: ["Generative AI", "Cloud Systems", "Research Methods", "Career Strategy"],
+        bio: "Senior Student Ambassador Mentor with deep expertise in AI pipelines, student outreach, and Google developer technology tracks.",
         availability: "Available",
         maxMentees: 8,
         joinedDate: "2024-01-15",
-        officeHours: "Tue & Thu, 2:00 PM - 5:00 PM EST",
-        officeLocation: "Turing Science Center, Rm 412"
+        officeHours: "Tue & Thu, 2:00 PM - 5:00 PM",
+        officeLocation: "IIMTBIF Innovation Wing, Lab 101"
       },
       {
         id: "MTR-102",
-        name: "Prof. Marcus Sterling",
-        email: "marcus.sterling@gdgconnect.edu",
-        phone: "+1 (555) 482-1923",
-        institution: "College of Engineering",
+        name: "Aarushi Singh",
+        email: "aarushi.singh@gdgconnect.edu",
+        phone: "+91 98765 43211",
+        institution: "IIMT University • IIMTBIF",
         department: "Cybersecurity & Networks",
-        avatar: "MS",
+        avatar: "AS",
         expertise: ["Network Defense", "Ethical Hacking", "Student Leadership", "Sponsorship Outreach"],
-        bio: "Industry practitioner turned associate professor; specializes in student career pipelines, hackathon mentorship, and cybersecurity competitions.",
+        bio: "Lead student mentor specializing in campus cybersecurity challenges, technical workshops, and national hackathon preparation.",
         availability: "Available",
         maxMentees: 6,
         joinedDate: "2024-03-01",
-        officeHours: "Mon & Wed, 10:00 AM - 1:00 PM EST",
-        officeLocation: "Engineering Quad, Lab 108"
+        officeHours: "Mon & Wed, 10:00 AM - 1:00 PM",
+        officeLocation: "IIMTBIF Lab 102"
       },
       {
         id: "MTR-103",
-        name: "Dr. Alistair Chen",
-        email: "alistair.chen@gdgconnect.edu",
-        phone: "+1 (555) 619-3345",
-        institution: "School of Informatics",
+        name: "Akshita Tyagi",
+        email: "akshita.tyagi@gdgconnect.edu",
+        phone: "+91 98765 43212",
+        institution: "IIMT University • IIMTBIF",
         department: "Human-Computer Interaction",
-        avatar: "AC",
-        expertise: ["Product Design", "UX Research", "Community Engagement", "Grant Writing"],
-        bio: "Head of Human-Centered Tech lab. Fosters cross-campus collaborative teams, UI/UX bootcamps, and accessibility initiatives.",
+        avatar: "AT",
+        expertise: ["Product Design", "UX Research", "Community Engagement", "Solution Challenge"],
+        bio: "Mentor fostering collaborative engineering teams, UI/UX bootcamps, and accessibility initiatives for Google Solution Challenge.",
         availability: "Limited Slots",
         maxMentees: 5,
         joinedDate: "2024-08-10",
-        officeHours: "Fri, 11:00 AM - 3:00 PM EST",
-        officeLocation: "Design Studio Hub, Studio C"
+        officeHours: "Fri, 11:00 AM - 3:00 PM",
+        officeLocation: "Design Innovation Hub, Studio B"
       },
       {
         id: "MTR-104",
-        name: "Prof. Nadia Morales",
-        email: "nadia.morales@gdgconnect.edu",
-        phone: "+1 (555) 902-4512",
-        institution: "College of Sciences",
-        department: "Software Engineering & DevOps",
-        avatar: "NM",
-        expertise: ["DevOps Pipelines", "Open Source", "Agile Coaching", "Public Speaking"],
-        bio: "Veteran software architect advising ambassadors on technical curriculum, open-source workshop facilitation, and industry partnerships.",
-        availability: "Busy",
+        name: "Arsh Zehra",
+        email: "arsh.zehra@gdgconnect.edu",
+        phone: "+91 98765 43213",
+        institution: "IIMT University • IIMTBIF",
+        department: "DevOps & Software Eng",
+        avatar: "AZ",
+        expertise: ["DevOps Pipelines", "Open Source", "Kubernetes", "Public Speaking"],
+        bio: "Software engineering mentor advising campus ambassadors on technical curriculum, open-source workshop facilitation, and cloud labs.",
+        availability: "Available",
         maxMentees: 6,
         joinedDate: "2024-11-05",
-        officeHours: "Wed, 3:00 PM - 6:00 PM EST",
+        officeHours: "Wed, 3:00 PM - 6:00 PM",
         officeLocation: "Innovation Hall, Rm 204"
+      },
+      {
+        id: "MTR-105",
+        name: "Khyati",
+        email: "khyati@gdgconnect.edu",
+        phone: "+91 98765 43214",
+        institution: "IIMT University • IIMTBIF",
+        department: "Mobile & Cloud Technologies",
+        avatar: "KH",
+        expertise: ["Flutter & Dart", "Android Compose", "Cloud Architecture", "Event Planning"],
+        bio: "Mobile systems lead and mentor driving cross-platform developer adoption, hackathon mentoring, and community outreach.",
+        availability: "Available",
+        maxMentees: 6,
+        joinedDate: "2025-01-10",
+        officeHours: "Thu, 1:00 PM - 4:00 PM",
+        officeLocation: "Mobile Development Center, Rm 105"
       }
     ],
 

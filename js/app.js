@@ -554,7 +554,7 @@
                 <!-- Mentors Column -->
                 <div style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
                   <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.75rem; color: var(--color-primary);">
-                    ${ui.icon('shield')} Faculty Mentors (4)
+                    ${ui.icon('shield')} Student Ambassador Mentors (${mentors.length})
                   </div>
                   <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     ${mentors.map(m => `
