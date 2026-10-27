@@ -17,13 +17,31 @@
   <!-- Core Stylesheets -->
   <link rel="stylesheet" href="css/main.css?v=2.3">
   <link rel="stylesheet" href="css/components.css?v=2.3">
-  <link rel="stylesheet" href="css/sections.css?v=2.3">
-  <link rel="stylesheet" href="css/community.css?v=2.3">
+  <link rel="stylesheet" href="css/sections.css?v=2.4">
+  <link rel="stylesheet" href="css/community.css?v=2.4">
+  <link rel="stylesheet" href="css/motion.css?v=2.4">
 </head>
 <body data-theme="dark">
 
   <!-- Google Signature 4-Color Accent Stripe -->
   <div class="google-top-stripe"></div>
+
+  <!-- ==========================================================================
+       CINEMATIC MOTION BACKGROUND: Interactive Neural Canvas & Floating Auroras
+       ========================================================================== -->
+  <div class="motion-bg-container" aria-hidden="true">
+    <!-- Floating Luminous Aurora Orbs -->
+    <div class="aurora-mesh">
+      <div class="aurora-orb aurora-orb-cyan"></div>
+      <div class="aurora-orb aurora-orb-indigo"></div>
+      <div class="aurora-orb aurora-orb-emerald"></div>
+      <div class="aurora-orb aurora-orb-purple"></div>
+    </div>
+    <!-- Perspective Cyber Grid with Subtle Vertical Drift -->
+    <div class="cyber-grid-mesh"></div>
+    <!-- 60fps Interactive Neural Mesh Particle Canvas -->
+    <canvas id="ambient-particle-canvas" class="ambient-particle-canvas"></canvas>
+  </div>
 
   <!-- ==========================================================================
        PUBLIC GDG COMMUNITY SHOWCASE & "TAP TO ENTER" GATEWAY (E-CELL CA THEME)
@@ -624,8 +642,9 @@
   <script src="js/sections/communication.js?v=2.2"></script>
   <script src="js/sections/achievements.js?v=2.2"></script>
   <script src="js/sections/calendar.js?v=2.2"></script>
-  <script src="js/sections/profile-settings.js?v=2.2"></script>
-  <script src="js/community.js?v=2.2"></script>
-  <script src="js/app.js?v=2.2"></script>
+  <script src="js/sections/profile-settings.js?v=2.4"></script>
+  <script src="js/community.js?v=2.4"></script>
+  <script src="js/motion.js?v=2.4"></script>
+  <script src="js/app.js?v=2.4"></script>
 </body>
 </html>
