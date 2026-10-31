@@ -37,6 +37,46 @@
     { id: 'profile-settings', label: '13. Profile & Settings', icon: 'settings', sectionKey: 'profileSettings' }
   ];
 
+  /* ==========================================================================
+     PORTAL COPY-PROTECTION HANDLER
+     Completely blocks text copying, cut, and text drag-selection across the portal
+     while keeping interactive form inputs fully functional for typing credentials.
+     ========================================================================== */
+  function initCopyProtection() {
+    const isInput = (el) => {
+      if (!el) return false;
+      const tag = el.tagName;
+      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable;
+    };
+
+    document.addEventListener('copy', (e) => {
+      if (!isInput(document.activeElement) && !isInput(e.target)) {
+        e.preventDefault();
+      }
+    }, true);
+
+    document.addEventListener('cut', (e) => {
+      if (!isInput(document.activeElement) && !isInput(e.target)) {
+        e.preventDefault();
+      }
+    }, true);
+
+    document.addEventListener('selectstart', (e) => {
+      if (!isInput(e.target)) {
+        e.preventDefault();
+      }
+    }, true);
+
+    document.addEventListener('dragstart', (e) => {
+      if (!isInput(e.target)) {
+        e.preventDefault();
+      }
+    }, true);
+  }
+
+  // Activate copy protection immediately
+  initCopyProtection();
+
   function initApp() {
     renderSidebarNav();
     updateUserDisplays();

@@ -467,29 +467,28 @@
 
 .preloader-title {
   font-size: 2.25rem;
-  font-weight: 900;
-  letter-spacing: -0.6px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: #ffffff;
   margin: 0 0 0.5rem;
 }
 
 .preloader-title span {
-  color: #00f3ff;
-  text-shadow: 0 0 20px rgba(0, 243, 255, 0.65);
+  color: #38bdf8;
 }
 
 .preloader-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 243, 255, 0.08);
-  border: 1px solid rgba(0, 243, 255, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
   padding: 0.35rem 1rem;
   font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  color: #38bdf8;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
   margin-bottom: 0.45rem;
 }
 
@@ -497,8 +496,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #00f3ff;
-  box-shadow: 0 0 10px #00f3ff;
+  background-color: #38bdf8;
   animation: preloaderDotFlash 1.2s infinite;
 }
 
@@ -568,10 +566,10 @@
 }
 
 .preloader-pct {
-  color: #00f3ff;
+  color: #38bdf8;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+  font-feature-settings: "tnum" 1;
 }
 
 /* Sleek Google signature 4-color micro bar */
