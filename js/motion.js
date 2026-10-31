@@ -8,7 +8,7 @@
   'use strict';
 
   /* ==========================================================================
-     CINEMATIC PRELOADER CONTROLLER
+     CINEMATIC PRELOADER CONTROLLER (Extended ~3.8s - 4.2s Experience)
      ========================================================================== */
   function initPreloader() {
     const preloader = document.getElementById('app-preloader');
@@ -35,23 +35,23 @@
     let current = 0;
     let target = 28;
     let statusIdx = 0;
-    let isComplete = false;
 
     const timer = setInterval(() => {
       if (current < target) {
-        const step = Math.max(1, Math.ceil((target - current) * 0.22));
+        const diff = target - current;
+        const step = diff > 8 ? Math.max(1, Math.floor(diff * 0.12)) : 1;
         current = Math.min(target, current + step);
 
         if (fill) fill.style.width = current + '%';
         if (pct) pct.textContent = current + '%';
 
-        if (current >= 25 && statusIdx === 0) {
+        if (current >= 22 && statusIdx === 0) {
           statusIdx = 1;
           if (status) status.textContent = statusMessages[1];
-        } else if (current >= 55 && statusIdx === 1) {
+        } else if (current >= 52 && statusIdx === 1) {
           statusIdx = 2;
           if (status) status.textContent = statusMessages[2];
-        } else if (current >= 85 && statusIdx === 2) {
+        } else if (current >= 80 && statusIdx === 2) {
           statusIdx = 3;
           if (status) status.textContent = statusMessages[3];
         }
@@ -63,34 +63,22 @@
         if (pct) pct.textContent = '100%';
         if (fill) fill.style.width = '100%';
 
+        // Hold 100% completion state for 450ms before smooth fade-out
         setTimeout(() => {
           preloader.classList.add('preloader-hidden');
           window.dispatchEvent(new CustomEvent('gdg:preloader-dismissed'));
           setTimeout(() => {
             preloader.style.display = 'none';
-          }, 700);
-        }, 220);
+          }, 750);
+        }, 450);
       }
-    }, 25);
+    }, 32);
 
-    // Staged progress targets for lifelike loading simulation
-    setTimeout(() => { if (!isComplete) target = 65; }, 320);
-    setTimeout(() => { if (!isComplete) target = 88; }, 680);
-
-    const markComplete = () => {
-      isComplete = true;
-      target = 100;
-    };
-
-    if (document.readyState === 'complete') {
-      setTimeout(markComplete, 600);
-    } else {
-      window.addEventListener('load', () => {
-        setTimeout(markComplete, 350);
-      });
-      // Safety fail-safe timeout
-      setTimeout(markComplete, 1800);
-    }
+    // Staged progression calibrated for an immersive ~3.8s to 4.2s presentation
+    setTimeout(() => { target = 56; }, 900);
+    setTimeout(() => { target = 82; }, 1900);
+    setTimeout(() => { target = 95; }, 2900);
+    setTimeout(() => { target = 100; }, 3600);
   }
 
   // Kick off preloader immediately
