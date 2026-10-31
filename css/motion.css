@@ -247,7 +247,10 @@
   .aurora-orb,
   .cyber-grid-mesh,
   .comm-hero-badge,
-  .btn-comm-primary::before {
+  .comm-hero-bg-photo,
+  .btn-comm-primary::before,
+  .preloader-ring,
+  .preloader-logo-core {
     animation: none !important;
   }
 
@@ -256,4 +259,290 @@
     transform: none !important;
     transition: none !important;
   }
+
+  .app-preloader {
+    transition: none !important;
+  }
 }
+
+/* ==========================================================================
+   4. CINEMATIC APP PRELOADER SCREEN
+   ========================================================================== */
+.app-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background-color: #050811;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, visibility;
+}
+
+.app-preloader.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+.preloader-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.preloader-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  mix-blend-mode: screen;
+}
+
+.preloader-orb-cyan {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.35) 0%, rgba(0, 243, 255, 0) 70%);
+  top: 15%;
+  left: 20%;
+  animation: preloaderOrb1 10s ease-in-out infinite alternate;
+}
+
+.preloader-orb-indigo {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0) 70%);
+  bottom: 12%;
+  right: 18%;
+  animation: preloaderOrb2 12s ease-in-out infinite alternate;
+}
+
+@keyframes preloaderOrb1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(35px, -25px) scale(1.15); }
+}
+
+@keyframes preloaderOrb2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-35px, 25px) scale(1.12); }
+}
+
+.preloader-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 75%);
+}
+
+.preloader-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.2rem 1.75rem;
+  max-width: 460px;
+  width: 90%;
+}
+
+/* Emblem with glowing orbital rings */
+.preloader-emblem {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+}
+
+.preloader-ring-outer {
+  inset: -6px;
+  border-top-color: #00f3ff;
+  border-right-color: rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.35);
+  animation: preloaderRingSpin 3.5s linear infinite;
+}
+
+.preloader-ring-inner {
+  inset: 2px;
+  border-bottom-color: #6366f1;
+  border-left-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
+  animation: preloaderRingSpin 2.4s linear infinite reverse;
+}
+
+@keyframes preloaderRingSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.preloader-logo-core {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: rgba(14, 21, 38, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 25px rgba(0, 243, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: preloaderCorePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes preloaderCorePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(0, 243, 255, 0.25); }
+  50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 243, 255, 0.55); }
+}
+
+.preloader-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+}
+
+.preloader-title span {
+  color: #00f3ff;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.65);
+}
+
+.preloader-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 243, 255, 0.08);
+  border: 1px solid rgba(0, 243, 255, 0.28);
+  border-radius: 9999px;
+  padding: 0.35rem 1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #38bdf8;
+  margin-bottom: 0.45rem;
+}
+
+.preloader-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00f3ff;
+  box-shadow: 0 0 10px #00f3ff;
+  animation: preloaderDotFlash 1.2s infinite;
+}
+
+@keyframes preloaderDotFlash {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.preloader-sub {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0 0 1.9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Progress Meter */
+.preloader-meter-box {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 1.85rem;
+}
+
+.preloader-track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.preloader-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f3ff, #38bdf8, #6366f1, #a855f7);
+  background-size: 200% 100%;
+  border-radius: 9999px;
+  transition: width 0.18s cubic-bezier(0.1, 0.9, 0.2, 1);
+  box-shadow: 0 0 16px rgba(0, 243, 255, 0.8);
+  animation: preloaderShimmer 2s linear infinite;
+}
+
+@keyframes preloaderShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.preloader-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.65rem;
+  font-size: 0.76rem;
+}
+
+.preloader-status-text {
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.preloader-pct {
+  color: #00f3ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+/* Sleek Google signature 4-color micro bar */
+.preloader-google-bar {
+  display: flex;
+  width: 110px;
+  height: 3px;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(66, 133, 244, 0.4);
+}
+
+.preloader-google-bar span {
+  flex: 1;
+  height: 100%;
+}
+
+.preloader-google-bar .bar-blue { background-color: #4285f4; }
+.preloader-google-bar .bar-red { background-color: #ea4335; }
+.preloader-google-bar .bar-yellow { background-color: #fbbc04; }
+.preloader-google-bar .bar-green { background-color: #34a853; }

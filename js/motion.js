@@ -7,7 +7,96 @@
 (function () {
   'use strict';
 
-  // Respect reduced motion accessibility
+  /* ==========================================================================
+     CINEMATIC PRELOADER CONTROLLER
+     ========================================================================== */
+  function initPreloader() {
+    const preloader = document.getElementById('app-preloader');
+    if (!preloader) return;
+
+    // If reduced motion is requested, dismiss immediately
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      preloader.style.display = 'none';
+      return;
+    }
+
+    const fill = document.getElementById('preloader-fill');
+    const pct = document.getElementById('preloader-pct');
+    const status = document.getElementById('preloader-status');
+
+    const statusMessages = [
+      'Initializing ambassador ecosystem...',
+      'Connecting GDGoC IIMTU nodes...',
+      'Loading student mentors & labs...',
+      'Configuring developer workspace...',
+      'Welcome to GDGconnect.'
+    ];
+
+    let current = 0;
+    let target = 28;
+    let statusIdx = 0;
+    let isComplete = false;
+
+    const timer = setInterval(() => {
+      if (current < target) {
+        const step = Math.max(1, Math.ceil((target - current) * 0.22));
+        current = Math.min(target, current + step);
+
+        if (fill) fill.style.width = current + '%';
+        if (pct) pct.textContent = current + '%';
+
+        if (current >= 25 && statusIdx === 0) {
+          statusIdx = 1;
+          if (status) status.textContent = statusMessages[1];
+        } else if (current >= 55 && statusIdx === 1) {
+          statusIdx = 2;
+          if (status) status.textContent = statusMessages[2];
+        } else if (current >= 85 && statusIdx === 2) {
+          statusIdx = 3;
+          if (status) status.textContent = statusMessages[3];
+        }
+      }
+
+      if (current >= 100) {
+        clearInterval(timer);
+        if (status) status.textContent = statusMessages[4];
+        if (pct) pct.textContent = '100%';
+        if (fill) fill.style.width = '100%';
+
+        setTimeout(() => {
+          preloader.classList.add('preloader-hidden');
+          window.dispatchEvent(new CustomEvent('gdg:preloader-dismissed'));
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 700);
+        }, 220);
+      }
+    }, 25);
+
+    // Staged progress targets for lifelike loading simulation
+    setTimeout(() => { if (!isComplete) target = 65; }, 320);
+    setTimeout(() => { if (!isComplete) target = 88; }, 680);
+
+    const markComplete = () => {
+      isComplete = true;
+      target = 100;
+    };
+
+    if (document.readyState === 'complete') {
+      setTimeout(markComplete, 600);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(markComplete, 350);
+      });
+      // Safety fail-safe timeout
+      setTimeout(markComplete, 1800);
+    }
+  }
+
+  // Kick off preloader immediately
+  initPreloader();
+
+  // Respect reduced motion accessibility for heavy canvas animations
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }

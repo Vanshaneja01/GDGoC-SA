@@ -15,13 +15,69 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Core Stylesheets -->
-  <link rel="stylesheet" href="css/main.css?v=2.3">
-  <link rel="stylesheet" href="css/components.css?v=2.3">
-  <link rel="stylesheet" href="css/sections.css?v=2.4">
-  <link rel="stylesheet" href="css/community.css?v=2.4">
-  <link rel="stylesheet" href="css/motion.css?v=2.4">
+  <link rel="stylesheet" href="css/main.css?v=2.5">
+  <link rel="stylesheet" href="css/components.css?v=2.5">
+  <link rel="stylesheet" href="css/sections.css?v=2.5">
+  <link rel="stylesheet" href="css/community.css?v=2.5">
+  <link rel="stylesheet" href="css/motion.css?v=2.5">
 </head>
 <body data-theme="dark">
+
+  <!-- ==========================================================================
+       CINEMATIC PRELOADER / INITIALIZATION SCREEN
+       ========================================================================== -->
+  <div id="app-preloader" class="app-preloader" role="status" aria-live="polite" aria-label="Loading GDGconnect Portal">
+    <div class="preloader-backdrop">
+      <div class="preloader-orb preloader-orb-cyan"></div>
+      <div class="preloader-orb preloader-orb-indigo"></div>
+      <div class="preloader-grid"></div>
+    </div>
+
+    <div class="preloader-content">
+      <!-- High-Tech Animated Emblem -->
+      <div class="preloader-emblem">
+        <div class="preloader-ring preloader-ring-outer"></div>
+        <div class="preloader-ring preloader-ring-inner"></div>
+        <div class="preloader-logo-core">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            <path d="M8 7L3 12L8 17" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 7L21 12L16 17" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.5 5L10.5 19" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="1.8" fill="#fbbc04"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Brand & Mission Typography -->
+      <div class="preloader-brand">
+        <h1 class="preloader-title">GDG<span>connect</span></h1>
+        <div class="preloader-badge">
+          <span class="preloader-dot"></span>
+          <span>CAMPUS AMBASSADOR & MENTOR NETWORK</span>
+        </div>
+        <p class="preloader-sub">On Campus IIMTU &bull; Powered by IIMTBIF</p>
+      </div>
+
+      <!-- Cyberpunk Progress Meter & Percentage -->
+      <div class="preloader-meter-box">
+        <div class="preloader-track">
+          <div class="preloader-fill" id="preloader-fill"></div>
+        </div>
+        <div class="preloader-metrics">
+          <span class="preloader-status-text" id="preloader-status">Initializing ambassador ecosystem...</span>
+          <span class="preloader-pct" id="preloader-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Sleek Google 4-Color Accent Micro-Bar -->
+      <div class="preloader-google-bar">
+        <span class="bar-blue"></span>
+        <span class="bar-red"></span>
+        <span class="bar-yellow"></span>
+        <span class="bar-green"></span>
+      </div>
+    </div>
+  </div>
 
   <!-- Google Signature 4-Color Accent Stripe -->
   <div class="google-top-stripe"></div>
@@ -78,56 +134,64 @@
       </nav>
     </header>
 
-    <!-- Hero Section (High-Energy Cyberpunk Style) -->
-    <section class="comm-hero">
-      <div class="comm-hero-badge">
-        <span class="comm-dot"></span> GDGoC IIMTU &bull; CAMPUS AMBASSADOR PROGRAM 2026-27
+    <!-- Hero Section with Full-Width Atmospheric Developer Summit Photo Backdrop -->
+    <section class="comm-hero-wrapper">
+      <div class="comm-hero-backdrop" aria-hidden="true">
+        <img src="assets/images/hero-bg.jpg" alt="GDGoC Campus Developer Summit" class="comm-hero-bg-photo" loading="eager" />
+        <div class="comm-hero-overlay"></div>
+        <div class="comm-hero-vignette"></div>
       </div>
 
-      <h1 class="comm-hero-title">
-        Join. Lead. Inspire.<br>
-        <span class="comm-gradient-text">The Ultimate Campus Leadership & Developer Internship.</span>
-      </h1>
-
-      <p class="comm-hero-desc">
-        Google Developer Groups on Campus (GDGoC) at IIMT University, proudly powered by IIMTBIF. Represent your department, lead groundbreaking tech initiatives, organize hands-on labs, and accelerate your career alongside elite student mentors.
-      </p>
-
-      <!-- Primary "Tap to Enter" Button (ecell.in/ca signature neon button) -->
-      <div class="comm-cta-group">
-        <button type="button" class="btn-comm-primary" id="btn-tap-to-enter-portal">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span>Tap to Enter GDGconnect</span>
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
-
-        <a href="#comm-about" class="btn-comm-secondary">
-          <span>Explore CA Perks & Roles</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </a>
-      </div>
-
-      <div class="comm-credentials-hint">
-        <span>🔑 Appointed Ambassadors & Student Mentors: Tap above to sign in with your issued credentials</span>
-      </div>
-
-      <!-- Live Community Numbers (Glassmorphic Stats Ribbon) -->
-      <div class="comm-stats-grid" id="comm-impact">
-        <div class="comm-stat-card">
-          <div class="comm-stat-num blue">7,500+</div>
-          <div class="comm-stat-label">Active Student Developers</div>
+      <div class="comm-hero">
+        <div class="comm-hero-badge">
+          <span class="comm-dot"></span> GDGoC IIMTU &bull; CAMPUS AMBASSADOR PROGRAM 2026-27
         </div>
-        <div class="comm-stat-card">
-          <div class="comm-stat-num green">5</div>
-          <div class="comm-stat-label">Student Ambassador Mentors</div>
+
+        <h1 class="comm-hero-title">
+          Join. Lead. Inspire.<br>
+          <span class="comm-gradient-text">The Ultimate Campus Leadership & Developer Internship.</span>
+        </h1>
+
+        <p class="comm-hero-desc">
+          Google Developer Groups on Campus (GDGoC) at IIMT University, proudly powered by IIMTBIF. Represent your department, lead groundbreaking tech initiatives, organize hands-on labs, and accelerate your career alongside elite student mentors.
+        </p>
+
+        <!-- Primary "Tap to Enter" Button (ecell.in/ca signature neon button) -->
+        <div class="comm-cta-group">
+          <button type="button" class="btn-comm-primary" id="btn-tap-to-enter-portal">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Tap to Enter GDGconnect</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <a href="#comm-about" class="btn-comm-secondary">
+            <span>Explore CA Perks & Roles</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
         </div>
-        <div class="comm-stat-card">
-          <div class="comm-stat-num yellow">25</div>
-          <div class="comm-stat-label">Appointed Campus Ambassadors</div>
+
+        <div class="comm-credentials-hint">
+          <span>🔑 Appointed Ambassadors & Student Mentors: Tap above to sign in with your issued credentials</span>
         </div>
-        <div class="comm-stat-card">
-          <div class="comm-stat-num red">50+</div>
-          <div class="comm-stat-label">Hands-on Technology Labs</div>
+
+        <!-- Live Community Numbers (Glassmorphic Stats Ribbon) -->
+        <div class="comm-stats-grid" id="comm-impact">
+          <div class="comm-stat-card">
+            <div class="comm-stat-num blue">7,500+</div>
+            <div class="comm-stat-label">Active Student Developers</div>
+          </div>
+          <div class="comm-stat-card">
+            <div class="comm-stat-num green">5</div>
+            <div class="comm-stat-label">Student Ambassador Mentors</div>
+          </div>
+          <div class="comm-stat-card">
+            <div class="comm-stat-num yellow">25</div>
+            <div class="comm-stat-label">Appointed Campus Ambassadors</div>
+          </div>
+          <div class="comm-stat-card">
+            <div class="comm-stat-num red">50+</div>
+            <div class="comm-stat-label">Hands-on Technology Labs</div>
+          </div>
         </div>
       </div>
     </section>
@@ -626,25 +690,25 @@
   <div id="modal-host"></div>
 
   <!-- Application Logic & Section Modules -->
-  <script src="js/db.js?v=2.2"></script>
-  <script src="js/state.js?v=2.2"></script>
-  <script src="js/ui.js?v=2.2"></script>
-  <script src="js/sections/dashboard.js?v=2.2"></script>
-  <script src="js/sections/mentors.js?v=2.2"></script>
-  <script src="js/sections/ambassadors.js?v=2.2"></script>
-  <script src="js/sections/tasks.js?v=2.2"></script>
-  <script src="js/sections/mentor-sessions.js?v=2.2"></script>
-  <script src="js/sections/ambassador-sessions.js?v=2.2"></script>
-  <script src="js/sections/labs-registrations.js?v=2.2"></script>
-  <script src="js/sections/reports.js?v=2.2"></script>
-  <script src="js/sections/announcements.js?v=2.2"></script>
-  <script src="js/sections/resources.js?v=2.2"></script>
-  <script src="js/sections/communication.js?v=2.2"></script>
-  <script src="js/sections/achievements.js?v=2.2"></script>
-  <script src="js/sections/calendar.js?v=2.2"></script>
-  <script src="js/sections/profile-settings.js?v=2.4"></script>
-  <script src="js/community.js?v=2.4"></script>
-  <script src="js/motion.js?v=2.4"></script>
-  <script src="js/app.js?v=2.4"></script>
+  <script src="js/db.js?v=2.5"></script>
+  <script src="js/state.js?v=2.5"></script>
+  <script src="js/ui.js?v=2.5"></script>
+  <script src="js/sections/dashboard.js?v=2.5"></script>
+  <script src="js/sections/mentors.js?v=2.5"></script>
+  <script src="js/sections/ambassadors.js?v=2.5"></script>
+  <script src="js/sections/tasks.js?v=2.5"></script>
+  <script src="js/sections/mentor-sessions.js?v=2.5"></script>
+  <script src="js/sections/ambassador-sessions.js?v=2.5"></script>
+  <script src="js/sections/labs-registrations.js?v=2.5"></script>
+  <script src="js/sections/reports.js?v=2.5"></script>
+  <script src="js/sections/announcements.js?v=2.5"></script>
+  <script src="js/sections/resources.js?v=2.5"></script>
+  <script src="js/sections/communication.js?v=2.5"></script>
+  <script src="js/sections/achievements.js?v=2.5"></script>
+  <script src="js/sections/calendar.js?v=2.5"></script>
+  <script src="js/sections/profile-settings.js?v=2.5"></script>
+  <script src="js/community.js?v=2.5"></script>
+  <script src="js/motion.js?v=2.5"></script>
+  <script src="js/app.js?v=2.5"></script>
 </body>
 </html>
