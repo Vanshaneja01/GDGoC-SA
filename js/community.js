@@ -11,7 +11,164 @@
   const CommunityManager = {
     init() {
       this.bindPortalButtons();
+      this.initCaSlider();
       this.checkInitialView();
+    },
+
+    /* ==========================================================================
+       CAMPUS AMBASSADORS & ALLOTTED MENTORS CAROUSEL / SLIDE CONTROLLER
+       ========================================================================== */
+    initCaSlider() {
+      const track = document.getElementById('ca-slider-track');
+      const viewport = document.getElementById('ca-slider-viewport');
+      const prevBtn = document.getElementById('ca-slide-prev');
+      const nextBtn = document.getElementById('ca-slide-next');
+      const dotsContainer = document.getElementById('ca-slider-dots');
+      const filterBar = document.getElementById('ca-filter-bar');
+
+      if (!track || !viewport) return;
+
+      const mentors = (window.CC.db && window.CC.db.getMentors()) || [];
+      const ambassadors = (window.CC.db && window.CC.db.getAmbassadors()) || [];
+
+      const mentorMap = {};
+      mentors.forEach(m => { mentorMap[m.id] = m; });
+
+      // Default mentor fallback
+      const defaultMentor = mentors[0] || { name: 'Disha Agarwal', department: 'AI & Distributed Systems', avatar: 'DA' };
+
+      const renderCards = (filterId = 'all') => {
+        track.innerHTML = '';
+
+        const filtered = ambassadors.filter(a => {
+          if (filterId === 'all') return true;
+          return a.mentorId === filterId;
+        });
+
+        if (filtered.length === 0) {
+          track.innerHTML = `
+            <div style="padding: 3rem 1.5rem; text-align: center; width: 100%; color: #94a3b8;">
+              <p style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.4rem;">No Ambassadors in this Cohort</p>
+              <p style="font-size: 0.9rem;">Select another mentor cohort or click "All Ambassadors" to view the full directory.</p>
+            </div>
+          `;
+          if (dotsContainer) dotsContainer.innerHTML = '';
+          return;
+        }
+
+        filtered.forEach(a => {
+          const mentor = mentorMap[a.mentorId] || defaultMentor;
+          const card = document.createElement('div');
+          card.className = 'ca-slide-card';
+          card.setAttribute('data-mentor-id', a.mentorId || '');
+
+          const initials = a.avatar || a.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+          const mentorInitials = mentor.avatar || mentor.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+
+          const skillsHtml = (a.skills || ['React', 'Python', 'Cloud', 'Outreach']).slice(0, 3).map(s => `
+            <span class="ca-skill-pill">${s}</span>
+          `).join('');
+
+          card.innerHTML = `
+            <div>
+              <div class="ca-card-header">
+                <div class="ca-avatar-circle">${initials}</div>
+                <div class="ca-card-meta">
+                  <span class="ca-card-name">${a.name}</span>
+                  <span class="ca-card-dept">${a.department || 'B.Tech Computer Science'}</span>
+                </div>
+              </div>
+
+              <span class="ca-card-badge">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                <span>Campus Ambassador</span>
+              </span>
+
+              <!-- Allotted Mentor Box -->
+              <div class="ca-mentor-box">
+                <div class="ca-mentor-avatar">${mentorInitials}</div>
+                <div class="ca-mentor-info">
+                  <span class="ca-mentor-tag">Allotted Student Mentor</span>
+                  <span class="ca-mentor-name">${mentor.name}</span>
+                  <span class="ca-mentor-dept">${mentor.department || 'Senior Student Mentor'}</span>
+                </div>
+              </div>
+
+              <div class="ca-skills-row">
+                ${skillsHtml}
+              </div>
+            </div>
+
+            <div class="ca-card-footer">
+              <span>Status: <strong style="color: #34d399;">Active</strong></span>
+              <span>Year: <strong style="color: #ffffff;">${a.year ? a.year.split(' ')[0] : 'Year 3'}</strong></span>
+            </div>
+          `;
+
+          track.appendChild(card);
+        });
+
+        // Recreate dots
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+          const cardCount = filtered.length;
+          const dotsCount = Math.min(cardCount, 6);
+          for (let i = 0; i < dotsCount; i++) {
+            const dot = document.createElement('div');
+            dot.className = `ca-slider-dot ${i === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => {
+              const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 24 : 320;
+              viewport.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+            });
+            dotsContainer.appendChild(dot);
+          }
+        }
+      };
+
+      // Initial Render
+      renderCards('all');
+
+      // Prev & Next Buttons
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 24 : 320;
+          viewport.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 24 : 320;
+          viewport.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+      }
+
+      // Filter Bar
+      if (filterBar) {
+        filterBar.addEventListener('click', (e) => {
+          const btn = e.target.closest('.ca-filter-btn');
+          if (!btn) return;
+
+          filterBar.querySelectorAll('.ca-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter') || 'all';
+          renderCards(filter);
+          viewport.scrollTo({ left: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Viewport scroll listener for dots
+      viewport.addEventListener('scroll', () => {
+        if (!dotsContainer) return;
+        const dots = dotsContainer.querySelectorAll('.ca-slider-dot');
+        if (dots.length === 0) return;
+        const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 24 : 320;
+        const activeIdx = Math.min(dots.length - 1, Math.round(viewport.scrollLeft / cardWidth));
+        dots.forEach((d, idx) => {
+          d.classList.toggle('active', idx === activeIdx);
+        });
+      }, { passive: true });
     },
 
     // Check if user is already logged in or has a URL query

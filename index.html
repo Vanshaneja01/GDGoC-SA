@@ -1,715 +1,720 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GDG on Campus IIMT Meerut — Campus Ambassador & Mentor Program</title>
+  <title>GDGconnect — Student Ambassador & Mentor Management Portal</title>
   
-  <!-- Web Fonts: Inter, Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Web Fonts: Plus Jakarta Sans (E-Cell CA style), Roboto & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            google: {
-              blue: '#4285F4',
-              red: '#EA4335',
-              yellow: '#FBBC04',
-              green: '#34A853',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          boxShadow: {
-            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.05), 0 8px 16px -2px rgba(0, 0, 0, 0.02)',
-            'card': '0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02)',
-            'card-hover': '0 20px 35px -4px rgba(0, 0, 0, 0.08), 0 10px 15px -3px rgba(0, 0, 0, 0.04)',
-          }
-        }
-      }
-    }
-  </script>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
-  <!-- Core Custom Stylesheet & Copy Protection -->
+  <!-- Core Stylesheets -->
   <link rel="stylesheet" href="css/main.css?v=3.0">
+  <link rel="stylesheet" href="css/components.css?v=3.0">
+  <link rel="stylesheet" href="css/sections.css?v=3.0">
+  <link rel="stylesheet" href="css/community.css?v=3.0">
+  <link rel="stylesheet" href="css/motion.css?v=3.0">
 </head>
-<body class="bg-white text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
-
-  <!-- Google Signature 4-Color Accent Stripe -->
-  <div class="google-stripe"></div>
+<body data-theme="dark">
 
   <!-- ==========================================================================
-       1. STICKY TOP NAVBAR
+       CINEMATIC PRELOADER / INITIALIZATION SCREEN
        ========================================================================== -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-20">
-        
-        <!-- Brand Lockup -->
-        <a href="#about" class="flex items-center gap-3 group focus:outline-none">
-          <!-- Official GDG Brackets Logo -->
-          <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200/90 flex items-center justify-center p-2 shadow-2xs group-hover:border-blue-300 transition-colors">
-            <svg viewBox="0 0 24 24" fill="none" class="w-full h-full">
-              <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M13.5 5L10.5 19" stroke="#FBBC04" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="12" cy="12" r="1.8" fill="#34A853"/>
-            </svg>
-          </div>
-          <div class="flex flex-col text-left">
-            <span class="text-base sm:text-lg font-bold text-slate-900 tracking-tight font-display leading-tight flex items-center gap-1.5">
-              GDG on Campus
-              <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/60 hidden sm:inline-block">IIMT</span>
-            </span>
-            <span class="text-[11px] font-medium text-slate-500">IIMT University, Meerut</span>
-          </div>
-        </a>
+  <div id="app-preloader" class="app-preloader" role="status" aria-live="polite" aria-label="Loading GDGconnect Portal">
+    <div class="preloader-backdrop">
+      <!-- Aesthetic Developer Summit Background Photo -->
+      <img src="assets/images/hero-bg.jpg" alt="GDGoC Developer Atmosphere" class="preloader-bg-photo" />
+      <div class="preloader-photo-overlay"></div>
+      <div class="preloader-orb preloader-orb-cyan"></div>
+      <div class="preloader-orb preloader-orb-indigo"></div>
+      <div class="preloader-grid"></div>
+      <div class="preloader-vignette"></div>
+    </div>
 
-        <!-- Desktop Navigation Links (Smooth-Scroll Anchors) -->
-        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
-          <a href="#about" class="nav-link hover:text-blue-600 transition-colors">About</a>
-          <a href="#ca-program" class="nav-link hover:text-blue-600 transition-colors">CA Program</a>
-          <a href="#perks" class="nav-link hover:text-blue-600 transition-colors">Perks</a>
-          <a href="#responsibilities" class="nav-link hover:text-blue-600 transition-colors">Responsibilities</a>
-          <a href="#directory" class="nav-link hover:text-blue-600 transition-colors">Directory</a>
-        </nav>
+    <div class="preloader-content">
+      <!-- High-Tech Animated Emblem -->
+      <div class="preloader-emblem">
+        <div class="preloader-ring preloader-ring-outer"></div>
+        <div class="preloader-ring preloader-ring-inner"></div>
+        <div class="preloader-logo-core">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            <path d="M8 7L3 12L8 17" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 7L21 12L16 17" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.5 5L10.5 19" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="1.8" fill="#fbbc04"/>
+          </svg>
+        </div>
+      </div>
 
-        <!-- Right Action Button -->
-        <div class="hidden sm:flex items-center gap-3">
-          <button type="button" class="btn-open-portal-login inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-blue-600 text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow transition-all duration-200 focus:outline-none">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <span>Portal Login</span>
-          </button>
+      <!-- Brand & Mission Typography -->
+      <div class="preloader-brand">
+        <h1 class="preloader-title">GDG<span>connect</span></h1>
+        <div class="preloader-badge">
+          <span class="preloader-dot"></span>
+          <span>CAMPUS AMBASSADOR & MENTOR NETWORK</span>
+        </div>
+        <p class="preloader-sub">On Campus IIMTU &bull; Powered by IIMTBIF</p>
+      </div>
+
+      <!-- Cyberpunk Progress Meter & Percentage -->
+      <div class="preloader-meter-box">
+        <div class="preloader-track">
+          <div class="preloader-fill" id="preloader-fill"></div>
+        </div>
+        <div class="preloader-metrics">
+          <span class="preloader-status-text" id="preloader-status">Initializing ambassador ecosystem...</span>
+          <span class="preloader-pct" id="preloader-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Sleek Google 4-Color Accent Micro-Bar -->
+      <div class="preloader-google-bar">
+        <span class="bar-blue"></span>
+        <span class="bar-red"></span>
+        <span class="bar-yellow"></span>
+        <span class="bar-green"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Signature 4-Color Accent Stripe -->
+  <div class="google-top-stripe"></div>
+
+  <!-- ==========================================================================
+       CINEMATIC MOTION BACKGROUND: Interactive Neural Canvas & Floating Auroras
+       ========================================================================== -->
+  <div class="motion-bg-container" aria-hidden="true">
+    <!-- Floating Luminous Aurora Orbs -->
+    <div class="aurora-mesh">
+      <div class="aurora-orb aurora-orb-cyan"></div>
+      <div class="aurora-orb aurora-orb-indigo"></div>
+      <div class="aurora-orb aurora-orb-emerald"></div>
+      <div class="aurora-orb aurora-orb-purple"></div>
+    </div>
+    <!-- Perspective Cyber Grid with Subtle Vertical Drift -->
+    <div class="cyber-grid-mesh"></div>
+    <!-- 60fps Interactive Neural Mesh Particle Canvas -->
+    <canvas id="ambient-particle-canvas" class="ambient-particle-canvas"></canvas>
+  </div>
+
+  <!-- ==========================================================================
+       PUBLIC GDG COMMUNITY SHOWCASE & "TAP TO ENTER" GATEWAY (E-CELL CA THEME)
+       ========================================================================== -->
+  <div id="community-landing" class="community-landing">
+    <!-- Floating Glassmorphic Navbar (ecell.in/ca style) -->
+    <header class="comm-navbar">
+      <div class="comm-nav-brand">
+        <div class="comm-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M8 7L3 12L8 17" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 7L21 12L16 17" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.5 5L10.5 19" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="1.5" fill="#fde047"/>
+          </svg>
+        </div>
+        <div class="comm-brand-text">
+          <span class="comm-brand-title">GDG<span>connect</span></span>
+          <span class="comm-brand-sub">On Campus IIMTU &bull; CA Portal</span>
+        </div>
+      </div>
+
+      <nav class="comm-nav-links">
+        <a href="#section-about-gdg">About GDG</a>
+        <a href="#section-ca-program">CA Program</a>
+        <a href="#section-why-ca">Why CA?</a>
+        <a href="#section-responsibilities">Responsibilities</a>
+        <a href="#section-ca-slide">Ambassadors &amp; Mentors</a>
+        <a href="#section-faqs">FAQs</a>
+        <button type="button" class="btn-comm-portal" id="btn-nav-enter-portal">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+          <span>Portal Login</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- ==========================================================================
+         SECTION 1: GDG ON CAMPUS IIMT MEERUT & THE 3 INSTITUTIONAL LOGOS
+         ========================================================================== -->
+    <section class="comm-hero-wrapper" id="section-about-gdg">
+      <div class="comm-hero-backdrop" aria-hidden="true">
+        <img src="assets/images/hero-bg.jpg" alt="GDGoC Campus Developer Summit" class="comm-hero-bg-photo" loading="eager" />
+        <div class="comm-hero-overlay"></div>
+        <div class="comm-hero-vignette"></div>
+      </div>
+
+      <div class="comm-hero">
+        <!-- 3 Prominent Institutional Logos (GDG on Campus, IIMTBIF, IIMT University) -->
+        <div class="institutional-logos-bar" role="region" aria-label="Institutional Partners">
+          <div class="institutional-logo-card">
+            <img src="assets/images/gdg-lockup.svg" alt="Google Developer Groups on Campus Logo" class="institutional-logo-img" />
+          </div>
+          <div class="institutional-logo-card">
+            <img src="assets/images/iimtbif-logo.svg" alt="IIMTBIF Business Incubator Foundation Logo" class="institutional-logo-img" />
+          </div>
+          <div class="institutional-logo-card">
+            <img src="assets/images/iimtu-logo.svg" alt="IIMT University Meerut Logo" class="institutional-logo-img" />
+          </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <div class="flex md:hidden">
-          <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="comm-hero-badge">
+          <span class="comm-dot"></span> GOOGLE DEVELOPER GROUPS ON CAMPUS &bull; IIMT MEERUT
+        </div>
+
+        <h1 class="comm-hero-title">
+          GDG on Campus IIMT Meerut<br>
+          <span class="comm-gradient-text">Pioneering Technical Excellence, Student Innovation &amp; Open Source.</span>
+        </h1>
+
+        <!-- Chapter About Story Card -->
+        <div class="comm-chapter-about-box">
+          <p>
+            <strong class="comm-chapter-highlight">Google Developer Groups on Campus (GDGoC) at IIMT University, Meerut</strong> is the university’s official student-led developer community, proudly powered by the <strong class="comm-chapter-highlight">IIMT Business Incubation Foundation (IIMTBIF)</strong>.
+          </p>
+          <p>
+            Our mission is to foster a world-class engineering, coding, and entrepreneurship culture across campus. We empower over 20,000+ students across B.Tech Computer Science, IT, AI &amp; ML, BCA, MCA, and Polytechnic to transition from curious learners into industry-ready software engineers and startup innovators.
+          </p>
+          <p>
+            Through hands-on workshops in Google Cloud, Generative AI with Gemini, Android Compose, Flutter, and Firebase, our community organizes hackathons like DevHack IIMTU, participates in the global Google Solution Challenge, and facilitates startup incubation directly with IIMTBIF.
+          </p>
+        </div>
+
+        <!-- Primary "Tap to Enter" Portal CTA -->
+        <div class="comm-cta-group">
+          <button type="button" class="btn-comm-primary" id="btn-tap-to-enter-portal">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Tap to Enter GDGconnect Portal</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <a href="#section-ca-program" class="btn-comm-secondary">
+            <span>Explore Campus Ambassador Program</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+        </div>
+
+        <div class="comm-credentials-hint">
+          <span>🔑 Appointed Ambassadors &amp; Student Mentors: Tap above to sign in with your issued credentials</span>
+        </div>
+
+        <!-- Live Community Numbers (Stats Ribbon) -->
+        <div class="comm-stats-grid" id="comm-impact">
+          <div class="comm-stat-card">
+            <div class="comm-stat-num blue">20,000+</div>
+            <div class="comm-stat-label">Students on Campus</div>
+          </div>
+          <div class="comm-stat-card">
+            <div class="comm-stat-num green">50+</div>
+            <div class="comm-stat-label">Technical Labs &amp; Study Jams</div>
+          </div>
+          <div class="comm-stat-card">
+            <div class="comm-stat-num yellow">5</div>
+            <div class="comm-stat-label">Student Ambassador Mentors</div>
+          </div>
+          <div class="comm-stat-card">
+            <div class="comm-stat-num red">25</div>
+            <div class="comm-stat-label">Appointed Campus Ambassadors</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: CAMPUS AMBASSADOR (CA) PROGRAM OF GDG IIMT
+         ========================================================================== -->
+    <section class="comm-section" id="section-ca-program" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Campus Leadership Initiative</span>
+        <h2 class="comm-section-title">The Campus Ambassador Program at GDG IIMT</h2>
+        <p class="comm-section-desc">
+          A premier student leadership initiative bridging every academic department, hostel, and engineering branch at IIMT University with Google's global developer ecosystem.
+        </p>
+      </div>
+
+      <div class="ca-program-grid">
+        <div class="ca-program-card">
+          <div class="ca-program-icon" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8;">🏛️</div>
+          <h3 class="ca-program-title">1. Departmental Representation</h3>
+          <p class="ca-program-desc">
+            Serving as the primary technical voice across B.Tech CSE, IT, AI/ML, BCA, MCA, and Polytechnic branches to connect classroom learning with cutting-edge industry practices.
+          </p>
+        </div>
+
+        <div class="ca-program-card">
+          <div class="ca-program-icon" style="background: rgba(99, 102, 241, 0.12); color: #818cf8;">👥</div>
+          <h3 class="ca-program-title">2. 1-on-1 Mentorship Pipeline</h3>
+          <p class="ca-program-desc">
+            Directly paired with dedicated senior student mentors (Disha, Aarushi, Akshita, Arsh, Khyati) for weekly guidance, code reviews, and leadership growth.
+          </p>
+        </div>
+
+        <div class="ca-program-card">
+          <div class="ca-program-icon" style="background: rgba(52, 211, 153, 0.12); color: #34d399;">🚀</div>
+          <h3 class="ca-program-title">3. Incubation with IIMTBIF</h3>
+          <p class="ca-program-desc">
+            Fast-track access to IIMT Business Incubation Foundation resources, seed funding pathways, startup mentor networks, and prototype acceleration labs.
+          </p>
+        </div>
+
+        <div class="ca-program-card">
+          <div class="ca-program-icon" style="background: rgba(251, 191, 36, 0.12); color: #fbbf24;">⚡</div>
+          <h3 class="ca-program-title">4. Hands-on Event Execution</h3>
+          <p class="ca-program-desc">
+            Organize high-impact Google Cloud study jams, Android development bootcamps, and campus hackathons with direct logistics and promotional support.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: WHY CA AT GDG IIMTU?
+         ========================================================================== -->
+    <section class="comm-section" id="section-why-ca" style="border-top: 1px solid rgba(255, 255, 255, 0.06); background: rgba(10, 15, 29, 0.4);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Value Proposition</span>
+        <h2 class="comm-section-title">Why Become a Campus Ambassador?</h2>
+        <p class="comm-section-desc">
+          Step into the fast lane of student entrepreneurship and developer leadership. Gain unmatched exposure, industry credentials, and real-world execution experience.
+        </p>
+      </div>
+
+      <div class="comm-pillars-grid">
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon blue">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3 class="comm-pillar-title">1. Official Certification &amp; LoR</h3>
+          <p class="comm-pillar-text">
+            Earn distinguished Certificates of Leadership and formal Letters of Recommendation endorsed by GDGoC IIMTU and IIMTBIF, validating your verified contributions and tenure.
+          </p>
+        </div>
+
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon green">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="comm-pillar-title">2. 1-on-1 Guidance from Senior Mentors</h3>
+          <p class="comm-pillar-text">
+            Participate in regular 1-on-1 strategic checkpoints with Disha Agarwal, Aarushi Singh, Akshita Tyagi, Arsh Zehra, and Khyati to review deliverables and accelerate your tech trajectory.
+          </p>
+        </div>
+
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon yellow">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3 class="comm-pillar-title">3. Exclusive Google Swag &amp; Perks</h3>
+          <p class="comm-pillar-text">
+            Unlock official GDG merchandise, custom chapter hoodies, branded stickers, Google Cloud Skill Boost vouchers, and VIP conference passes to flagship DevFest events.
+          </p>
+        </div>
+
+        <div class="comm-pillar-card">
+          <div class="comm-pillar-icon blue">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <h3 class="comm-pillar-title">4. Real-World Leadership Experience</h3>
+          <p class="comm-pillar-text">
+            Lead your campus from the front. Plan, publicize, and host developer study jams, hackathons, and Google Solution Challenge teams while honing public speaking and project management.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: RESPONSIBILITIES OF A CAMPUS AMBASSADOR
+         ========================================================================== -->
+    <section class="comm-section" id="section-responsibilities" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Role Framework</span>
+        <h2 class="comm-section-title">Responsibilities of a Campus Ambassador</h2>
+        <p class="comm-section-desc">
+          A structured, action-oriented track designed to simulate technical community organizing, developer evangelism, and agile project delivery at scale.
+        </p>
+      </div>
+
+      <div class="comm-tracks-grid">
+        <div class="comm-track-card">
+          <span class="comm-track-badge" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);">Track 01</span>
+          <h4 class="comm-track-title">📢 Departmental Outreach &amp; Awareness</h4>
+          <p class="comm-track-desc">
+            Be the primary voice of GDGoC on campus. Publicize tech initiatives, Solution Challenge sprints, and recruitment drives across campus batches and digital channels.
+          </p>
+        </div>
+
+        <div class="comm-track-card">
+          <span class="comm-track-badge" style="background: rgba(52, 211, 153, 0.12); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.25);">Track 02</span>
+          <h4 class="comm-track-title">⚡ Workshop &amp; Lab Facilitation</h4>
+          <p class="comm-track-desc">
+            Coordinate and facilitate hands-on workshops in AI with Gemini, Cloud DevOps, Flutter, and Modern Web, backed by curriculum support from student mentors.
+          </p>
+        </div>
+
+        <div class="comm-track-card">
+          <span class="comm-track-badge" style="background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.25);">Track 03</span>
+          <h4 class="comm-track-title">🎯 Hackathon &amp; Registration Drive</h4>
+          <p class="comm-track-desc">
+            Manage specialized campus lab cohorts, assist participants with onboarding, drive DevHack 2026 participation, and maintain verified certification logs.
+          </p>
+        </div>
+
+        <div class="comm-track-card">
+          <span class="comm-track-badge" style="background: rgba(129, 140, 248, 0.12); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.25);">Track 04</span>
+          <h4 class="comm-track-title">🤝 Reporting &amp; Mentor Sync</h4>
+          <p class="comm-track-desc">
+            Participate in bi-weekly 1-on-1 progress reviews with assigned student mentors, submit milestone reports on GDGconnect, and level up through structured feedback.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: THE CA SLIDE - CAMPUS AMBASSADORS & ALLOTTED MENTORS
+         ========================================================================== -->
+    <section class="comm-section" id="section-ca-slide" style="border-top: 1px solid rgba(255, 255, 255, 0.06); background: rgba(10, 15, 29, 0.5);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Campus Leadership Directory</span>
+        <h2 class="comm-section-title">Meet Our Campus Ambassadors &amp; Allotted Mentors</h2>
+        <p class="comm-section-desc">
+          Meet the appointed student ambassadors driving technology initiatives across university departments, and the senior mentors guiding their growth.
+        </p>
+
+        <!-- Mentor Cohort Filter Bar -->
+        <div class="ca-filter-bar" id="ca-filter-bar">
+          <button type="button" class="ca-filter-btn active" data-filter="all">All Ambassadors</button>
+          <button type="button" class="ca-filter-btn" data-filter="MTR-101">Disha Agarwal's Cohort</button>
+          <button type="button" class="ca-filter-btn" data-filter="MTR-102">Aarushi Singh's Cohort</button>
+          <button type="button" class="ca-filter-btn" data-filter="MTR-103">Akshita Tyagi's Cohort</button>
+          <button type="button" class="ca-filter-btn" data-filter="MTR-104">Arsh Zehra's Cohort</button>
+          <button type="button" class="ca-filter-btn" data-filter="MTR-105">Khyati's Cohort</button>
+        </div>
+      </div>
+
+      <!-- Slider Container with Left / Right Navigation -->
+      <div class="ca-slider-container">
+        <button type="button" class="ca-slider-arrow prev" id="ca-slide-prev" aria-label="Previous Ambassador Slide">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+
+        <div class="ca-slider-viewport" id="ca-slider-viewport">
+          <div class="ca-slider-track" id="ca-slider-track">
+            <!-- Rendered dynamically by CommunityManager.initCaSlider() -->
+          </div>
+        </div>
+
+        <button type="button" class="ca-slider-arrow next" id="ca-slide-next" aria-label="Next Ambassador Slide">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Carousel Pagination Dots -->
+      <div class="ca-slider-dots" id="ca-slider-dots"></div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: FREQUENTLY ASKED QUESTIONS (FAQ ACCORDION)
+         ========================================================================== -->
+    <section class="comm-section" id="section-faqs" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+      <div class="comm-section-header">
+        <span class="comm-section-tag">Got Questions?</span>
+        <h2 class="comm-section-title">Frequently Asked Questions</h2>
+        <p class="comm-section-desc">
+          Everything you need to know about the GDGoC IIMTU Campus Ambassador program.
+        </p>
+      </div>
+
+      <div class="comm-faq-container">
+        <div class="comm-faq-item open">
+          <div class="comm-faq-question">
+            <span>Who is eligible to become a Campus Ambassador at IIMT University?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            Any enrolled student from any department (B.Tech CSE, IT, AI &amp; ML, BCA, MCA, or Polytechnic) at IIMT University who is enthusiastic about developer culture, peer learning, and leadership is eligible. Passion and consistency matter most!
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <div class="comm-faq-question">
+            <span>What is the weekly time commitment required?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            The program comfortably accommodates your academic schedule. Typically, ambassadors dedicate 3 to 5 hours per week for mentoring syncs, coordinating lab sessions, and submitting weekly progress reports.
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <div class="comm-faq-question">
+            <span>How do the allotted mentors assist ambassadors?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            Your assigned mentor (Disha Agarwal, Aarushi Singh, Akshita Tyagi, Arsh Zehra, or Khyati) conducts regular 1-on-1 reviews, helps plan workshop curriculums, validates task deliverables, and recommends you for certificates and LoRs.
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <div class="comm-faq-question">
+            <span>What are the requirements for official Certification &amp; LoR?</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="comm-faq-answer">
+            To receive the verified Certificate of Leadership and formal Letter of Recommendation from GDG on Campus IIMT and IIMTBIF, ambassadors must complete their tenure tasks and maintain good standing with their mentor.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: GATEWAY PORTAL BANNER
+         ========================================================================== -->
+    <section class="comm-section" style="padding-top: 1rem;">
+      <div class="comm-portal-banner" id="comm-portal">
+        <h2 class="comm-portal-banner-title">Ready to Lead Your Campus? Step Into the Fast Lane.</h2>
+        <p class="comm-portal-banner-desc">
+          Access your personalized ambassador or mentor dashboard to track points, review submissions, and manage campus lab registrations.
+        </p>
+        <button type="button" class="btn-comm-primary" id="btn-enter-portal-cta">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Sign In to GDGconnect</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: PUBLIC COMMUNITY FOOTER & OFFICIAL GDG SOCIAL MEDIA HUB
+         ========================================================================== -->
+    <footer class="comm-footer">
+      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem;">
+          Connect with GDG on Campus IIMT Meerut
+        </h3>
+        <p style="font-size: 0.95rem; color: #94a3b8; max-width: 600px; margin: 0 auto 1.5rem;">
+          Follow our official social media handles to stay updated on upcoming hackathons, tech labs, DevFest announcements, and recruitment drives.
+        </p>
+
+        <!-- Official GDG Social Media Handles Hub -->
+        <div class="comm-social-hub">
+          <a href="https://www.linkedin.com/company/gdg-on-campus-iimt/" target="_blank" rel="noopener noreferrer" class="comm-social-pill" title="LinkedIn: GDG on Campus IIMT">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a href="https://www.instagram.com/gdg_iimt/" target="_blank" rel="noopener noreferrer" class="comm-social-pill" title="Instagram: @gdg_iimt">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>Instagram (@gdg_iimt)</span>
+          </a>
+
+          <a href="https://gdg.community.dev/gdg-on-campus-iimt-university-meerut-india/" target="_blank" rel="noopener noreferrer" class="comm-social-pill" title="Official Bevy Platform: GDG on Campus IIMT University">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span>GDG Community (Bevy)</span>
+          </a>
+
+          <a href="https://github.com/Vanshaneja01/GDGoC-SA" target="_blank" rel="noopener noreferrer" class="comm-social-pill" title="GitHub Repository">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span>GitHub</span>
+          </a>
+
+          <a href="https://unstop.com/p/devhack-2026-gdg-on-campus-iimt-meerut-1750208" target="_blank" rel="noopener noreferrer" class="comm-social-pill" title="DevHack on Unstop">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>DevHack @ Unstop</span>
+          </a>
+
+          <a href="mailto:gdg@iimtindia.net" class="comm-social-pill" title="Email GDG on Campus IIMT">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>gdg@iimtindia.net</span>
+          </a>
+        </div>
+
+        <div class="comm-footer-links">
+          <a href="#section-about-gdg">About Chapter</a>
+          <a href="#section-ca-program">CA Program</a>
+          <a href="#section-why-ca">Why CA?</a>
+          <a href="#section-responsibilities">Responsibilities</a>
+          <a href="#section-ca-slide">Ambassadors &amp; Mentors</a>
+          <a href="#section-faqs">FAQs</a>
+          <a href="#comm-portal">Portal Login</a>
+        </div>
+
+        <p style="margin: 0 0 0.5rem; font-size: 0.86rem; color: #94a3b8;">
+          Google Developer Groups on Campus (GDGoC) at IIMT University, Meerut &bull; Proudly Powered by IIMT Business Incubation Foundation (IIMTBIF).
+        </p>
+        <p style="margin: 0; font-size: 0.78rem; color: #64748b;">
+          IIMT University, O Pocket, Ganga Nagar, Meerut, Uttar Pradesh 250001 &bull; Academic Year 2026–27
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <div id="app" style="display: none;">
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Collapsible Sidebar Navigation -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#dashboard" class="app-brand" id="brand-link">
+          <div class="brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.5 5L10.5 19" stroke="#34A853" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="1.5" fill="#FBBC04"/>
+            </svg>
+          </div>
+          <div class="brand-text-wrapper">
+            <span class="brand-name">GDGconnect</span>
+            <span class="brand-tagline">Google Developer Groups</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Live Role & Persona Card -->
+      <div class="sidebar-role-card">
+        <div class="role-card-header">
+          <span class="role-pill role-pill-mentor" id="sidebar-role-indicator">Mentor Mode</span>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-family-mono);">v2.4</span>
+        </div>
+        <div class="role-user-brief">
+          <div id="sidebar-user-avatar"></div>
+          <div class="role-user-meta">
+            <span class="role-user-name" id="sidebar-user-name">Dr. Evelyn Vance</span>
+            <span class="role-user-id" id="sidebar-user-id">MTR-101</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Items (Strictly Ordered 1-13) -->
+      <nav class="sidebar-nav" id="sidebar-nav-list" aria-label="Main Navigation">
+        <!-- Injected dynamically by app.js -->
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--status-green); display: inline-block;"></span>
+            <span>Online</span>
+          </div>
+          <button type="button" class="btn btn-xs btn-outline" id="sidebar-sign-out" title="Sign out to GDG Community Showcase">
+            Sign Out
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Viewport Layout -->
+    <div class="app-viewport">
+      
+      <!-- Top Navigation Bar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-icon" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
-        </div>
 
-      </div>
-    </div>
-
-    <!-- Mobile Drawer Menu -->
-    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
-      <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600">About Chapter</a>
-      <a href="#ca-program" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600">CA Program</a>
-      <a href="#perks" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600">Perks & Benefits</a>
-      <a href="#responsibilities" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600">Responsibilities</a>
-      <a href="#directory" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600">Ambassadors & Mentors</a>
-      <div class="pt-2">
-        <button type="button" class="btn-open-portal-login w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-center shadow flex items-center justify-center gap-2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-          <span>Ambassador & Mentor Portal Login</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- ==========================================================================
-         1. UNIFIED HERO & ABOUT SECTION
-         ========================================================================== -->
-    <section id="about" class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden bg-white">
-      <!-- Subtle Decorative Top Radial Glow -->
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-50/50 via-slate-50/20 to-transparent pointer-events-none -z-10"></div>
-
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
-        <!-- Eyebrow Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-8 shadow-2xs">
-          <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-          <span>Google Developer Groups on Campus &bull; IIMT Meerut</span>
-        </div>
-
-        <!-- Bold Header (User Requirement) -->
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-6 font-display">
-          GDG on Campus <br class="hidden sm:inline">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-slate-900">IIMT Meerut</span>
-        </h1>
-
-        <!-- Professional Sub-Headline (User Requirement) -->
-        <p class="text-lg sm:text-xl md:text-2xl font-normal text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
-          Empowering student developers, fostering technological innovation, and bridging academic curiosity with industry-grade software leadership.
-        </p>
-
-        <!-- Action CTA Buttons -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <a href="#ca-program" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm md:text-base shadow-md hover:shadow-lg transition-all duration-200">
-            <span>Explore Ambassador Program</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+          <!-- Global Search with keyboard shortcut -->
+          <div class="global-search-container">
+            <svg class="global-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-          </a>
-          <a href="#directory" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold text-sm md:text-base shadow-2xs hover:shadow transition-all duration-200">
-            <span>Meet Ambassadors & Mentors</span>
-          </a>
-        </div>
-
-        <!-- Clean Chapter Mission Text Block (User Requirement) -->
-        <div class="max-w-3xl mx-auto bg-slate-50/80 border border-slate-200/90 rounded-2xl p-7 sm:p-9 shadow-soft text-left md:text-center relative">
-          <span class="text-[11px] font-bold uppercase tracking-widest text-blue-700 mb-2.5 inline-block">Chapter Mission</span>
-          <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-            We are a vibrant, student-led developer community at IIMT University, Meerut, supported by the IIMT Business Incubator Foundation (IIMTBIF). Our mission is to inspire, educate, and empower undergraduate and postgraduate students through real-world tech workshops, peer mentorship, collaborative open-source sprints, and Google developer technology tracks.
-          </p>
-
-          <!-- Horizontally Centered Logo Strip (User Requirement: GDG Logo, IIMTBIF Logo, and IIMT University Logo) -->
-          <div class="mt-8 pt-8 border-t border-slate-200/80">
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6 text-center">Institutional Collaboration & Affiliations</p>
-            <div class="flex flex-wrap sm:flex-nowrap justify-center items-center gap-6 sm:gap-10">
-              
-              <!-- 1. GDG on Campus Logo -->
-              <div class="flex items-center gap-2.5 px-4 py-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                  <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M13.5 5L10.5 19" stroke="#FBBC04" stroke-width="2.5" stroke-linecap="round"/>
-                  <circle cx="12" cy="12" r="1.8" fill="#34A853"/>
-                </svg>
-                <div class="flex flex-col text-left">
-                  <span class="text-xs font-bold text-slate-800 leading-tight">GDG on Campus</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Google Developer Groups</span>
-                </div>
-              </div>
-
-              <!-- 2. IIMTBIF Logo -->
-              <div class="flex items-center gap-2.5 px-4 py-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
-                <div class="w-6 h-6 rounded-lg bg-amber-500 flex items-center justify-center text-white font-black text-xs shadow-2xs">
-                  BIF
-                </div>
-                <div class="flex flex-col text-left">
-                  <span class="text-xs font-bold text-slate-800 leading-tight">IIMTBIF</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Business Incubator Foundation</span>
-                </div>
-              </div>
-
-              <!-- 3. IIMT University Logo -->
-              <div class="flex items-center gap-2.5 px-4 py-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
-                <div class="w-6 h-6 rounded-lg bg-blue-900 flex items-center justify-center text-white font-black text-xs shadow-2xs">
-                  IIMT
-                </div>
-                <div class="flex flex-col text-left">
-                  <span class="text-xs font-bold text-slate-800 leading-tight">IIMT University</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Transforming Education</span>
-                </div>
-              </div>
-
-            </div>
+            <input type="text" class="global-search-input" id="global-search-input" placeholder="Search mentors, tasks, labs..." aria-label="Global Search">
+            <kbd class="global-search-shortcut">/</kbd>
           </div>
         </div>
 
-      </div>
-    </section>
+        <div class="topbar-right">
+          <!-- Community Showcase Hub Link -->
+          <button type="button" class="btn btn-sm btn-outline" id="btn-open-community-hub" title="View public GDG Community information and tracks" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span>Community Hub</span>
+          </button>
 
-    <!-- ==========================================================================
-         2. ABOUT THE CA PROGRAM (Asymmetrical Two-Column Layout on bg-slate-50)
-         ========================================================================== -->
-    <section id="ca-program" class="bg-slate-50 border-y border-slate-200/80 py-20 md:py-28">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          <!-- Left Column (Text Narrative, 7 Columns) -->
-          <div class="lg:col-span-7 space-y-6">
-            <span class="text-xs font-bold uppercase tracking-widest text-blue-600">Student Leadership Accelerator</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display leading-tight">
-              About the Campus Ambassador Program
-            </h2>
-            
-            <p class="text-base text-slate-600 leading-relaxed font-normal">
-              The GDGoC Campus Ambassador (CA) Program at IIMT University is an elite student leadership initiative designed to bridge classroom academics with real-world developer execution. As a Campus Ambassador, you represent your academic department, collaborate directly with appointed Student Mentors and Faculty Advisors, and spearhead tech initiatives across the campus.
-            </p>
-            
-            <p class="text-base text-slate-600 leading-relaxed font-normal">
-              Ambassadors organize hands-on technical bootcamps, drive awareness for Google Solution Challenge, lead Cloud & Gemini AI study jams, and cultivate an active open-source culture. This program offers a proven pathway to build executive project management skills, earn industry credentials, and connect with top practitioners in technology.
-            </p>
-
-            <!-- Key Feature Badges Grid -->
-            <div class="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-                <div class="text-2xl font-extrabold text-blue-600 mb-0.5">25+</div>
-                <div class="text-xs font-semibold text-slate-700">Appointed CAs</div>
-                <div class="text-[11px] text-slate-500">Across Departments</div>
-              </div>
-              <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-                <div class="text-2xl font-extrabold text-emerald-600 mb-0.5">1:1</div>
-                <div class="text-xs font-semibold text-slate-700">Faculty Mentorship</div>
-                <div class="text-[11px] text-slate-500">Bi-Weekly Syncs</div>
-              </div>
-              <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-                <div class="text-2xl font-extrabold text-amber-500 mb-0.5">100%</div>
-                <div class="text-xs font-semibold text-slate-700">Verified Credentials</div>
-                <div class="text-[11px] text-slate-500">Google Chapter LORs</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column (Tech Photo & Floating Card, 5 Columns) -->
-          <div class="lg:col-span-5">
-            <div class="relative mx-auto max-w-md lg:max-w-none">
-              <!-- Decorative Backing Drop Shadow -->
-              <div class="absolute -inset-2 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-3xl transform -rotate-1 -z-10"></div>
-              
-              <!-- Main Image Card -->
-              <div class="bg-white p-2.5 rounded-2xl border border-slate-200/90 shadow-card overflow-hidden">
-                <div class="relative h-72 sm:h-80 w-full rounded-xl overflow-hidden bg-slate-100">
-                  <img src="assets/images/campus-summit.jpg" alt="IIMT University Student Developer Summit" class="w-full h-full object-cover">
-                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
-                  
-                  <div class="absolute bottom-4 left-4 right-4 text-white">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold tracking-wide uppercase mb-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Active Chapter 2026-27
-                    </span>
-                    <p class="text-sm font-bold text-white drop-shadow">IIMT University Campus Dev Summit</p>
-                  </div>
-                </div>
-
-                <!-- Floating Bottom Pill Feature -->
-                <div class="mt-3.5 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between text-xs">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                    <span class="font-semibold text-slate-700">Powered by IIMTBIF Hub</span>
-                  </div>
-                  <span class="text-slate-500 font-medium">Meerut, India</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         3. WHY CA AT GDG? (Perks & Benefits Grid)
-         ========================================================================== -->
-    <section id="perks" class="py-20 md:py-28 bg-white">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Section Header -->
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2 block">Value Proposition</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
-            Why CA at GDG?
-          </h2>
-          <p class="mt-3 text-base text-slate-600 leading-relaxed font-normal">
-            Gain executive project leadership, direct access to faculty mentorship, and verifiable industry recognition.
-          </p>
-        </div>
-
-        <!-- Modern CSS Grid of Feature Cards (User Requirement) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-          
-          <!-- Card 1: Leadership -->
-          <div class="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2 font-display">Executive Leadership</h3>
-            <p class="text-sm text-slate-600 leading-relaxed font-normal">
-              Organize campus-wide technology workshops, anchor developer sessions, and build lifelong public speaking and executive coordination skills.
-            </p>
-          </div>
-
-          <!-- Card 2: Swag & Kits -->
-          <div class="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
-            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2 font-display">Exclusive Google Swag</h3>
-            <p class="text-sm text-slate-600 leading-relaxed font-normal">
-              Receive official GDGoC merchandise, branded tees, custom stickers, ID badges, and limited-edition swag kits for outstanding chapter contributions.
-            </p>
-          </div>
-
-          <!-- Card 3: 1:1 Mentorship -->
-          <div class="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2 font-display">Dedicated 1:1 Mentorship</h3>
-            <p class="text-sm text-slate-600 leading-relaxed font-normal">
-              Direct access to assigned senior faculty mentors and student leads for technical career roadmapping, resume reviews, and research advice.
-            </p>
-          </div>
-
-          <!-- Card 4: Networking -->
-          <div class="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
-            <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2 font-display">National Tech Network</h3>
-            <p class="text-sm text-slate-600 leading-relaxed font-normal">
-              Connect with fellow ambassadors across India, participate in Google regional summits, and interact with founders at the IIMTBIF incubation center.
-            </p>
-          </div>
-
-          <!-- Card 5: Verified LOR & Certificate -->
-          <div class="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2 font-display">Verified Certificate & LOR</h3>
-            <p class="text-sm text-slate-600 leading-relaxed font-normal">
-              Earn an officially signed GDGoC Ambassador Certificate and personalized Letters of Recommendation (LOR) for higher studies and job applications.
-            </p>
-          </div>
-
-          <!-- Card 6: Career & Incubation Fast-Track -->
-          <div class="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2 font-display">Career & Startup Incubation</h3>
-            <p class="text-sm text-slate-600 leading-relaxed font-normal">
-              Priority consideration for startup incubation grants, prototype funding at IIMTBIF, and direct recommendations for tech internship roles.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         4. RESPONSIBILITIES (Vertical Timeline & Sleek Checklist with Google Green SVG)
-         ========================================================================== -->
-    <section id="responsibilities" class="bg-slate-50 border-t border-slate-200/80 py-20 md:py-28">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Section Header -->
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2 block">Roadmap & Commitments</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
-            Ambassador Responsibilities
-          </h2>
-          <p class="mt-3 text-base text-slate-600 leading-relaxed font-normal">
-            A structured, progressive checklist outlining your duties throughout the ambassador tenure.
-          </p>
-        </div>
-
-        <!-- Vertical Checklist Container (Custom SVG checkmarks in Google Green) -->
-        <div class="space-y-5">
-          
-          <!-- Item 1 -->
-          <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow duration-200 flex items-start gap-4 sm:gap-5">
-            <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0 flex items-center justify-center border border-emerald-200/70 mt-0.5">
-              <!-- Custom SVG Checkmark in Google Green (#34A853) -->
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <div class="flex-grow">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                <h3 class="text-base sm:text-lg font-bold text-slate-900">Branch & Department Community Evangelism</h3>
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Phase 01 &bull; Outreach</span>
-              </div>
-              <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                Serve as the primary voice of GDGoC within your department. Spread official event updates, share technical resources, and encourage active classroom participation in coding sessions.
-              </p>
-            </div>
-          </div>
-
-          <!-- Item 2 -->
-          <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow duration-200 flex items-start gap-4 sm:gap-5">
-            <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0 flex items-center justify-center border border-emerald-200/70 mt-0.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <div class="flex-grow">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                <h3 class="text-base sm:text-lg font-bold text-slate-900">Hands-on Lab & Workshop Coordination</h3>
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Phase 02 &bull; Execution</span>
-              </div>
-              <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                Coordinate logistical planning and student registrations for workshops focused on Google Cloud, Gemini AI APIs, Web development, and Kotlin/Android labs on campus.
-              </p>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow duration-200 flex items-start gap-4 sm:gap-5">
-            <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0 flex items-center justify-center border border-emerald-200/70 mt-0.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <div class="flex-grow">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                <h3 class="text-base sm:text-lg font-bold text-slate-900">Peer Mentorship & Hackathon Team Formation</h3>
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Phase 03 &bull; Mentorship</span>
-              </div>
-              <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                Assist first- and second-year students in mastering Git, setting up developer environments, and forming multi-disciplinary teams for the Google Solution Challenge.
-              </p>
-            </div>
-          </div>
-
-          <!-- Item 4 -->
-          <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow duration-200 flex items-start gap-4 sm:gap-5">
-            <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0 flex items-center justify-center border border-emerald-200/70 mt-0.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <div class="flex-grow">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                <h3 class="text-base sm:text-lg font-bold text-slate-900">Monthly Syncs & Impact Milestone Reporting</h3>
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Phase 04 &bull; Sync</span>
-              </div>
-              <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                Participate in scheduled bi-weekly and monthly status reviews with assigned mentors, presenting branch participation metrics and feedback for ongoing community improvement.
-              </p>
-            </div>
-          </div>
-
-          <!-- Item 5 -->
-          <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow duration-200 flex items-start gap-4 sm:gap-5">
-            <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0 flex items-center justify-center border border-emerald-200/70 mt-0.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <div class="flex-grow">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                <h3 class="text-base sm:text-lg font-bold text-slate-900">DevFest & Flagship Summit Operations</h3>
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Phase 05 &bull; Flagship</span>
-              </div>
-              <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                Collaborate with the GDGoC core leadership team to execute IIMT University's annual DevFest conference, guest tech keynotes, and incubation pitch days powered by IIMTBIF.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         5. CA & MENTOR DIRECTORY (Interactive JavaScript Slider)
-         ========================================================================== -->
-    <section id="directory" class="py-20 md:py-28 bg-white border-t border-slate-200/80">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Header with Slider Controls -->
-        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2 block">Directory</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
-              Ambassadors & Mentors
-            </h2>
-            <p class="mt-2 text-base text-slate-600 max-w-xl font-normal">
-              Meet our active student ambassadors and their assigned faculty & student mentors across IIMT Meerut.
-            </p>
-          </div>
-
-          <!-- Slider Navigation Arrows (User Requirement) -->
-          <div class="flex items-center gap-3 mt-6 sm:mt-0">
-            <button type="button" class="slider-prev w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm hover:bg-slate-50 flex items-center justify-center text-slate-700 hover:text-blue-600 transition focus:outline-none" aria-label="Previous Ambassador">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
+          <!-- Role Quick Switch Bar -->
+          <div class="role-quick-switch" title="Toggle active role perspective">
+            <button class="role-switch-btn active" id="role-btn-mentor">
+              Mentor
             </button>
-            <button type="button" class="slider-next w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm hover:bg-slate-50 flex items-center justify-center text-slate-700 hover:text-blue-600 transition focus:outline-none" aria-label="Next Ambassador">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+            <button class="role-switch-btn" id="role-btn-ambassador">
+              Ambassador
             </button>
           </div>
-        </div>
 
-        <!-- Carousel Container (Shows 1 on mobile, 2 on tablet, 3 on desktop) -->
-        <div id="ca-slider-container" class="relative overflow-hidden -mx-3">
-          <div class="slider-track py-2">
-            <!-- Cards rendered dynamically via js/slider.js -->
-          </div>
-          <!-- Dots Pagination -->
-          <div class="slider-dots flex justify-center items-center gap-2 mt-8"></div>
-        </div>
+          <!-- Notification Bell with Counter -->
+          <button type="button" class="topbar-icon-btn" id="notifications-btn" aria-label="View notifications">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+            </svg>
+            <span class="badge-counter" id="notification-badge" style="display: none;">0</span>
+          </button>
 
-      </div>
-    </section>
-  </main>
+          <!-- Theme Mode Switcher -->
+          <button type="button" class="topbar-icon-btn" id="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle Theme">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
 
-  <!-- ==========================================================================
-       6. DARK MINIMAL FOOTER
-       ========================================================================== -->
-  <footer class="bg-slate-950 text-slate-400 py-14 border-t border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-800/80">
-        
-        <!-- Brand Identification -->
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center p-2 shadow-sm">
-            <svg viewBox="0 0 24 24" fill="none" class="w-full h-full">
-              <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M13.5 5L10.5 19" stroke="#FBBC04" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="12" cy="12" r="1.8" fill="#34A853"/>
+          <!-- User Profile Menu Trigger -->
+          <div class="user-menu-trigger" id="user-menu-trigger" title="Click to view Settings & Identity Switcher">
+            <div id="topbar-user-avatar"></div>
+            <div class="user-menu-info">
+              <span class="user-menu-name" id="topbar-user-name">Dr. Evelyn Vance</span>
+              <span class="user-menu-role" id="topbar-user-role">Mentor • MTR-101</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted); margin-left: 2px;">
+              <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </div>
-          <div class="flex flex-col text-left">
-            <span class="text-sm font-bold text-white font-display">GDG on Campus IIMT Meerut</span>
-            <span class="text-xs text-slate-500">Google Developer Groups &bull; IIMT University</span>
-          </div>
         </div>
+      </header>
 
-        <!-- Social Icons (User Requirement: LinkedIn, Instagram, X, GitHub) -->
-        <div class="flex items-center gap-5">
-          <!-- LinkedIn -->
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-slate-900 hover:bg-blue-600 hover:text-white flex items-center justify-center text-slate-400 transition-colors border border-slate-800">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-          </a>
-
-          <!-- Instagram -->
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full bg-slate-900 hover:bg-pink-600 hover:text-white flex items-center justify-center text-slate-400 transition-colors border border-slate-800">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-
-          <!-- X (Twitter) -->
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 hover:text-white flex items-center justify-center text-slate-400 transition-colors border border-slate-800">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
-
-          <!-- GitHub -->
-          <a href="https://github.com/Vanshaneja01/GDGoC-SA" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 hover:text-white flex items-center justify-center text-slate-400 transition-colors border border-slate-800">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-            </svg>
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Centered Copyright Text (User Requirement) -->
-      <div class="pt-8 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p>&copy; 2026 GDG on Campus IIMT Meerut. Powered by IIMTBIF &bull; IIMT University.</p>
-        <div class="flex items-center gap-4 text-slate-400">
-          <a href="#about" class="hover:text-white transition-colors">Back to Top &uarr;</a>
-        </div>
-      </div>
-
-    </div>
-  </footer>
-
-  <!-- ==========================================================================
-       PORTAL LOGIN MODAL (Access for Appointed Ambassadors & Mentors)
-       ========================================================================== -->
-  <div id="portal-login-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4" aria-modal="true" role="dialog">
-    <div class="bg-white rounded-2xl max-w-md w-full p-7 border border-slate-200 shadow-2xl relative text-left">
-      
-      <!-- Close Button -->
-      <button type="button" id="btn-close-login-modal" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100 transition" aria-label="Close dialog">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-
-      <!-- Modal Header -->
-      <div class="mb-6">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-2">
-          <span class="w-2 h-2 rounded-full bg-blue-600"></span> Sign In
-        </span>
-        <h3 class="text-2xl font-bold text-slate-900 tracking-tight font-display">GDGconnect Portal</h3>
-        <p class="text-xs text-slate-500 mt-1">Sign in with your issued Ambassador or Mentor credentials.</p>
-      </div>
-
-      <!-- Form -->
-      <form id="portal-login-form" class="space-y-4">
-        <div>
-          <label for="login-role-select" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Portal Role</label>
-          <select id="login-role-select" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            <option value="Ambassador">Campus Ambassador</option>
-            <option value="Mentor">Student / Faculty Mentor</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="login-email-input" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Official University Email</label>
-          <input type="email" id="login-email-input" value="vansh@iimtu.edu.in" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-        </div>
-
-        <div>
-          <label for="login-password-input" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Access Passcode</label>
-          <input type="password" id="login-password-input" value="••••••••" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-        </div>
-
-        <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md transition mt-2 flex items-center justify-center gap-2">
-          <span>Enter Dashboard</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </form>
-
-      <div class="mt-5 pt-4 border-t border-slate-100 text-center text-xs text-slate-400">
-        Default testing access is pre-configured. Tap Enter Dashboard to continue.
-      </div>
+      <!-- Main Content Viewport (Dynamic Section Renderer) -->
+      <main class="app-main" id="main-content-viewport" role="main">
+        <!-- Content will be rendered dynamically -->
+      </main>
     </div>
   </div>
 
-  <!-- Interactive Slider Engine & App Controller -->
-  <script src="js/slider.js?v=3.0"></script>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Accessible Modal Host -->
+  <div id="modal-host"></div>
+
+  <!-- Application Logic & Section Modules -->
+  <script src="js/db.js?v=3.0"></script>
+  <script src="js/state.js?v=3.0"></script>
+  <script src="js/ui.js?v=3.0"></script>
+  <script src="js/sections/dashboard.js?v=3.0"></script>
+  <script src="js/sections/mentors.js?v=3.0"></script>
+  <script src="js/sections/ambassadors.js?v=3.0"></script>
+  <script src="js/sections/tasks.js?v=3.0"></script>
+  <script src="js/sections/mentor-sessions.js?v=3.0"></script>
+  <script src="js/sections/ambassador-sessions.js?v=3.0"></script>
+  <script src="js/sections/labs-registrations.js?v=3.0"></script>
+  <script src="js/sections/reports.js?v=3.0"></script>
+  <script src="js/sections/announcements.js?v=3.0"></script>
+  <script src="js/sections/resources.js?v=3.0"></script>
+  <script src="js/sections/communication.js?v=3.0"></script>
+  <script src="js/sections/achievements.js?v=3.0"></script>
+  <script src="js/sections/calendar.js?v=3.0"></script>
+  <script src="js/sections/profile-settings.js?v=3.0"></script>
+  <script src="js/community.js?v=3.0"></script>
+  <script src="js/motion.js?v=3.0"></script>
   <script src="js/app.js?v=3.0"></script>
 </body>
 </html>
