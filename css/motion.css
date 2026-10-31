@@ -248,6 +248,7 @@
   .cyber-grid-mesh,
   .comm-hero-badge,
   .comm-hero-bg-photo,
+  .preloader-bg-photo,
   .btn-comm-primary::before,
   .preloader-ring,
   .preloader-logo-core {
@@ -300,6 +301,46 @@
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  background-color: #050811;
+}
+
+/* Atmospheric Developer Summit Background Photo in Preloader */
+.preloader-bg-photo {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: saturate(1.25) brightness(0.42) contrast(1.15);
+  transform: scale(1.02);
+  animation: preloaderPhotoZoom 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes preloaderPhotoZoom {
+  0% { transform: scale(1.02) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+.preloader-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(180deg, 
+      rgba(5, 8, 17, 0.45) 0%, 
+      rgba(5, 8, 17, 0.7) 40%, 
+      rgba(5, 8, 17, 0.88) 80%, 
+      #050811 100%),
+    radial-gradient(circle at 50% 45%, rgba(0, 243, 255, 0.12) 0%, transparent 65%),
+    radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
+}
+
+.preloader-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 130px 45px #050811;
 }
 
 .preloader-orb {
@@ -355,9 +396,15 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 2.2rem 1.75rem;
+  padding: 2.2rem 2rem;
   max-width: 460px;
   width: 90%;
+  background: rgba(10, 15, 29, 0.76);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 243, 255, 0.22);
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 243, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Emblem with glowing orbital rings */
