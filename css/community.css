@@ -1121,8 +1121,9 @@
 .institutional-logo-card {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1.4rem;
+  justify-content: center;
+  min-height: 64px;
+  padding: 0.65rem 1.4rem;
   border-radius: 16px;
   background: rgba(14, 21, 38, 0.78);
   backdrop-filter: blur(16px);
@@ -1140,10 +1141,11 @@
 }
 
 .institutional-logo-img {
-  height: 42px;
+  height: 44px;
   width: auto;
-  max-width: 170px;
+  max-width: 220px;
   object-fit: contain;
+  display: block;
 }
 
 .institutional-logo-meta {
