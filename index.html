@@ -109,7 +109,7 @@
   <div id="community-landing" class="community-landing">
     <!-- Floating Glassmorphic Navbar (ecell.in/ca style) -->
     <header class="comm-navbar">
-      <div class="comm-nav-brand">
+      <a href="#" class="comm-nav-brand" aria-label="GDGconnect Home">
         <div class="comm-brand-logo">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M8 7L3 12L8 17" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -122,7 +122,7 @@
           <span class="comm-brand-title">GDG<span>connect</span></span>
           <span class="comm-brand-sub">On Campus IIMTU &bull; CA Portal</span>
         </div>
-      </div>
+      </a>
 
       <nav class="comm-nav-links">
         <a href="#section-about-gdg">About GDG</a>
@@ -131,9 +131,9 @@
         <a href="#section-responsibilities">Responsibilities</a>
         <a href="#section-ca-slide">Ambassadors &amp; Mentors</a>
         <a href="#section-faqs">FAQs</a>
-        <button type="button" class="btn-comm-portal" id="btn-nav-enter-portal">
+        <button type="button" class="btn-comm-portal" id="btn-nav-enter-portal" aria-label="Sign In to GDGconnect Portal">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
-          <span>Portal Login</span>
+          <span>Portal Sign In</span>
         </button>
       </nav>
     </header>
@@ -143,38 +143,31 @@
          ========================================================================== -->
     <section class="comm-hero-wrapper" id="section-about-gdg">
       <div class="comm-hero-backdrop" aria-hidden="true">
-        <img src="assets/images/hero-bg.jpg" alt="GDGoC Campus Developer Summit" class="comm-hero-bg-photo" loading="eager" />
+        <img src="assets/images/hero-bg.jpg" alt="GDGoC Campus Developer Summit Atmospheric Photo" class="comm-hero-bg-photo" loading="eager" />
         <div class="comm-hero-overlay"></div>
         <div class="comm-hero-vignette"></div>
       </div>
 
       <div class="comm-hero">
-        <!-- 3 Prominent Institutional Logos (GDG on Campus, IIMTBIF, IIMT University) -->
-        <div class="institutional-logos-bar" role="region" aria-label="Institutional Partners">
-          <div class="institutional-logo-card">
-            <img src="assets/images/gdg-logo.jpeg" alt="Google Developer Groups on Campus Logo" class="institutional-logo-img" />
-          </div>
-          <div class="institutional-logo-card">
-            <img src="assets/images/incub-logo.png" alt="IIMTBIF Business Incubator Foundation Logo" class="institutional-logo-img" />
-          </div>
-          <div class="institutional-logo-card">
-            <img src="assets/images/iimt-logo.png" alt="IIMT University Meerut Logo" class="institutional-logo-img" />
-          </div>
-        </div>
-
         <div class="comm-hero-badge">
           <span class="comm-dot"></span> GOOGLE DEVELOPER GROUPS ON CAMPUS &bull; IIMT MEERUT
         </div>
 
+        <!-- Punchy Primary Headline -->
         <h1 class="comm-hero-title">
-          GDG on Campus IIMT Meerut<br>
-          <span class="comm-gradient-text">Pioneering Technical Excellence, Student Innovation &amp; Open Source.</span>
+          Code. Build. Lead.<br>
+          <span class="comm-gradient-text">At IIMT Meerut.</span>
         </h1>
+
+        <!-- Clear, Readable Subtitle -->
+        <p class="comm-hero-subtitle">
+          The official student developer and technical leadership community at IIMT University, Meerut. Advancing open-source engineering, AI innovation, and startup incubation.
+        </p>
 
         <!-- Chapter About Story Card -->
         <div class="comm-chapter-about-box">
           <p>
-            <strong class="comm-chapter-highlight">Google Developer Groups on Campus (GDGoC) at IIMT University, Meerut</strong> is the university’s official student-led developer community, proudly powered by the <strong class="comm-chapter-highlight">IIMT Business Incubation Foundation (IIMTBIF)</strong>.
+            <strong class="comm-chapter-highlight">Google Developer Groups on Campus (GDGoC) at IIMT University, Meerut</strong> is the university’s official student-led developer network, proudly powered by the <strong class="comm-chapter-highlight">IIMT Business Incubation Foundation (IIMTBIF)</strong>.
           </p>
           <p>
             Our mission is to foster a world-class engineering, coding, and entrepreneurship culture across campus. We empower over 20,000+ students across B.Tech Computer Science, IT, AI &amp; ML, BCA, MCA, and Polytechnic to transition from curious learners into industry-ready software engineers and startup innovators.
@@ -184,11 +177,11 @@
           </p>
         </div>
 
-        <!-- Primary "Tap to Enter" Portal CTA -->
+        <!-- Distinct Primary & Secondary Hero CTAs -->
         <div class="comm-cta-group">
           <button type="button" class="btn-comm-primary" id="btn-tap-to-enter-portal">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <span>Tap to Enter GDGconnect Portal</span>
+            <span>Sign In to Portal</span>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
 
@@ -202,7 +195,23 @@
           <span>🔑 Appointed Ambassadors &amp; Student Mentors: Tap above to sign in with your issued credentials</span>
         </div>
 
-        <!-- Live Community Numbers (Stats Ribbon) -->
+        <!-- In Association With (Social-Proof Partner Bar) -->
+        <div class="comm-association-wrapper">
+          <span class="comm-association-label">In Association With</span>
+          <div class="institutional-logos-bar" role="region" aria-label="Institutional Partners">
+            <div class="institutional-logo-card" title="Google Developer Groups on Campus - IIMT Meerut">
+              <img src="assets/images/3.png" alt="Google Developer Groups on Campus - IIMT Meerut Logo" class="institutional-logo-img" />
+            </div>
+            <div class="institutional-logo-card" title="IIMT Business Incubation Foundation">
+              <img src="assets/images/incub-logo.png" alt="IIMT Business Incubation Foundation (IIMTBIF) Official Logo" class="institutional-logo-img" />
+            </div>
+            <div class="institutional-logo-card" title="IIMT University Meerut">
+              <img src="assets/images/iimt-logo.png" alt="IIMT University Meerut Official Crest" class="institutional-logo-img" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Community Numbers (Stats Ribbon) positioned right below hero as immediate social proof -->
         <div class="comm-stats-grid" id="comm-impact">
           <div class="comm-stat-card">
             <div class="comm-stat-num blue">20,000+</div>
@@ -384,14 +393,28 @@
           Meet the appointed student ambassadors driving technology initiatives across university departments, and the senior mentors guiding their growth.
         </p>
 
-        <!-- Mentor Cohort Filter Bar -->
-        <div class="ca-filter-bar" id="ca-filter-bar">
-          <button type="button" class="ca-filter-btn active" data-filter="all">All Ambassadors</button>
-          <button type="button" class="ca-filter-btn" data-filter="MTR-101">Disha Agarwal's Cohort</button>
-          <button type="button" class="ca-filter-btn" data-filter="MTR-102">Aarushi Singh's Cohort</button>
-          <button type="button" class="ca-filter-btn" data-filter="MTR-103">Akshita Tyagi's Cohort</button>
-          <button type="button" class="ca-filter-btn" data-filter="MTR-104">Arsh Zehra's Cohort</button>
-          <button type="button" class="ca-filter-btn" data-filter="MTR-105">Khyati's Cohort</button>
+        <!-- Mentor Cohort Filter Bar (Horizontally scrollable on mobile, centered pills on desktop) -->
+        <div class="ca-filter-container">
+          <div class="ca-filter-bar" id="ca-filter-bar" role="tablist" aria-label="Ambassador Mentor Cohorts">
+            <button type="button" class="ca-filter-btn active" data-filter="all" role="tab" aria-selected="true">
+              All Ambassadors <span class="ca-filter-count">20</span>
+            </button>
+            <button type="button" class="ca-filter-btn" data-filter="MTR-101" role="tab" aria-selected="false">
+              Disha Agarwal <span class="ca-filter-count">4</span>
+            </button>
+            <button type="button" class="ca-filter-btn" data-filter="MTR-102" role="tab" aria-selected="false">
+              Aarushi Singh <span class="ca-filter-count">4</span>
+            </button>
+            <button type="button" class="ca-filter-btn" data-filter="MTR-103" role="tab" aria-selected="false">
+              Akshita Tyagi <span class="ca-filter-count">4</span>
+            </button>
+            <button type="button" class="ca-filter-btn" data-filter="MTR-104" role="tab" aria-selected="false">
+              Arsh Zehra <span class="ca-filter-count">4</span>
+            </button>
+            <button type="button" class="ca-filter-btn" data-filter="MTR-105" role="tab" aria-selected="false">
+              Khyati <span class="ca-filter-count">4</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -403,7 +426,7 @@
 
         <div class="ca-slider-viewport" id="ca-slider-viewport">
           <div class="ca-slider-track" id="ca-slider-track">
-            <!-- Rendered dynamically by CommunityManager.initCaSlider() -->
+            <!-- Rendered dynamically by CommunityManager.initCaSlider() with standardized heights and clear mentor distinction -->
           </div>
         </div>
 
@@ -430,42 +453,62 @@
 
       <div class="comm-faq-container">
         <div class="comm-faq-item open">
-          <div class="comm-faq-question">
+          <button type="button" class="comm-faq-question" aria-expanded="true">
             <span>Who is eligible to become a Campus Ambassador at IIMT University?</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </div>
+            <span class="comm-faq-toggle-icon">
+              <svg class="comm-faq-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
           <div class="comm-faq-answer">
-            Any enrolled student from any department (B.Tech CSE, IT, AI &amp; ML, BCA, MCA, or Polytechnic) at IIMT University who is enthusiastic about developer culture, peer learning, and leadership is eligible. Passion and consistency matter most!
+            Any enrolled student from any department (B.Tech CSE, IT, AI &amp; ML, BCA, MCA, or Polytechnic) at IIMT University who is enthusiastic about developer culture, peer learning, and leadership is eligible. Passion, consistency, and curiosity matter most!
           </div>
         </div>
 
         <div class="comm-faq-item">
-          <div class="comm-faq-question">
+          <button type="button" class="comm-faq-question" aria-expanded="false">
             <span>What is the weekly time commitment required?</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </div>
+            <span class="comm-faq-toggle-icon">
+              <svg class="comm-faq-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
           <div class="comm-faq-answer">
             The program comfortably accommodates your academic schedule. Typically, ambassadors dedicate 3 to 5 hours per week for mentoring syncs, coordinating lab sessions, and submitting weekly progress reports.
           </div>
         </div>
 
         <div class="comm-faq-item">
-          <div class="comm-faq-question">
-            <span>How do the allotted mentors assist ambassadors?</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </div>
+          <button type="button" class="comm-faq-question" aria-expanded="false">
+            <span>How do the allotted senior mentors assist ambassadors?</span>
+            <span class="comm-faq-toggle-icon">
+              <svg class="comm-faq-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
           <div class="comm-faq-answer">
-            Your assigned mentor (Disha Agarwal, Aarushi Singh, Akshita Tyagi, Arsh Zehra, or Khyati) conducts regular 1-on-1 reviews, helps plan workshop curriculums, validates task deliverables, and recommends you for certificates and LoRs.
+            Your assigned mentor (Disha Agarwal, Aarushi Singh, Akshita Tyagi, Arsh Zehra, or Khyati) conducts regular 1-on-1 reviews, helps plan workshop curriculums, validates task deliverables, and recommends you for official Google certificates and letters of recommendation.
           </div>
         </div>
 
         <div class="comm-faq-item">
-          <div class="comm-faq-question">
+          <button type="button" class="comm-faq-question" aria-expanded="false">
             <span>What are the requirements for official Certification &amp; LoR?</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </div>
+            <span class="comm-faq-toggle-icon">
+              <svg class="comm-faq-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
           <div class="comm-faq-answer">
-            To receive the verified Certificate of Leadership and formal Letter of Recommendation from GDG on Campus IIMT and IIMTBIF, ambassadors must complete their tenure tasks and maintain good standing with their mentor.
+            To receive the verified Certificate of Leadership and formal Letter of Recommendation from GDG on Campus IIMT and IIMTBIF, ambassadors must complete their tenure milestone tasks and maintain active participation with their mentor.
+          </div>
+        </div>
+
+        <div class="comm-faq-item">
+          <button type="button" class="comm-faq-question" aria-expanded="false">
+            <span>How do I sign in to the GDGconnect Portal after onboarding?</span>
+            <span class="comm-faq-toggle-icon">
+              <svg class="comm-faq-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
+          <div class="comm-faq-answer">
+            Click the "Portal Sign In" button in the top navigation bar or the "Sign In to Portal" hero button. Choose whether you are signing in as an Appointed Ambassador or Student Mentor to access your live tasks, session logs, and point tallies.
           </div>
         </div>
       </div>

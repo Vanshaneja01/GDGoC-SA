@@ -6,8 +6,8 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'gdgconnect_data_v2';
-  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v1';
+  const STORAGE_KEY = 'gdgconnect_data_v3';
+  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v2';
 
   // Realistic seed data
   const SEED_DATA = {
@@ -259,6 +259,141 @@
         status: "Active",
         joinedDate: "2025-07-15",
         avatar: "AR"
+      },
+      {
+        id: "AMB-212",
+        name: "Tanvi Verma",
+        email: "tanvi.verma@student.gdgconnect.edu",
+        phone: "+91 98765 43231",
+        institution: "Department of Computer Science & Engineering",
+        department: "B.Tech CSE (AI & ML)",
+        year: "Sophomore (Year 2)",
+        mentorId: "MTR-101",
+        skills: ["TensorFlow", "NLP", "Python", "Study Jams"],
+        bio: "AI enthusiast organizing campus study circles and Google GenAI prompt engineering sprints.",
+        status: "Active",
+        joinedDate: "2025-09-01",
+        avatar: "TV"
+      },
+      {
+        id: "AMB-213",
+        name: "Harsh Vardhan",
+        email: "harsh.vardhan@student.gdgconnect.edu",
+        phone: "+91 98765 43232",
+        institution: "School of Engineering & Technology",
+        department: "B.Tech Information Technology",
+        year: "Junior (Year 3)",
+        mentorId: "MTR-102",
+        skills: ["Cloud Security", "Kubernetes", "DevOps", "Technical Demos"],
+        bio: "Student ambassador driving cybersecurity labs and cloud defense workshops at IIMTU.",
+        status: "Active",
+        joinedDate: "2025-08-15",
+        avatar: "HV"
+      },
+      {
+        id: "AMB-214",
+        name: "Simran Kaur",
+        email: "simran.kaur@student.gdgconnect.edu",
+        phone: "+91 98765 43233",
+        institution: "School of Computer Applications",
+        department: "BCA & Cloud Infrastructure",
+        year: "Freshman (Year 1)",
+        mentorId: "MTR-102",
+        skills: ["Ethical Hacking", "Python", "Outreach", "Documentation"],
+        bio: "First-year ambassador building female developer engagement and organizing peer coding labs.",
+        status: "Active",
+        joinedDate: "2026-09-10",
+        avatar: "SK"
+      },
+      {
+        id: "AMB-215",
+        name: "Ananya Mishra",
+        email: "ananya.mishra@student.gdgconnect.edu",
+        phone: "+91 98765 43234",
+        institution: "Department of Computer Science & Engineering",
+        department: "B.Tech CSE",
+        year: "Junior (Year 3)",
+        mentorId: "MTR-103",
+        skills: ["Figma", "Design Systems", "Solution Challenge", "User Testing"],
+        bio: "Product design lead steering accessibility and UX initiatives for campus hackathons.",
+        status: "Active",
+        joinedDate: "2025-07-20",
+        avatar: "AM"
+      },
+      {
+        id: "AMB-216",
+        name: "Kartik Pandey",
+        email: "kartik.pandey@student.gdgconnect.edu",
+        phone: "+91 98765 43235",
+        institution: "School of Engineering & Technology",
+        department: "B.Tech Computer Science",
+        year: "Sophomore (Year 2)",
+        mentorId: "MTR-103",
+        skills: ["Frontend", "Tailwind CSS", "React", "Public Speaking"],
+        bio: "Frontend evangelist running hands-on web clinics and onboarding new student coders.",
+        status: "Active",
+        joinedDate: "2025-08-05",
+        avatar: "KP"
+      },
+      {
+        id: "AMB-217",
+        name: "Rahul Saxena",
+        email: "rahul.saxena@student.gdgconnect.edu",
+        phone: "+91 98765 43236",
+        institution: "Department of Computer Science & Engineering",
+        department: "B.Tech Software Engineering",
+        year: "Senior (Year 4)",
+        mentorId: "MTR-104",
+        skills: ["CI/CD Pipelines", "Docker", "Go", "Open Source"],
+        bio: "DevOps coordinator helping student teams containerize Solution Challenge projects.",
+        status: "Active",
+        joinedDate: "2025-05-12",
+        avatar: "RS"
+      },
+      {
+        id: "AMB-218",
+        name: "Megha Jain",
+        email: "megha.jain@student.gdgconnect.edu",
+        phone: "+91 98765 43237",
+        institution: "School of Computer Applications",
+        department: "MCA & Data Systems",
+        year: "Postgraduate (Year 1)",
+        mentorId: "MTR-104",
+        skills: ["Git & GitHub", "Linux", "System Architecture", "Community Ops"],
+        bio: "Postgraduate lead mentoring student contributors during open-source sprint weeks.",
+        status: "Active",
+        joinedDate: "2025-06-18",
+        avatar: "MJ"
+      },
+      {
+        id: "AMB-219",
+        name: "Varun Chopra",
+        email: "varun.chopra@student.gdgconnect.edu",
+        phone: "+91 98765 43238",
+        institution: "School of Engineering & Technology",
+        department: "B.Tech Electrical & Computer",
+        year: "Junior (Year 3)",
+        mentorId: "MTR-105",
+        skills: ["Flutter", "Dart", "Firebase Auth", "App Deployment"],
+        bio: "Mobile app developer assisting student teams in deploying production-ready Android apps.",
+        status: "Active",
+        joinedDate: "2025-07-28",
+        avatar: "VC"
+      },
+      {
+        id: "AMB-220",
+        name: "Riya Sen",
+        email: "riya.sen@student.gdgconnect.edu",
+        phone: "+91 98765 43239",
+        institution: "Department of Computer Science & Engineering",
+        department: "B.Tech CSE",
+        year: "Sophomore (Year 2)",
+        mentorId: "MTR-105",
+        skills: ["Android Compose", "Kotlin", "Cloud Firestore", "Event Marketing"],
+        bio: "Android Compose champion organizing mobile hack sprints and DevFest speaker drives.",
+        status: "Active",
+        joinedDate: "2025-09-05",
+        avatar: "RYS"
       }
     ],
 

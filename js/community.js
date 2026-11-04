@@ -37,6 +37,22 @@
       // Default mentor fallback
       const defaultMentor = mentors[0] || { name: 'Disha Agarwal', department: 'AI & Distributed Systems', avatar: 'DA' };
 
+      // Update Filter Bar Buttons with dynamic counts
+      if (filterBar) {
+        const allBtn = filterBar.querySelector('.ca-filter-btn[data-filter="all"]');
+        if (allBtn) {
+          allBtn.innerHTML = `All Ambassadors <span class="ca-filter-count">${ambassadors.length}</span>`;
+        }
+
+        mentors.forEach(m => {
+          const btn = filterBar.querySelector(`.ca-filter-btn[data-filter="${m.id}"]`);
+          if (btn) {
+            const count = ambassadors.filter(a => a.mentorId === m.id).length;
+            btn.innerHTML = `${m.name} <span class="ca-filter-count">${count}</span>`;
+          }
+        });
+      }
+
       const renderCards = (filterId = 'all') => {
         track.innerHTML = '';
 
@@ -70,38 +86,49 @@
           `).join('');
 
           card.innerHTML = `
-            <div>
+            <div class="ca-card-main-content">
+              <!-- AMBASSADOR PROFILE (STUDENT LEADER) -->
               <div class="ca-card-header">
-                <div class="ca-avatar-circle">${initials}</div>
+                <div class="ca-avatar-circle" title="${a.name}">${initials}</div>
                 <div class="ca-card-meta">
-                  <span class="ca-card-name">${a.name}</span>
-                  <span class="ca-card-dept">${a.department || 'B.Tech Computer Science'}</span>
+                  <span class="ca-card-name" title="${a.name}">${a.name}</span>
+                  <span class="ca-card-dept" title="${a.department || 'B.Tech Computer Science'}">${a.department || 'B.Tech Computer Science'}</span>
                 </div>
               </div>
 
-              <span class="ca-card-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                <span>Campus Ambassador</span>
-              </span>
+              <!-- ROLE PILL: CAMPUS AMBASSADOR -->
+              <div class="ca-role-badge-row">
+                <span class="ca-card-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                  <span>Campus Ambassador</span>
+                </span>
+              </div>
 
-              <!-- Allotted Mentor Box -->
-              <div class="ca-mentor-box">
-                <div class="ca-mentor-avatar">${mentorInitials}</div>
-                <div class="ca-mentor-info">
-                  <span class="ca-mentor-tag">Allotted Student Mentor</span>
-                  <span class="ca-mentor-name">${mentor.name}</span>
-                  <span class="ca-mentor-dept">${mentor.department || 'Senior Student Mentor'}</span>
+              <!-- DEDICATED ALLOTTED MENTOR SUB-CARD -->
+              <div class="ca-mentor-box" title="Allotted Senior Mentor: ${mentor.name}">
+                <div class="ca-mentor-box-label">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>Guided by Senior Mentor</span>
+                </div>
+                <div class="ca-mentor-body">
+                  <div class="ca-mentor-avatar" title="${mentor.name}">${mentorInitials}</div>
+                  <div class="ca-mentor-info">
+                    <span class="ca-mentor-name">${mentor.name}</span>
+                    <span class="ca-mentor-dept">${mentor.department || 'Senior Student Mentor'}</span>
+                  </div>
                 </div>
               </div>
 
+              <!-- SKILLS CHIPS -->
               <div class="ca-skills-row">
                 ${skillsHtml}
               </div>
             </div>
 
+            <!-- PINNED BOTTOM FOOTER -->
             <div class="ca-card-footer">
-              <span>Status: <strong style="color: #34d399;">Active</strong></span>
-              <span>Year: <strong style="color: #ffffff;">${a.year ? a.year.split(' ')[0] : 'Year 3'}</strong></span>
+              <span class="ca-footer-status"><span class="ca-status-dot"></span> Active Ambassador</span>
+              <span class="ca-footer-year">${a.year ? a.year.split(' ')[0] : 'Year 3'}</span>
             </div>
           `;
 
@@ -305,12 +332,23 @@
     bindPortalButtons() {
       // Tap to Enter button in Hero
       document.addEventListener('click', (e) => {
-        // FAQ Accordion Toggle (E-Cell style)
+        // FAQ Accordion Toggle with smooth transition and accessible state
         const faqHeader = e.target.closest('.comm-faq-question');
         if (faqHeader) {
+          e.preventDefault();
           const faqItem = faqHeader.closest('.comm-faq-item');
           if (faqItem) {
-            faqItem.classList.toggle('open');
+            const wasOpen = faqItem.classList.contains('open');
+            // Close other FAQ items for a clean single-open accordion flow
+            document.querySelectorAll('.comm-faq-item').forEach(item => {
+              item.classList.remove('open');
+              const btn = item.querySelector('.comm-faq-question');
+              if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+            if (!wasOpen) {
+              faqItem.classList.add('open');
+              faqHeader.setAttribute('aria-expanded', 'true');
+            }
             return;
           }
         }
