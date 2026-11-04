@@ -6,8 +6,8 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'gdgconnect_data_v6';
-  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v5';
+  const STORAGE_KEY = 'gdgconnect_data_v7';
+  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v6';
 
   // Realistic seed data
   const SEED_DATA = {
@@ -96,23 +96,6 @@
         joinedDate: "2025-01-10",
         officeHours: "Thu, 1:00 PM - 4:00 PM",
         officeLocation: "Mobile Development Center, Rm 105"
-      },
-      {
-        id: "MTR-106",
-        name: "Aditya Taliyan",
-        email: "adityataliyan123@gmail.com",
-        password: "aditya@gdg",
-        phone: "+91 97586 42648",
-        institution: "IIMT University • IIMTBIF",
-        department: "Web Technologies & Systems",
-        avatar: "AT",
-        expertise: ["Modern Web", "Peer Mentorship", "Creative Problem Solving", "Developer Outreach"],
-        bio: "Senior Student Ambassador Mentor guiding campus ambassadors on web development ecosystems, community liaison, and technical initiatives.",
-        availability: "Available",
-        maxMentees: 6,
-        joinedDate: "2025-01-15",
-        officeHours: "Wed & Fri, 2:00 PM - 5:00 PM",
-        officeLocation: "IIMTBIF Innovation Wing, Studio C"
       }
     ],
 
@@ -531,20 +514,22 @@
       },
       {
         id: "AMB-222",
-        name: "Ambassador In Induction 4",
-        email: "ambassador.induction4@gdgconnect.edu",
-        password: "ambassador@gdg",
-        phone: "+91 98000 00004",
+        name: "Aditya Taliyan",
+        email: "adityataliyan123@gmail.com",
+        password: "aditya@gdg",
+        phone: "+91 97586 42648",
         institution: "IIMT University, Meerut",
-        department: "Departmental Ambassador",
-        year: "1st Year",
-        mentorId: "MTR-106",
-        skills: ["Web Development", "Campus Outreach", "Creative Innovation"],
-        bio: "Ambassador candidate completing onboarding and departmental liaison orientation under Mentor Aditya Taliyan.",
-        linkedin: "https://linkedin.com",
+        department: "BCA",
+        year: "3rd Year",
+        mentorId: "MTR-105",
+        skills: ["Curious Learner", "Aspiring Developer", "Future Innovator", "Web Tech"],
+        bio: "Curious learner, aspiring developer, and future innovator.",
+        linkedin: "https://www.linkedin.com/in/aditya-taliyan-813049319",
+        drivePhotoUrl: "https://drive.google.com/open?id=1_kenLlmI-tTzU-74gMiI9Jq8UVBgqTU_",
+        photoUrl: "https://lh3.googleusercontent.com/d/1_kenLlmI-tTzU-74gMiI9Jq8UVBgqTU_",
         status: "Active",
-        joinedDate: "2025-09-01",
-        avatar: "AI"
+        joinedDate: "2025-08-10",
+        avatar: "AT"
       },
       {
         id: "AMB-223",
@@ -1477,7 +1462,7 @@
         if (stored) {
           this.data = JSON.parse(stored);
           // Check if data version or essential keys exist or if mentors count is updated
-          if (!this.data.mentors || !this.data.ambassadors || this.data.mentors.length < 6) {
+          if (!this.data.mentors || !this.data.ambassadors || this.data.mentors.length !== 5) {
             this.reset();
           }
         } else {
@@ -1557,6 +1542,13 @@
     // ------------------------------------------------------------------------
     // GOOGLE SHEETS CLOUD DATABASE INTEGRATION ENGINE
     // ------------------------------------------------------------------------
+    verifyAdminPasscode(passcode) {
+      if (!passcode) return false;
+      const clean = String(passcode).trim();
+      const validAdminKeys = ['admin@gdg', 'gdgadmin2026', 'gdg2026', 'iimt@admin'];
+      return validAdminKeys.includes(clean);
+    }
+
     getGoogleSheetsUrl() {
       return localStorage.getItem('gdgconnect_google_sheets_url') || '';
     }

@@ -587,7 +587,7 @@
                 </button>
               </div>
               <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; display: block;">
-                Enter any Mentor ID (MTR-101 to 106) or Ambassador ID (AMB-201 to 225) or your official Gmail to instantly access your dashboard.
+                Enter any Mentor ID (MTR-101 to 105) or Ambassador ID (AMB-201 to 225) or your registered Email.
               </span>
             </div>
 
@@ -595,9 +595,6 @@
             <div>
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                 <strong style="font-size: 0.88rem; color: var(--text-main);">Quick Switch by Person:</strong>
-                <button type="button" class="btn btn-xs btn-outline" id="btn-switcher-open-directory" style="font-size: 0.72rem; color: #4285F4;">
-                  📋 View All Credentials &amp; Passwords
-                </button>
               </div>
 
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">

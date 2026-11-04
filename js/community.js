@@ -385,13 +385,6 @@
           return;
         }
 
-        const credsDirBtn = e.target.closest('#btn-open-creds-directory, .btn-creds-dir');
-        if (credsDirBtn) {
-          e.preventDefault();
-          this.openCredentialsDirectoryModal();
-          return;
-        }
-
         const tapBtn = e.target.closest('#btn-tap-to-enter-portal, .btn-comm-portal, #btn-enter-portal-cta');
         if (tapBtn) {
           e.preventDefault();
@@ -417,13 +410,40 @@
           this.showCommunityView();
         }
       });
+
+      // Mobile Hamburger Navigation Drawer Toggle for Public Header
+      const hamburgerBtn = document.getElementById('comm-hamburger-btn');
+      const navLinks = document.getElementById('comm-nav-links');
+
+      hamburgerBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = navLinks?.classList.toggle('mobile-open');
+        hamburgerBtn.classList.toggle('active', isOpen);
+        hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close mobile nav drawer when clicking any link
+      navLinks?.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('click', () => {
+          navLinks?.classList.remove('mobile-open');
+          hamburgerBtn?.classList.remove('active');
+          hamburgerBtn?.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Close mobile nav drawer when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.comm-navbar')) {
+          navLinks?.classList.remove('mobile-open');
+          hamburgerBtn?.classList.remove('active');
+          hamburgerBtn?.setAttribute('aria-expanded', 'false');
+        }
+      });
     },
 
-    openAuthModal(defaultRole = 'Mentor') {
+    openAuthModal(defaultRole = 'Ambassador') {
       const ui = window.CC.ui;
       let activeRole = defaultRole;
-      const mentors = (window.CC.db && window.CC.db.getMentors()) || [];
-      const ambassadors = (window.CC.db && window.CC.db.getAmbassadors()) || [];
 
       const modalHtml = `
         <div class="modal-backdrop">
@@ -442,26 +462,26 @@
                 </div>
                 <div>
                   <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">Sign in to GDGconnect</h3>
-                  <span style="font-size: 0.75rem; color: var(--text-muted);">Mentor &amp; Ambassador Management Command Center</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Campus Ambassador &amp; Mentor Management Portal</span>
                 </div>
               </div>
-              <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
+              <button class="btn-icon" data-close-modal aria-label="Close dialog">${ui.icon('x')}</button>
             </div>
 
-            <div class="modal-body" style="padding: 1.25rem 1.75rem;">
+            <div class="modal-body" style="padding: 1.35rem 1.75rem;">
               <!-- Role Selector Tabs -->
               <div class="auth-role-tabs">
-                <button type="button" class="auth-role-tab ${activeRole === 'Mentor' ? 'active' : ''}" id="tab-auth-mentor">
-                  🛡️ Senior Student Mentor (${mentors.length})
-                </button>
                 <button type="button" class="auth-role-tab ${activeRole === 'Ambassador' ? 'active' : ''}" id="tab-auth-ambassador">
-                  🎓 Campus Ambassador (${ambassadors.length})
+                  🎓 Campus Ambassador
+                </button>
+                <button type="button" class="auth-role-tab ${activeRole === 'Mentor' ? 'active' : ''}" id="tab-auth-mentor">
+                  🛡️ Senior Student Mentor
                 </button>
               </div>
 
-              <!-- Sign In Form -->
-              <form id="portal-auth-form">
-                <div class="form-group" style="margin-bottom: 1rem;">
+              <!-- Clean, Secure Sign In Form (No Exposed Passwords or Demo Values) -->
+              <form id="portal-auth-form" autocomplete="on">
+                <div class="form-group" style="margin-bottom: 1.15rem;">
                   <label class="form-label" for="auth-id-input" style="font-size: 0.82rem; font-weight: 600;">
                     <span id="label-id-type">${activeRole === 'Mentor' ? 'Mentor Email' : 'Ambassador Email'}</span> or Assigned ID
                   </label>
@@ -469,106 +489,54 @@
                     type="text" 
                     id="auth-id-input" 
                     class="form-control" 
-                    placeholder="${activeRole === 'Mentor' ? 'e.g. aarushisingh2978@gmail.com or MTR-102' : 'e.g. vanshsingh1024@gmail.com or AMB-201'}"
-                    value="${activeRole === 'Mentor' ? (mentors[1] ? mentors[1].email : 'aarushisingh2978@gmail.com') : 'vanshsingh1024@gmail.com'}"
+                    placeholder="${activeRole === 'Mentor' ? 'Enter official Gmail or Mentor ID (e.g. MTR-101)' : 'Enter registered Email or Ambassador ID (e.g. AMB-201)'}"
+                    value=""
+                    autocomplete="username"
                     required 
+                    autofocus
                   />
                 </div>
 
-                <div class="form-group" style="margin-bottom: 1.25rem;">
+                <div class="form-group" style="margin-bottom: 1.45rem;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                     <label class="form-label" for="auth-password-input" style="font-size: 0.82rem; font-weight: 600; margin: 0;">
-                      Security Password / Access Key
+                      Security Password
                     </label>
-                    <span style="font-size: 0.72rem; color: var(--color-primary); cursor: pointer;" id="btn-autofill-pass">
-                      Auto-fill Assigned Key
-                    </span>
                   </div>
                   <div style="position: relative;">
                     <input 
                       type="password" 
                       id="auth-password-input" 
                       class="form-control" 
-                      placeholder="Enter assigned password (e.g. aarushi@gdg)"
-                      value="${activeRole === 'Mentor' ? 'aarushi@gdg' : 'vansh@gdg'}"
+                      placeholder="Enter your security password"
+                      value=""
+                      autocomplete="current-password"
                       required 
                     />
-                    <button type="button" id="btn-toggle-auth-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.8rem;">
+                    <button type="button" id="btn-toggle-auth-pass" title="Toggle password visibility" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.9rem; padding: 4px;">
                       👁️
                     </button>
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block" style="padding: 0.85rem; font-size: 0.95rem; font-weight: 700;">
+                <button type="submit" class="btn btn-primary btn-block" style="padding: 0.85rem; font-size: 0.95rem; font-weight: 700; width: 100%;">
                   ${ui.icon('log-in')} Sign In to ${activeRole} Dashboard
                 </button>
               </form>
 
-              <!-- One-Click Pre-Assigned Credentials Roster -->
-              <div class="auth-demo-box">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
-                  <strong style="font-size: 0.78rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.5px;">
-                    🔑 Quick Access: Assigned Mentors &amp; Ambasssadors
-                  </strong>
-                  <button type="button" class="btn-creds-dir" id="btn-modal-open-directory" style="font-size: 0.72rem; color: #4285F4; background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 600;">
-                    View All Passwords Directory
-                  </button>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 0.45rem;">
-                  <!-- Mentor 1: Disha Agarwal -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                    <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Disha Agarwal <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
-                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">agarwaldisha832@gmail.com • Key: disha@gdg</div>
-                    </div>
-                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-101">
-                      Sign In
-                    </button>
-                  </div>
-
-                  <!-- Mentor 2: Aarushi Singh -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                    <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Aarushi Singh <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
-                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">aarushisingh2978@gmail.com • Key: aarushi@gdg</div>
-                    </div>
-                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-102">
-                      Sign In
-                    </button>
-                  </div>
-
-                  <!-- Mentor 3: Aditya Taliyan -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                    <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Aditya Taliyan <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
-                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">adityataliyan123@gmail.com • Key: aditya@gdg</div>
-                    </div>
-                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-106">
-                      Sign In
-                    </button>
-                  </div>
-
-                  <!-- Ambassador: Vansh Singh -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                    <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Vansh Singh <span class="badge badge-olive" style="font-size: 0.65rem;">Ambassador</span></div>
-                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">vanshsingh1024@gmail.com • Key: vansh@gdg</div>
-                    </div>
-                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Ambassador:AMB-201">
-                      Sign In
-                    </button>
-                  </div>
-                </div>
+              <!-- Confidential Security Notice -->
+              <div style="margin-top: 1.35rem; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: var(--bg-surface); border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 0.65rem;">
+                <span style="font-size: 1rem;">🔒</span>
+                <span style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.4;">
+                  <strong>Confidential Portal:</strong> Please sign in using the official email or issued ID provided during your appointment.
+                </span>
               </div>
-
             </div>
 
             <div class="modal-footer" style="padding: 0.85rem 1.75rem; background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-              <button type="button" class="btn btn-xs btn-outline btn-sheets-sync" id="btn-modal-open-sheets" style="display: inline-flex; align-items: center; gap: 0.35rem;">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                <span>Google Sheets DB Sync</span>
-              </button>
+              <span style="font-size: 0.74rem; color: var(--text-muted);">
+                GDG on Campus IIMTU &bull; IIMTBIF
+              </span>
               <button class="btn btn-sm btn-outline" data-close-modal>Cancel</button>
             </div>
           </div>
@@ -582,15 +550,16 @@
         const tabAmb = modalHost.querySelector('#tab-auth-ambassador');
         const tabMtr = modalHost.querySelector('#tab-auth-mentor');
         const togglePassBtn = modalHost.querySelector('#btn-toggle-auth-pass');
+        const submitBtn = modalHost.querySelector('button[type="submit"]');
 
         tabMtr.addEventListener('click', () => {
           activeRole = 'Mentor';
           tabMtr.classList.add('active');
           tabAmb.classList.remove('active');
           labelIdType.textContent = 'Mentor Email or Assigned ID';
-          idInput.placeholder = 'e.g. aarushisingh2978@gmail.com or MTR-102';
-          idInput.value = 'aarushisingh2978@gmail.com';
-          passInput.value = 'aarushi@gdg';
+          idInput.placeholder = 'Enter official Gmail or Mentor ID (e.g. MTR-101)';
+          if (submitBtn) submitBtn.innerHTML = `${ui.icon('log-in')} Sign In to Mentor Dashboard`;
+          idInput.focus();
         });
 
         tabAmb.addEventListener('click', () => {
@@ -598,55 +567,15 @@
           tabAmb.classList.add('active');
           tabMtr.classList.remove('active');
           labelIdType.textContent = 'Ambassador Email or Assigned ID';
-          idInput.placeholder = 'e.g. vanshsingh1024@gmail.com or AMB-201';
-          idInput.value = 'vanshsingh1024@gmail.com';
-          passInput.value = 'vansh@gdg';
+          idInput.placeholder = 'Enter registered Email or Ambassador ID (e.g. AMB-201)';
+          if (submitBtn) submitBtn.innerHTML = `${ui.icon('log-in')} Sign In to Ambassador Dashboard`;
+          idInput.focus();
         });
 
         togglePassBtn?.addEventListener('click', () => {
           const isPass = passInput.type === 'password';
           passInput.type = isPass ? 'text' : 'password';
           togglePassBtn.textContent = isPass ? '🔒' : '👁️';
-        });
-
-        modalHost.querySelector('#btn-autofill-pass')?.addEventListener('click', () => {
-          const val = idInput.value.trim().toLowerCase();
-          if (val.includes('aarushi')) passInput.value = 'aarushi@gdg';
-          else if (val.includes('disha')) passInput.value = 'disha@gdg';
-          else if (val.includes('aditya')) passInput.value = 'aditya@gdg';
-          else if (val.includes('akshita')) passInput.value = 'akshita@gdg';
-          else if (val.includes('arsh')) passInput.value = 'arsh@gdg';
-          else if (val.includes('khyati')) passInput.value = 'khyati@gdg';
-          else if (val.includes('vansh')) passInput.value = 'vansh@gdg';
-          else if (activeRole === 'Mentor') passInput.value = 'mentor@gdg';
-          else passInput.value = 'ambassador@gdg';
-        });
-
-        modalHost.querySelector('#btn-modal-open-directory')?.addEventListener('click', () => {
-          ui.closeModal();
-          this.openCredentialsDirectoryModal();
-        });
-
-        modalHost.querySelector('#btn-modal-open-sheets')?.addEventListener('click', () => {
-          ui.closeModal();
-          this.openGoogleSheetsModal();
-        });
-
-        // Quick sign in buttons
-        modalHost.querySelectorAll('[data-quick-user]').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const [role, id] = btn.getAttribute('data-quick-user').split(':');
-            const targetUser = role === 'Mentor'
-              ? window.CC.db.getMentorById(id)
-              : window.CC.db.getAmbassadorById(id);
-
-            if (targetUser) {
-              CommunityManager.setSession(targetUser, role);
-              ui.closeModal();
-              ui.showToast(`Authenticated as ${targetUser.name} (${targetUser.email})`, "success", `Welcome to ${role} Dashboard`);
-              CommunityManager.showPortalView();
-            }
-          });
         });
 
         // Form Submission with Strict Authentication
@@ -664,23 +593,80 @@
           const authResult = window.CC.db.authenticateUser(rawId, rawPass);
 
           if (!authResult.success) {
-            ui.showToast(authResult.reason, "error", "Access Denied");
+            ui.showToast(authResult.reason || "Invalid credentials. Please verify your Email/ID and Password.", "error", "Access Denied");
             return;
           }
 
           // Complete login
           CommunityManager.setSession(authResult.user, authResult.role);
           ui.closeModal();
-          ui.showToast(`Authenticated as ${authResult.user.name}!`, "success", `Welcome, ${authResult.role}`);
+          ui.showToast(`Authenticated as ${authResult.user.name}!`, "success", `Welcome to ${authResult.role} Command Center`);
           CommunityManager.showPortalView();
         });
       });
     },
 
     // ------------------------------------------------------------------------
-    // GOOGLE SHEETS CLOUD DATABASE MODAL
+    // GOOGLE SHEETS CLOUD DATABASE (PASSWORD PROTECTED FOR ADMIN ONLY)
     // ------------------------------------------------------------------------
     openGoogleSheetsModal() {
+      // Require Administrator Passcode Verification
+      this.promptAdminAuth(() => {
+        this.renderGoogleSheetsModal();
+      });
+    },
+
+    promptAdminAuth(onSuccess) {
+      const ui = window.CC.ui;
+      const modalHtml = `
+        <div class="modal-backdrop">
+          <div class="modal-dialog modal-sm" style="max-width: 420px; border-radius: 16px;">
+            <div class="modal-header">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.3rem;">🔐</span>
+                <div>
+                  <h3 class="modal-title" style="font-size: 1.05rem;">Admin Verification</h3>
+                  <span style="font-size: 0.72rem; color: var(--text-muted);">Protected Google Sheets Cloud Database</span>
+                </div>
+              </div>
+              <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem 1.5rem;">
+              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1.15rem;">
+                Google Sheets database sync settings are protected and restricted to chapter leadership. Enter the Master Administrator Passkey to proceed:
+              </p>
+              <form id="form-admin-verify">
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                  <label class="form-label" for="input-admin-pass" style="font-size: 0.8rem; font-weight: 600;">Administrator Passkey</label>
+                  <input type="password" id="input-admin-pass" class="form-control" placeholder="Enter master admin passcode" required autofocus />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%; padding: 0.75rem;">
+                  ${ui.icon('check')} Verify &amp; Open Sheets DB
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      `;
+
+      ui.openModal(modalHtml, (modalHost) => {
+        const form = modalHost.querySelector('#form-admin-verify');
+        const passInput = modalHost.querySelector('#input-admin-pass');
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const pass = passInput.value.trim();
+          if (window.CC.db.verifyAdminPasscode(pass)) {
+            ui.closeModal();
+            ui.showToast("Admin access authorized!", "success", "Unlocked");
+            onSuccess();
+          } else {
+            ui.showToast("Invalid admin passcode. Access denied.", "error", "Unauthorized");
+          }
+        });
+      });
+    },
+
+    renderGoogleSheetsModal() {
       const ui = window.CC.ui;
       const db = window.CC.db;
       const status = db.getGoogleSheetsSyncStatus();
