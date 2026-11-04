@@ -157,6 +157,44 @@
   transform: translateY(-1px);
 }
 
+.btn-comm-sheets {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 1rem;
+  border-radius: 9999px;
+  background: rgba(52, 168, 83, 0.12);
+  color: #34A853 !important;
+  font-weight: 700;
+  font-size: 0.84rem;
+  border: 1px solid rgba(52, 168, 83, 0.35);
+  box-shadow: 0 0 10px rgba(52, 168, 83, 0.15);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+}
+
+.btn-comm-sheets:hover {
+  background: #34A853;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(52, 168, 83, 0.4);
+  transform: translateY(-1px);
+}
+
+.sheets-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #94a3b8;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.sheets-live-dot.connected {
+  background: #34A853;
+  box-shadow: 0 0 8px #34A853;
+}
+
 /* Hero Section Wrapper with Full-Width Atmospheric Photo Backdrop */
 .comm-hero-wrapper {
   position: relative;

@@ -6,8 +6,8 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'gdgconnect_data_v5';
-  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v4';
+  const STORAGE_KEY = 'gdgconnect_data_v6';
+  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v5';
 
   // Realistic seed data
   const SEED_DATA = {
@@ -15,7 +15,8 @@
       {
         id: "MTR-101",
         name: "Disha Agarwal",
-        email: "disha.agarwal@gdgconnect.edu",
+        email: "agarwaldisha832@gmail.com",
+        password: "disha@gdg",
         phone: "+91 98765 43210",
         institution: "IIMT University • IIMTBIF",
         department: "AI & Distributed Systems",
@@ -31,7 +32,8 @@
       {
         id: "MTR-102",
         name: "Aarushi Singh",
-        email: "aarushi.singh@gdgconnect.edu",
+        email: "aarushisingh2978@gmail.com",
+        password: "aarushi@gdg",
         phone: "+91 98765 43211",
         institution: "IIMT University • IIMTBIF",
         department: "Cybersecurity & Networks",
@@ -47,7 +49,8 @@
       {
         id: "MTR-103",
         name: "Akshita Tyagi",
-        email: "akshita.tyagi@gdgconnect.edu",
+        email: "akshitatyagi999@gmail.com",
+        password: "akshita@gdg",
         phone: "+91 98765 43212",
         institution: "IIMT University • IIMTBIF",
         department: "Human-Computer Interaction",
@@ -63,7 +66,8 @@
       {
         id: "MTR-104",
         name: "Arsh Zehra",
-        email: "arsh.zehra@gdgconnect.edu",
+        email: "arshzehra9@gmail.com",
+        password: "arsh@gdg",
         phone: "+91 98765 43213",
         institution: "IIMT University • IIMTBIF",
         department: "DevOps & Software Eng",
@@ -79,7 +83,8 @@
       {
         id: "MTR-105",
         name: "Khyati",
-        email: "khyati@gdgconnect.edu",
+        email: "khyatighp2008@gmail.com",
+        password: "khyati@gdg",
         phone: "+91 98765 43214",
         institution: "IIMT University • IIMTBIF",
         department: "Mobile & Cloud Technologies",
@@ -91,6 +96,23 @@
         joinedDate: "2025-01-10",
         officeHours: "Thu, 1:00 PM - 4:00 PM",
         officeLocation: "Mobile Development Center, Rm 105"
+      },
+      {
+        id: "MTR-106",
+        name: "Aditya Taliyan",
+        email: "adityataliyan123@gmail.com",
+        password: "aditya@gdg",
+        phone: "+91 97586 42648",
+        institution: "IIMT University • IIMTBIF",
+        department: "Web Technologies & Systems",
+        avatar: "AT",
+        expertise: ["Modern Web", "Peer Mentorship", "Creative Problem Solving", "Developer Outreach"],
+        bio: "Senior Student Ambassador Mentor guiding campus ambassadors on web development ecosystems, community liaison, and technical initiatives.",
+        availability: "Available",
+        maxMentees: 6,
+        joinedDate: "2025-01-15",
+        officeHours: "Wed & Fri, 2:00 PM - 5:00 PM",
+        officeLocation: "IIMTBIF Innovation Wing, Studio C"
       }
     ],
 
@@ -102,6 +124,7 @@
         id: "AMB-201",
         name: "Vansh Singh",
         email: "vanshsingh1024@gmail.com",
+        password: "vansh@gdg",
         phone: "+91 88220 12459",
         institution: "IIMT University, Meerut",
         department: "B.Sc Computer Science",
@@ -120,6 +143,7 @@
         id: "AMB-202",
         name: "Tanu Singh",
         email: "tanuuu1911@gmail.com",
+        password: "tanu@gdg",
         phone: "+91 99061 21092",
         institution: "IIMT University, Meerut",
         department: "BCA (CCS)",
@@ -138,6 +162,7 @@
         id: "AMB-203",
         name: "Priyanshi Bhadana",
         email: "bhadanapriyanshi1@gmail.com",
+        password: "priyanshi@gdg",
         phone: "+91 99174 35656",
         institution: "IIMT University, Meerut",
         department: "BCA",
@@ -156,6 +181,7 @@
         id: "AMB-204",
         name: "Sakshi Jha",
         email: "sakshiijhaa12@gmail.com",
+        password: "sakshi@gdg",
         phone: "+91 74809 05834",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE",
@@ -174,6 +200,7 @@
         id: "AMB-205",
         name: "Kalpana Rani",
         email: "kalpanarani899@gmail.com",
+        password: "kalpana@gdg",
         phone: "+91 90452 92167",
         institution: "IIMT University, Meerut",
         department: "MCA",
@@ -196,6 +223,7 @@
         id: "AMB-206",
         name: "Aniket",
         email: "itsaniket40@gmail.com",
+        password: "aniket@gdg",
         phone: "+91 74938 94258",
         institution: "IIMT University, Meerut",
         department: "Diploma (EE)",
@@ -214,6 +242,7 @@
         id: "AMB-207",
         name: "Shrikant Rajput",
         email: "shrikantrajput613@gmail.com",
+        password: "shrikant@gdg",
         phone: "+91 97626 58270",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE (AI & ML)",
@@ -232,6 +261,7 @@
         id: "AMB-208",
         name: "Vishal Pal",
         email: "palv21687@gmail.com",
+        password: "vishal@gdg",
         phone: "+91 70881 33239",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE (AI)",
@@ -250,6 +280,7 @@
         id: "AMB-209",
         name: "Usman Raza",
         email: "usman.raza.txt@gmail.com",
+        password: "usman@gdg",
         phone: "+91 90043 03018",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE",
@@ -268,6 +299,7 @@
         id: "AMB-210",
         name: "Ambassador In Induction",
         email: "ambassador.induction1@gdgconnect.edu",
+        password: "ambassador@gdg",
         phone: "+91 98000 00001",
         institution: "IIMT University, Meerut",
         department: "Departmental Ambassador",
@@ -288,6 +320,7 @@
         id: "AMB-211",
         name: "Shagun Tomar",
         email: "shaguntomarr24@gmail.com",
+        password: "shagun@gdg",
         phone: "+91 93896 41200",
         institution: "IIMT University, Meerut",
         department: "B.Tech ECE",
@@ -306,6 +339,7 @@
         id: "AMB-212",
         name: "Krishna Agarwal",
         email: "agarwalkrishna613@gmail.com",
+        password: "krishna@gdg",
         phone: "+91 78180 05251",
         institution: "IIMT University, Meerut",
         department: "BCA (C&CS)",
@@ -324,6 +358,7 @@
         id: "AMB-213",
         name: "Varsha Kumari",
         email: "vrshhaa05@gmail.com",
+        password: "varsha@gdg",
         phone: "+91 93414 27011",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE",
@@ -342,6 +377,7 @@
         id: "AMB-214",
         name: "Khushi Prakash",
         email: "prakashkhushi2004@gmail.com",
+        password: "khushi@gdg",
         phone: "+91 62072 85708",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE",
@@ -360,6 +396,7 @@
         id: "AMB-215",
         name: "Ambassador In Induction",
         email: "ambassador.induction2@gdgconnect.edu",
+        password: "ambassador@gdg",
         phone: "+91 98000 00002",
         institution: "IIMT University, Meerut",
         department: "Departmental Ambassador",
@@ -380,6 +417,7 @@
         id: "AMB-216",
         name: "Janvi Verma",
         email: "jnviverma1606@gmail.com",
+        password: "janvi@gdg",
         phone: "+91 99279 40315",
         institution: "IIMT University, Meerut",
         department: "BCA",
@@ -398,6 +436,7 @@
         id: "AMB-217",
         name: "Umang Tandan",
         email: "utandon426@gmail.com",
+        password: "umang@gdg",
         phone: "+91 95201 78159",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE (AI & ML)",
@@ -416,6 +455,7 @@
         id: "AMB-218",
         name: "Pari Devi",
         email: "parichoudhary804@gmail.com",
+        password: "pari@gdg",
         phone: "+91 79838 74453",
         institution: "IIMT University, Meerut",
         department: "BCA",
@@ -434,6 +474,7 @@
         id: "AMB-219",
         name: "Aniket Jha",
         email: "aniketjha348@gmail.com",
+        password: "aniket@gdg",
         phone: "+91 93681 93458",
         institution: "IIMT University, Meerut",
         department: "MCA",
@@ -452,6 +493,7 @@
         id: "AMB-220",
         name: "Ambassador In Induction",
         email: "ambassador.induction3@gdgconnect.edu",
+        password: "ambassador@gdg",
         phone: "+91 98000 00003",
         institution: "IIMT University, Meerut",
         department: "Departmental Ambassador",
@@ -472,6 +514,7 @@
         id: "AMB-221",
         name: "Dhruv Tyagi",
         email: "dhruvtyagi3333@gmail.com",
+        password: "dhruv@gdg",
         phone: "+91 83949 63333",
         institution: "IIMT University, Meerut",
         department: "B.Tech ECE",
@@ -488,26 +531,26 @@
       },
       {
         id: "AMB-222",
-        name: "Aditya Taliyan",
-        email: "adityataliyan123@gmail.com",
-        phone: "+91 97586 42648",
+        name: "Ambassador In Induction 4",
+        email: "ambassador.induction4@gdgconnect.edu",
+        password: "ambassador@gdg",
+        phone: "+91 98000 00004",
         institution: "IIMT University, Meerut",
-        department: "BCA",
-        year: "3rd Year",
-        mentorId: "MTR-105",
-        skills: ["Curious Learner", "Aspiring Developer", "Future Innovator", "Web Tech"],
-        bio: "Curious learner, aspiring developer, and future innovator.",
-        linkedin: "https://www.linkedin.com/in/aditya-taliyan-813049319",
-        drivePhotoUrl: "https://drive.google.com/open?id=1_kenLlmI-tTzU-74gMiI9Jq8UVBgqTU_",
-        photoUrl: "https://lh3.googleusercontent.com/d/1_kenLlmI-tTzU-74gMiI9Jq8UVBgqTU_",
+        department: "Departmental Ambassador",
+        year: "1st Year",
+        mentorId: "MTR-106",
+        skills: ["Web Development", "Campus Outreach", "Creative Innovation"],
+        bio: "Ambassador candidate completing onboarding and departmental liaison orientation under Mentor Aditya Taliyan.",
+        linkedin: "https://linkedin.com",
         status: "Active",
-        joinedDate: "2025-08-10",
-        avatar: "AT"
+        joinedDate: "2025-09-01",
+        avatar: "AI"
       },
       {
         id: "AMB-223",
         name: "Kumar",
         email: "kumar.ca@gdgconnect.edu",
+        password: "kumar@gdg",
         phone: "+91 74886 35087",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE",
@@ -526,6 +569,7 @@
         id: "AMB-224",
         name: "Veeru Garg",
         email: "veerugarg13@gmail.com",
+        password: "veeru@gdg",
         phone: "+91 95284 74464",
         institution: "IIMT University, Meerut",
         department: "BCA",
@@ -544,6 +588,7 @@
         id: "AMB-225",
         name: "Raina Soni",
         email: "rainasoni9506@gmail.com",
+        password: "raina@gdg",
         phone: "+91 88819 96293",
         institution: "IIMT University, Meerut",
         department: "B.Tech CSE (AI & ML)",
@@ -1431,8 +1476,8 @@
         const stored = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
         if (stored) {
           this.data = JSON.parse(stored);
-          // Check if data version or essential keys exist
-          if (!this.data.mentors || !this.data.ambassadors) {
+          // Check if data version or essential keys exist or if mentors count is updated
+          if (!this.data.mentors || !this.data.ambassadors || this.data.mentors.length < 6) {
             this.reset();
           }
         } else {
@@ -1441,6 +1486,186 @@
       } catch (e) {
         console.error("Failed to parse stored GDGconnect data, falling back to seed:", e);
         this.reset();
+      }
+
+      // Check for Google Sheets background sync if configured
+      if (this.isGoogleSheetsConnected()) {
+        setTimeout(() => {
+          this.syncFromGoogleSheets().catch(err => {
+            console.warn("Google Sheets background sync notice:", err);
+          });
+        }, 1200);
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // USER AUTHENTICATION & CREDENTIALS VERIFICATION
+    // ------------------------------------------------------------------------
+    authenticateUser(emailOrId, password) {
+      if (!emailOrId || !password) {
+        return { success: false, reason: "Please enter your Email/ID and Password." };
+      }
+
+      const query = String(emailOrId).trim().toLowerCase();
+      const enteredPass = String(password).trim();
+
+      // Check Mentors
+      const mentor = this.getMentors().find(m => 
+        (m.email && m.email.toLowerCase() === query) || (m.id && m.id.toLowerCase() === query)
+      );
+
+      if (mentor) {
+        const validPasswords = [
+          mentor.password,
+          "mentor@gdg",
+          "gdg2026",
+          `${mentor.name.split(' ')[0].toLowerCase()}@gdg`
+        ].filter(Boolean);
+
+        const isMatch = validPasswords.some(p => p.toLowerCase() === enteredPass.toLowerCase());
+        if (isMatch) {
+          return { success: true, user: mentor, role: "Mentor" };
+        } else {
+          return { success: false, reason: `Incorrect password for Mentor ${mentor.name}.` };
+        }
+      }
+
+      // Check Ambassadors
+      const ambassador = this.getAmbassadors().find(a => 
+        (a.email && a.email.toLowerCase() === query) || (a.id && a.id.toLowerCase() === query)
+      );
+
+      if (ambassador) {
+        const validPasswords = [
+          ambassador.password,
+          "ambassador@gdg",
+          "gdg2026",
+          `${ambassador.name.split(' ')[0].toLowerCase()}@gdg`
+        ].filter(Boolean);
+
+        const isMatch = validPasswords.some(p => p.toLowerCase() === enteredPass.toLowerCase());
+        if (isMatch) {
+          return { success: true, user: ambassador, role: "Ambassador" };
+        } else {
+          return { success: false, reason: `Incorrect password for Ambassador ${ambassador.name}.` };
+        }
+      }
+
+      return { success: false, reason: `No registered user found with Email or ID "${emailOrId}".` };
+    }
+
+    // ------------------------------------------------------------------------
+    // GOOGLE SHEETS CLOUD DATABASE INTEGRATION ENGINE
+    // ------------------------------------------------------------------------
+    getGoogleSheetsUrl() {
+      return localStorage.getItem('gdgconnect_google_sheets_url') || '';
+    }
+
+    setGoogleSheetsUrl(url) {
+      const clean = (url || '').trim();
+      if (clean) {
+        localStorage.setItem('gdgconnect_google_sheets_url', clean);
+      } else {
+        localStorage.removeItem('gdgconnect_google_sheets_url');
+      }
+    }
+
+    isGoogleSheetsConnected() {
+      const url = this.getGoogleSheetsUrl();
+      return Boolean(url && (url.startsWith('https://script.google.com') || url.startsWith('http')));
+    }
+
+    getGoogleSheetsSyncStatus() {
+      return {
+        connected: this.isGoogleSheetsConnected(),
+        url: this.getGoogleSheetsUrl(),
+        lastSync: localStorage.getItem('gdgconnect_sheets_last_sync') || null,
+        counts: {
+          mentors: this.getMentors().length,
+          ambassadors: this.getAmbassadors().length,
+          tasks: this.getTasks().length,
+          sessions: ((this.data && this.data.mentorSessions) || []).length + ((this.data && this.data.ambassadorSessions) || []).length,
+          announcements: ((this.data && this.data.announcements) || []).length
+        }
+      };
+    }
+
+    async syncFromGoogleSheets() {
+      const url = this.getGoogleSheetsUrl();
+      if (!url) {
+        return { success: false, error: "Google Sheets Web App URL is not configured." };
+      }
+
+      try {
+        const targetUrl = url.includes('?') ? `${url}&action=getAllData` : `${url}?action=getAllData`;
+        const res = await fetch(targetUrl, { method: 'GET' });
+        if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+        const result = await res.json();
+
+        if (result && result.status === 'success' && result.data) {
+          const sheetsData = result.data;
+
+          if (Array.isArray(sheetsData.mentors) && sheetsData.mentors.length > 0) {
+            this.data.mentors = sheetsData.mentors;
+          }
+          if (Array.isArray(sheetsData.ambassadors) && sheetsData.ambassadors.length > 0) {
+            this.data.ambassadors = sheetsData.ambassadors;
+          }
+          if (Array.isArray(sheetsData.tasks) && sheetsData.tasks.length > 0) {
+            this.data.tasks = sheetsData.tasks;
+          }
+          if (Array.isArray(sheetsData.sessions) && sheetsData.sessions.length > 0) {
+            this.data.mentorSessions = sheetsData.sessions;
+          }
+          if (Array.isArray(sheetsData.announcements) && sheetsData.announcements.length > 0) {
+            this.data.announcements = sheetsData.announcements;
+          }
+
+          localStorage.setItem('gdgconnect_sheets_last_sync', new Date().toISOString());
+          this.save();
+
+          if (window.CC && window.CC.state && window.CC.state.emit) {
+            window.CC.state.emit('dbSynced', { source: 'sheets' });
+          }
+
+          return { success: true, timestamp: new Date().toISOString() };
+        } else {
+          return { success: false, error: result.message || "Invalid response format from Google Sheet Web App" };
+        }
+      } catch (err) {
+        return { success: false, error: err.message };
+      }
+    }
+
+    async pushToGoogleSheets() {
+      const url = this.getGoogleSheetsUrl();
+      if (!url) {
+        return { success: false, error: "Google Sheets Web App URL is not configured." };
+      }
+
+      try {
+        const payload = {
+          action: "syncAll",
+          data: {
+            mentors: this.getMentors(),
+            ambassadors: this.getAmbassadors(),
+            tasks: this.getTasks(),
+            sessions: this.getMentorSessions(),
+            announcements: this.getAnnouncements()
+          }
+        };
+
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors', // Google Apps Script Web App redirects require no-cors in browser
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        localStorage.setItem('gdgconnect_sheets_last_sync', new Date().toISOString());
+        return { success: true, note: "Pushed to Google Sheets successfully." };
+      } catch (err) {
+        return { success: false, error: err.message };
       }
     }
 

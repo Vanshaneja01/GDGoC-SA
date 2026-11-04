@@ -257,6 +257,13 @@
       window.CC.state.toggleTheme();
     });
 
+    // Topbar Google Sheets Cloud DB Trigger
+    document.getElementById('btn-topbar-sheets')?.addEventListener('click', () => {
+      if (window.CC && window.CC.openGoogleSheetsModal) {
+        window.CC.openGoogleSheetsModal();
+      }
+    });
+
     // Topbar quick role switcher
     document.getElementById('role-btn-mentor')?.addEventListener('click', () => {
       window.CC.state.switchRole('Mentor');
@@ -580,7 +587,7 @@
                 </button>
               </div>
               <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; display: block;">
-                Enter any Mentor ID (MTR-101 to 105) or Ambassador ID (AMB-201 to 225) to instantly switch dashboards.
+                Enter any Mentor ID (MTR-101 to 106) or Ambassador ID (AMB-201 to 225) or your official Gmail to instantly access your dashboard.
               </span>
             </div>
 
@@ -588,6 +595,9 @@
             <div>
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                 <strong style="font-size: 0.88rem; color: var(--text-main);">Quick Switch by Person:</strong>
+                <button type="button" class="btn btn-xs btn-outline" id="btn-switcher-open-directory" style="font-size: 0.72rem; color: #4285F4;">
+                  📋 View All Credentials &amp; Passwords
+                </button>
               </div>
 
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
@@ -637,9 +647,13 @@
           </div>
 
           <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-            <div style="display: flex; gap: 0.5rem;">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
               <button class="btn btn-secondary" id="btn-modal-goto-profile">
                 ${ui.icon('settings')} View Profile & Settings
+              </button>
+              <button class="btn btn-outline" id="btn-modal-open-sheets" style="display: inline-flex; align-items: center; gap: 0.35rem; color: #34A853;">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                <span>Google Sheets DB</span>
               </button>
               <button class="btn btn-outline" id="btn-modal-sign-out" style="color: var(--color-danger);">
                 ${ui.icon('log-out')} Sign Out to Community
@@ -701,6 +715,22 @@
         }).catch(() => {
           ui.showToast(currentUrl, "info", "Shareable Link");
         });
+      });
+
+      // Open Credentials Directory
+      modalHost.querySelector('#btn-switcher-open-directory')?.addEventListener('click', () => {
+        ui.closeModal();
+        if (window.CC.openCredentialsDirectoryModal) {
+          window.CC.openCredentialsDirectoryModal();
+        }
+      });
+
+      // Open Google Sheets DB Modal
+      modalHost.querySelector('#btn-modal-open-sheets')?.addEventListener('click', () => {
+        ui.closeModal();
+        if (window.CC.openGoogleSheetsModal) {
+          window.CC.openGoogleSheetsModal();
+        }
       });
 
       // Go to profile settings

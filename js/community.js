@@ -378,6 +378,20 @@
           return;
         }
 
+        const sheetsBtn = e.target.closest('#btn-comm-nav-sheets, #btn-topbar-sheets, .btn-sheets-sync');
+        if (sheetsBtn) {
+          e.preventDefault();
+          this.openGoogleSheetsModal();
+          return;
+        }
+
+        const credsDirBtn = e.target.closest('#btn-open-creds-directory, .btn-creds-dir');
+        if (credsDirBtn) {
+          e.preventDefault();
+          this.openCredentialsDirectoryModal();
+          return;
+        }
+
         const tapBtn = e.target.closest('#btn-tap-to-enter-portal, .btn-comm-portal, #btn-enter-portal-cta');
         if (tapBtn) {
           e.preventDefault();
@@ -405,9 +419,11 @@
       });
     },
 
-    openAuthModal(defaultRole = 'Ambassador') {
+    openAuthModal(defaultRole = 'Mentor') {
       const ui = window.CC.ui;
       let activeRole = defaultRole;
+      const mentors = (window.CC.db && window.CC.db.getMentors()) || [];
+      const ambassadors = (window.CC.db && window.CC.db.getAmbassadors()) || [];
 
       const modalHtml = `
         <div class="modal-backdrop">
@@ -426,7 +442,7 @@
                 </div>
                 <div>
                   <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">Sign in to GDGconnect</h3>
-                  <span style="font-size: 0.75rem; color: var(--text-muted);">Mentor & Student Ambassador Portal</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Mentor &amp; Ambassador Management Command Center</span>
                 </div>
               </div>
               <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
@@ -435,11 +451,11 @@
             <div class="modal-body" style="padding: 1.25rem 1.75rem;">
               <!-- Role Selector Tabs -->
               <div class="auth-role-tabs">
-                <button type="button" class="auth-role-tab ${activeRole === 'Ambassador' ? 'active' : ''}" id="tab-auth-ambassador">
-                  🎓 Student Ambassador
-                </button>
                 <button type="button" class="auth-role-tab ${activeRole === 'Mentor' ? 'active' : ''}" id="tab-auth-mentor">
-                  🛡️ Faculty Mentor
+                  🛡️ Senior Student Mentor (${mentors.length})
+                </button>
+                <button type="button" class="auth-role-tab ${activeRole === 'Ambassador' ? 'active' : ''}" id="tab-auth-ambassador">
+                  🎓 Campus Ambassador (${ambassadors.length})
                 </button>
               </div>
 
@@ -447,14 +463,14 @@
               <form id="portal-auth-form">
                 <div class="form-group" style="margin-bottom: 1rem;">
                   <label class="form-label" for="auth-id-input" style="font-size: 0.82rem; font-weight: 600;">
-                    <span id="label-id-type">Ambassador ID</span> or Official Email
+                    <span id="label-id-type">${activeRole === 'Mentor' ? 'Mentor Email' : 'Ambassador Email'}</span> or Assigned ID
                   </label>
                   <input 
                     type="text" 
                     id="auth-id-input" 
                     class="form-control" 
-                    placeholder="e.g. AMB-201 or alex.rivera@student.gdgconnect.edu"
-                    value="${activeRole === 'Ambassador' ? 'AMB-201' : 'MTR-101'}"
+                    placeholder="${activeRole === 'Mentor' ? 'e.g. aarushisingh2978@gmail.com or MTR-102' : 'e.g. vanshsingh1024@gmail.com or AMB-201'}"
+                    value="${activeRole === 'Mentor' ? (mentors[1] ? mentors[1].email : 'aarushisingh2978@gmail.com') : 'vanshsingh1024@gmail.com'}"
                     required 
                   />
                 </div>
@@ -462,65 +478,84 @@
                 <div class="form-group" style="margin-bottom: 1.25rem;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                     <label class="form-label" for="auth-password-input" style="font-size: 0.82rem; font-weight: 600; margin: 0;">
-                      Issued Access Key / Password
+                      Security Password / Access Key
                     </label>
                     <span style="font-size: 0.72rem; color: var(--color-primary); cursor: pointer;" id="btn-autofill-pass">
-                      Auto-fill Key
+                      Auto-fill Assigned Key
                     </span>
                   </div>
-                  <input 
-                    type="password" 
-                    id="auth-password-input" 
-                    class="form-control" 
-                    placeholder="Enter your security access key"
-                    value="gdg2026"
-                    required 
-                  />
+                  <div style="position: relative;">
+                    <input 
+                      type="password" 
+                      id="auth-password-input" 
+                      class="form-control" 
+                      placeholder="Enter assigned password (e.g. aarushi@gdg)"
+                      value="${activeRole === 'Mentor' ? 'aarushi@gdg' : 'vansh@gdg'}"
+                      required 
+                    />
+                    <button type="button" id="btn-toggle-auth-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.8rem;">
+                      👁️
+                    </button>
+                  </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block" style="padding: 0.85rem; font-size: 0.95rem; font-weight: 700;">
-                  ${ui.icon('log-in')} Sign In to Dashboard
+                  ${ui.icon('log-in')} Sign In to ${activeRole} Dashboard
                 </button>
               </form>
 
-              <!-- One-Click Quick Credentials Helper -->
+              <!-- One-Click Pre-Assigned Credentials Roster -->
               <div class="auth-demo-box">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                   <strong style="font-size: 0.78rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.5px;">
-                    🔑 Pre-Assigned Credentials (1-Click Access)
+                    🔑 Quick Access: Assigned Mentors &amp; Ambasssadors
                   </strong>
+                  <button type="button" class="btn-creds-dir" id="btn-modal-open-directory" style="font-size: 0.72rem; color: #4285F4; background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 600;">
+                    View All Passwords Directory
+                  </button>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 0.45rem;">
-                  <!-- Mentor Demo -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  <!-- Mentor 1: Disha Agarwal -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
                     <div>
                       <div style="font-size: 0.8rem; font-weight: 600;">Disha Agarwal <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
-                      <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: MTR-101 • Key: mentor@gdg</div>
+                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">agarwaldisha832@gmail.com • Key: disha@gdg</div>
                     </div>
                     <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-101">
                       Sign In
                     </button>
                   </div>
 
-                  <!-- Ambassador Demo 1 -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  <!-- Mentor 2: Aarushi Singh -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
                     <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Alex Rivera <span class="badge badge-olive" style="font-size: 0.65rem;">Ambassador</span></div>
-                      <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: AMB-201 • Key: ambassador@gdg</div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Aarushi Singh <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
+                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">aarushisingh2978@gmail.com • Key: aarushi@gdg</div>
                     </div>
-                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Ambassador:AMB-201">
+                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-102">
                       Sign In
                     </button>
                   </div>
 
-                  <!-- Ambassador Demo 2 -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  <!-- Mentor 3: Aditya Taliyan -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
                     <div>
-                      <div style="font-size: 0.8rem; font-weight: 600;">Maya Patel <span class="badge badge-olive" style="font-size: 0.65rem;">Ambassador</span></div>
-                      <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-family-mono);">ID: AMB-202 • Key: ambassador@gdg</div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Aditya Taliyan <span class="badge badge-green" style="font-size: 0.65rem;">Mentor</span></div>
+                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">adityataliyan123@gmail.com • Key: aditya@gdg</div>
                     </div>
-                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Ambassador:AMB-202">
+                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Mentor:MTR-106">
+                      Sign In
+                    </button>
+                  </div>
+
+                  <!-- Ambassador: Vansh Singh -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                    <div>
+                      <div style="font-size: 0.8rem; font-weight: 600;">Vansh Singh <span class="badge badge-olive" style="font-size: 0.65rem;">Ambassador</span></div>
+                      <div style="font-size: 0.71rem; color: var(--text-muted); font-family: var(--font-family-mono);">vanshsingh1024@gmail.com • Key: vansh@gdg</div>
+                    </div>
+                    <button type="button" class="btn btn-xs btn-primary auth-quick-login-btn" data-quick-user="Ambassador:AMB-201">
                       Sign In
                     </button>
                   </div>
@@ -529,10 +564,11 @@
 
             </div>
 
-            <div class="modal-footer" style="padding: 0.85rem 1.75rem; background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.75rem; color: var(--text-muted);">
-                🔒 Protected by Campus Role-Based Authorization
-              </span>
+            <div class="modal-footer" style="padding: 0.85rem 1.75rem; background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+              <button type="button" class="btn btn-xs btn-outline btn-sheets-sync" id="btn-modal-open-sheets" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                <span>Google Sheets DB Sync</span>
+              </button>
               <button class="btn btn-sm btn-outline" data-close-modal>Cancel</button>
             </div>
           </div>
@@ -545,29 +581,55 @@
         const labelIdType = modalHost.querySelector('#label-id-type');
         const tabAmb = modalHost.querySelector('#tab-auth-ambassador');
         const tabMtr = modalHost.querySelector('#tab-auth-mentor');
-
-        tabAmb.addEventListener('click', () => {
-          activeRole = 'Ambassador';
-          tabAmb.classList.add('active');
-          tabMtr.classList.remove('active');
-          labelIdType.textContent = 'Ambassador ID';
-          idInput.placeholder = 'e.g. AMB-201 or alex.rivera@student.gdgconnect.edu';
-          if (!idInput.value || idInput.value === 'MTR-101') idInput.value = 'AMB-201';
-          passInput.value = 'ambassador@gdg';
-        });
+        const togglePassBtn = modalHost.querySelector('#btn-toggle-auth-pass');
 
         tabMtr.addEventListener('click', () => {
           activeRole = 'Mentor';
           tabMtr.classList.add('active');
           tabAmb.classList.remove('active');
-          labelIdType.textContent = 'Mentor ID';
-          idInput.placeholder = 'e.g. MTR-101 or evelyn.vance@gdgconnect.edu';
-          if (!idInput.value || idInput.value === 'AMB-201') idInput.value = 'MTR-101';
-          passInput.value = 'mentor@gdg';
+          labelIdType.textContent = 'Mentor Email or Assigned ID';
+          idInput.placeholder = 'e.g. aarushisingh2978@gmail.com or MTR-102';
+          idInput.value = 'aarushisingh2978@gmail.com';
+          passInput.value = 'aarushi@gdg';
+        });
+
+        tabAmb.addEventListener('click', () => {
+          activeRole = 'Ambassador';
+          tabAmb.classList.add('active');
+          tabMtr.classList.remove('active');
+          labelIdType.textContent = 'Ambassador Email or Assigned ID';
+          idInput.placeholder = 'e.g. vanshsingh1024@gmail.com or AMB-201';
+          idInput.value = 'vanshsingh1024@gmail.com';
+          passInput.value = 'vansh@gdg';
+        });
+
+        togglePassBtn?.addEventListener('click', () => {
+          const isPass = passInput.type === 'password';
+          passInput.type = isPass ? 'text' : 'password';
+          togglePassBtn.textContent = isPass ? '🔒' : '👁️';
         });
 
         modalHost.querySelector('#btn-autofill-pass')?.addEventListener('click', () => {
-          passInput.value = activeRole === 'Mentor' ? 'mentor@gdg' : 'ambassador@gdg';
+          const val = idInput.value.trim().toLowerCase();
+          if (val.includes('aarushi')) passInput.value = 'aarushi@gdg';
+          else if (val.includes('disha')) passInput.value = 'disha@gdg';
+          else if (val.includes('aditya')) passInput.value = 'aditya@gdg';
+          else if (val.includes('akshita')) passInput.value = 'akshita@gdg';
+          else if (val.includes('arsh')) passInput.value = 'arsh@gdg';
+          else if (val.includes('khyati')) passInput.value = 'khyati@gdg';
+          else if (val.includes('vansh')) passInput.value = 'vansh@gdg';
+          else if (activeRole === 'Mentor') passInput.value = 'mentor@gdg';
+          else passInput.value = 'ambassador@gdg';
+        });
+
+        modalHost.querySelector('#btn-modal-open-directory')?.addEventListener('click', () => {
+          ui.closeModal();
+          this.openCredentialsDirectoryModal();
+        });
+
+        modalHost.querySelector('#btn-modal-open-sheets')?.addEventListener('click', () => {
+          ui.closeModal();
+          this.openGoogleSheetsModal();
         });
 
         // Quick sign in buttons
@@ -581,52 +643,349 @@
             if (targetUser) {
               CommunityManager.setSession(targetUser, role);
               ui.closeModal();
-              ui.showToast(`Authenticated as ${targetUser.name} (${targetUser.id})`, "success", `Welcome to ${role} Dashboard`);
+              ui.showToast(`Authenticated as ${targetUser.name} (${targetUser.email})`, "success", `Welcome to ${role} Dashboard`);
               CommunityManager.showPortalView();
             }
           });
         });
 
-        // Form Submission
+        // Form Submission with Strict Authentication
         const form = modalHost.querySelector('#portal-auth-form');
         form.addEventListener('submit', (e) => {
           e.preventDefault();
           const rawId = idInput.value.trim();
           const rawPass = passInput.value.trim();
 
-          if (!rawId) {
-            ui.showToast("Please enter your assigned ID or email.", "error", "Input Required");
+          if (!rawId || !rawPass) {
+            ui.showToast("Please enter both your Email/ID and Password.", "error", "Input Required");
             return;
           }
 
-          const upper = rawId.toUpperCase();
-          let matchedUser = null;
-          let matchedRole = activeRole;
+          const authResult = window.CC.db.authenticateUser(rawId, rawPass);
 
-          // Check Mentor ID or Email
-          const mentor = window.CC.db.getMentorById(upper) || window.CC.db.getMentors().find(m => m.email.toLowerCase() === rawId.toLowerCase());
-          if (mentor) {
-            matchedUser = mentor;
-            matchedRole = 'Mentor';
-          } else {
-            // Check Ambassador ID or Email
-            const ambassador = window.CC.db.getAmbassadorById(upper) || window.CC.db.getAmbassadors().find(a => a.email.toLowerCase() === rawId.toLowerCase());
-            if (ambassador) {
-              matchedUser = ambassador;
-              matchedRole = 'Ambassador';
-            }
-          }
-
-          if (!matchedUser) {
-            ui.showToast(`Invalid credentials. No user found matching "${rawId}".`, "error", "Access Denied");
+          if (!authResult.success) {
+            ui.showToast(authResult.reason, "error", "Access Denied");
             return;
           }
 
           // Complete login
-          CommunityManager.setSession(matchedUser, matchedRole);
+          CommunityManager.setSession(authResult.user, authResult.role);
           ui.closeModal();
-          ui.showToast(`Authenticated successfully as ${matchedUser.name}!`, "success", `Welcome, ${matchedRole}`);
+          ui.showToast(`Authenticated as ${authResult.user.name}!`, "success", `Welcome, ${authResult.role}`);
           CommunityManager.showPortalView();
+        });
+      });
+    },
+
+    // ------------------------------------------------------------------------
+    // GOOGLE SHEETS CLOUD DATABASE MODAL
+    // ------------------------------------------------------------------------
+    openGoogleSheetsModal() {
+      const ui = window.CC.ui;
+      const db = window.CC.db;
+      const status = db.getGoogleSheetsSyncStatus();
+      const currentUrl = status.url || '';
+
+      const modalHtml = `
+        <div class="modal-backdrop">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-header">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(52, 168, 83, 0.15); display: flex; align-items: center; justify-content: center; color: #34A853;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div>
+                  <h3 class="modal-title">Google Sheets Cloud Database</h3>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Real-Time Two-Way Sync for Mentors, Ambassadors, Tasks &amp; Sessions</span>
+                </div>
+              </div>
+              <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
+            </div>
+
+            <div class="modal-body">
+              <!-- Live Connection Status Banner -->
+              <div style="padding: 1rem 1.25rem; background: ${status.connected ? 'rgba(52, 168, 83, 0.08)' : 'rgba(251, 188, 4, 0.08)'}; border: 1px solid ${status.connected ? 'rgba(52, 168, 83, 0.3)' : 'rgba(251, 188, 4, 0.3)'}; border-radius: var(--radius-md); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span style="width: 12px; height: 12px; border-radius: 50%; background: ${status.connected ? '#34A853' : '#f59e0b'}; box-shadow: 0 0 10px ${status.connected ? '#34A853' : '#f59e0b'}; display: inline-block;"></span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">
+                      ${status.connected ? 'Connected to Google Sheets Cloud Database' : 'Local Storage Mode (Ready to Connect Google Sheet)'}
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">
+                      ${status.connected ? `Live endpoint: <code style="font-size: 0.75rem;">${status.url.substring(0, 50)}...</code>` : 'Deploy our 1-minute Google Apps Script to synchronize with any Google Sheet'}
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-align: right;">
+                  ${status.lastSync ? `Last Synced: <strong>${new Date(status.lastSync).toLocaleTimeString()}</strong>` : 'Not synced yet'}
+                </div>
+              </div>
+
+              <!-- Web App URL Input Form -->
+              <div style="background: var(--bg-surface); padding: 1.15rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin-bottom: 1.25rem;">
+                <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 0.4rem;">
+                  Google Apps Script Web App URL
+                </label>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <input type="url" id="sheets-webapp-url-input" class="form-control" placeholder="https://script.google.com/macros/s/AKfycbx.../exec" value="${currentUrl}" style="flex: 1; min-width: 280px;" />
+                  <button type="button" class="btn btn-primary" id="btn-save-sheets-url">
+                    ${ui.icon('check')} Save &amp; Connect
+                  </button>
+                  <button type="button" class="btn btn-outline" id="btn-test-sheets-ping">
+                    ${ui.icon('refresh-cw')} Test Ping
+                  </button>
+                </div>
+                <span style="font-size: 0.73rem; color: var(--text-muted); display: block; margin-top: 6px;">
+                  Paste the Web App URL generated by deploying the provided Apps Script (Execute as: Me, Access: Anyone).
+                </span>
+              </div>
+
+              <!-- Database Sync Operations -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div style="font-weight: 700; font-size: 0.9rem; color: #4285F4; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;">
+                    ${ui.icon('download')} Pull from Google Sheets
+                  </div>
+                  <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Fetches the latest live rows from your Google Sheet tabs (Mentors, Ambassadors, Tasks, Sessions) into this portal.
+                  </p>
+                  <button type="button" class="btn btn-sm btn-primary" id="btn-pull-from-sheets" style="width: 100%;">
+                    🔄 Pull from Sheets Now
+                  </button>
+                </div>
+
+                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                  <div style="font-weight: 700; font-size: 0.9rem; color: #34A853; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;">
+                    ${ui.icon('upload')} Push Local Data to Google Sheets
+                  </div>
+                  <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Uploads current portal records (6 Mentors, 25 Ambassadors, Tasks, Sessions) to populate or overwrite your Google Sheet.
+                  </p>
+                  <button type="button" class="btn btn-sm btn-outline" id="btn-push-to-sheets" style="width: 100%;">
+                    ⬆️ Push All Records to Sheets
+                  </button>
+                </div>
+              </div>
+
+              <!-- 60-Second Setup Guide & Script Exporter -->
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                  <strong style="font-size: 0.85rem; color: var(--text-main);">
+                    📖 Quick 60-Second Google Sheets Setup Guide:
+                  </strong>
+                  <button type="button" class="btn btn-xs btn-outline" id="btn-copy-apps-script">
+                    📋 Copy Google Apps Script Code
+                  </button>
+                </div>
+
+                <ol style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-left: 1.2rem; margin-bottom: 0;">
+                  <li>Open <strong>Google Sheets</strong> and create a blank spreadsheet (e.g. <em>"GDGconnect Database"</em>).</li>
+                  <li>Click <strong>Extensions &gt; Apps Script</strong> from the top menu.</li>
+                  <li>Click the <strong>Copy Google Apps Script Code</strong> button above, paste it into <code>Code.gs</code>, and press <strong>Save (Ctrl+S)</strong>.</li>
+                  <li>Click <strong>Deploy &gt; New Deployment &gt; Web App</strong>. Set <em>"Execute as: Me"</em> and <em>"Who has access: Anyone"</em>, then click <strong>Deploy</strong>.</li>
+                  <li>Copy the deployed Web App URL, paste it into the field above, and click <strong>Save &amp; Connect</strong>!</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">
+                ☁️ Data stays 100% in your Google account
+              </span>
+              <button class="btn btn-sm btn-outline" data-close-modal>Close</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      ui.openModal(modalHtml, (modalHost) => {
+        const urlInput = modalHost.querySelector('#sheets-webapp-url-input');
+
+        // Save & Connect
+        modalHost.querySelector('#btn-save-sheets-url')?.addEventListener('click', () => {
+          const raw = urlInput.value.trim();
+          db.setGoogleSheetsUrl(raw);
+          ui.showToast(raw ? "Google Sheets URL saved! Connecting..." : "Google Sheets URL removed. Reverted to Local Storage.", "info", "Database Configuration");
+          // Update status indicator dots
+          document.querySelectorAll('#sheets-topbar-status-dot, .sheets-live-dot').forEach(d => {
+            d.classList.toggle('connected', db.isGoogleSheetsConnected());
+          });
+          ui.closeModal();
+          this.openGoogleSheetsModal();
+        });
+
+        // Test Ping
+        modalHost.querySelector('#btn-test-sheets-ping')?.addEventListener('click', async () => {
+          const raw = urlInput.value.trim();
+          if (!raw) {
+            ui.showToast("Please enter a Google Apps Script Web App URL first.", "error", "Input Required");
+            return;
+          }
+          ui.showToast("Pinging Google Sheets Web App endpoint...", "info", "Testing Connection");
+          try {
+            const target = raw.includes('?') ? `${raw}&action=ping` : `${raw}?action=ping`;
+            const res = await fetch(target, { method: 'GET' });
+            if (res.ok) {
+              const data = await res.json();
+              ui.showToast(`Connection Verified! ${data.message || 'Ready'}`, "success", "Google Sheets Online");
+            } else {
+              ui.showToast(`Server returned HTTP ${res.status}`, "warning", "Connection Issue");
+            }
+          } catch (e) {
+            ui.showToast(`Could not reach endpoint: ${e.message}`, "error", "Connection Error");
+          }
+        });
+
+        // Pull from Sheets
+        modalHost.querySelector('#btn-pull-from-sheets')?.addEventListener('click', async () => {
+          ui.showToast("Pulling latest records from Google Sheets tabs...", "info", "Synchronizing");
+          const res = await db.syncFromGoogleSheets();
+          if (res.success) {
+            ui.showToast("All mentors, ambassadors, tasks, and sessions synced from Google Sheets!", "success", "Sync Complete");
+            ui.closeModal();
+            // Refresh view
+            if (window.CC && window.CC.app && window.CC.app.renderCurrentSection) {
+              window.CC.app.renderCurrentSection();
+            }
+          } else {
+            ui.showToast(res.error || "Failed to pull from Google Sheets", "error", "Sync Error");
+          }
+        });
+
+        // Push to Sheets
+        modalHost.querySelector('#btn-push-to-sheets')?.addEventListener('click', async () => {
+          ui.showToast("Uploading portal database to Google Sheets...", "info", "Uploading");
+          const res = await db.pushToGoogleSheets();
+          if (res.success) {
+            ui.showToast("Local database pushed to Google Sheets successfully!", "success", "Upload Complete");
+          } else {
+            ui.showToast(res.error || "Failed to push to Google Sheets", "error", "Upload Error");
+          }
+        });
+
+        // Copy Apps Script code
+        modalHost.querySelector('#btn-copy-apps-script')?.addEventListener('click', async () => {
+          try {
+            const res = await fetch('google-apps-script.js');
+            const code = await res.text();
+            await navigator.clipboard.writeText(code);
+            ui.showToast("Google Apps Script code copied to clipboard! Paste into Extensions > Apps Script in your Google Sheet.", "success", "Copied to Clipboard");
+          } catch (e) {
+            ui.showToast("Could not copy automatically. You can copy google-apps-script.js from the project folder.", "info", "Code Location");
+          }
+        });
+      });
+    },
+
+    // ------------------------------------------------------------------------
+    // CREDENTIALS DIRECTORY MODAL (ALL MENTORS & AMBASSADORS)
+    // ------------------------------------------------------------------------
+    openCredentialsDirectoryModal() {
+      const ui = window.CC.ui;
+      const mentors = (window.CC.db && window.CC.db.getMentors()) || [];
+      const ambassadors = (window.CC.db && window.CC.db.getAmbassadors()) || [];
+
+      const modalHtml = `
+        <div class="modal-backdrop">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-header">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(66, 133, 244, 0.15); display: flex; align-items: center; justify-content: center; color: #4285F4;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <div>
+                  <h3 class="modal-title">Official Portal Credentials Directory</h3>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">${mentors.length} Senior Mentors &bull; ${ambassadors.length} Campus Ambassadors</span>
+                </div>
+              </div>
+              <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
+            </div>
+
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+              <!-- Senior Mentors Section -->
+              <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #34A853; font-weight: 700; font-size: 0.95rem;">
+                  <span>🛡️ Senior Student Mentors (${mentors.length})</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.75rem;">
+                  ${mentors.map(m => `
+                    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem;">
+                      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
+                        <span style="font-weight: 700; font-size: 0.92rem; color: var(--text-main);">${ui.escape(m.name)}</span>
+                        <span class="badge badge-green" style="font-size: 0.65rem;">${m.id}</span>
+                      </div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
+                        ✉️ Email: <code style="color: #4285F4;">${ui.escape(m.email)}</code>
+                      </div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        🔑 Password: <code style="color: #34A853; font-weight: 700;">${ui.escape(m.password || 'mentor@gdg')}</code>
+                        <span style="color: var(--text-muted); font-size: 0.7rem;"> (or mentor@gdg)</span>
+                      </div>
+                      <button type="button" class="btn btn-xs btn-outline btn-quick-login-direct" data-id="${m.id}" data-role="Mentor" style="width: 100%;">
+                        🚀 Open ${m.name.split(' ')[0]}'s Mentor Dashboard
+                      </button>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Campus Ambassadors Section -->
+              <div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #818cf8; font-weight: 700; font-size: 0.95rem;">
+                  <span>🎓 Appointed Campus Ambassadors (${ambassadors.length})</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.75rem;">
+                  ${ambassadors.map(a => {
+                    const mentor = mentors.find(m => m.id === a.mentorId);
+                    return `
+                      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
+                          <span style="font-weight: 700; font-size: 0.92rem; color: var(--text-main);">${ui.escape(a.name)}</span>
+                          <span class="badge badge-olive" style="font-size: 0.65rem;">${a.id}</span>
+                        </div>
+                        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
+                          ✉️ Email: <code style="color: #4285F4;">${ui.escape(a.email)}</code>
+                        </div>
+                        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
+                          🔑 Password: <code style="color: #34A853; font-weight: 700;">${ui.escape(a.password || 'ambassador@gdg')}</code>
+                          <span style="color: var(--text-muted); font-size: 0.7rem;"> (or ambassador@gdg)</span>
+                        </div>
+                        <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                          🛡️ Mentor: ${mentor ? mentor.name : a.mentorId} &bull; ${ui.escape(a.department || 'B.Tech')}
+                        </div>
+                        <button type="button" class="btn btn-xs btn-outline btn-quick-login-direct" data-id="${a.id}" data-role="Ambassador" style="width: 100%;">
+                          🚀 Open ${a.name.split(' ')[0]}'s Ambassador Dashboard
+                        </button>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">
+                Each user can sign in using their official Gmail or ID
+              </span>
+              <button class="btn btn-sm btn-outline" data-close-modal>Close</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      ui.openModal(modalHtml, (modalHost) => {
+        modalHost.querySelectorAll('.btn-quick-login-direct').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const role = btn.getAttribute('data-role');
+            const target = role === 'Mentor' ? window.CC.db.getMentorById(id) : window.CC.db.getAmbassadorById(id);
+            if (target) {
+              CommunityManager.setSession(target, role);
+              ui.closeModal();
+              ui.showToast(`Switched to ${target.name}'s ${role} Dashboard!`, "success", "Dashboard Active");
+              CommunityManager.showPortalView();
+            }
+          });
         });
       });
     }
@@ -634,6 +993,8 @@
 
   window.CC = window.CC || {};
   window.CC.community = CommunityManager;
+  window.CC.openGoogleSheetsModal = () => CommunityManager.openGoogleSheetsModal();
+  window.CC.openCredentialsDirectoryModal = () => CommunityManager.openCredentialsDirectoryModal();
 
   document.addEventListener('DOMContentLoaded', () => {
     CommunityManager.init();
