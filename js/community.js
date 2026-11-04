@@ -861,126 +861,12 @@
           }
         });
       });
-    },
-
-    // ------------------------------------------------------------------------
-    // CREDENTIALS DIRECTORY MODAL (ALL MENTORS & AMBASSADORS)
-    // ------------------------------------------------------------------------
-    openCredentialsDirectoryModal() {
-      const ui = window.CC.ui;
-      const mentors = (window.CC.db && window.CC.db.getMentors()) || [];
-      const ambassadors = (window.CC.db && window.CC.db.getAmbassadors()) || [];
-
-      const modalHtml = `
-        <div class="modal-backdrop">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-header">
-              <div style="display: flex; align-items: center; gap: 0.6rem;">
-                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(66, 133, 244, 0.15); display: flex; align-items: center; justify-content: center; color: #4285F4;">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                </div>
-                <div>
-                  <h3 class="modal-title">Official Portal Credentials Directory</h3>
-                  <span style="font-size: 0.78rem; color: var(--text-muted);">${mentors.length} Senior Mentors &bull; ${ambassadors.length} Campus Ambassadors</span>
-                </div>
-              </div>
-              <button class="btn-icon" data-close-modal>${ui.icon('x')}</button>
-            </div>
-
-            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-              <!-- Senior Mentors Section -->
-              <div style="margin-bottom: 1.5rem;">
-                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #34A853; font-weight: 700; font-size: 0.95rem;">
-                  <span>🛡️ Senior Student Mentors (${mentors.length})</span>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.75rem;">
-                  ${mentors.map(m => `
-                    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem;">
-                      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
-                        <span style="font-weight: 700; font-size: 0.92rem; color: var(--text-main);">${ui.escape(m.name)}</span>
-                        <span class="badge badge-green" style="font-size: 0.65rem;">${m.id}</span>
-                      </div>
-                      <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-                        ✉️ Email: <code style="color: #4285F4;">${ui.escape(m.email)}</code>
-                      </div>
-                      <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                        🔑 Password: <code style="color: #34A853; font-weight: 700;">${ui.escape(m.password || 'mentor@gdg')}</code>
-                        <span style="color: var(--text-muted); font-size: 0.7rem;"> (or mentor@gdg)</span>
-                      </div>
-                      <button type="button" class="btn btn-xs btn-outline btn-quick-login-direct" data-id="${m.id}" data-role="Mentor" style="width: 100%;">
-                        🚀 Open ${m.name.split(' ')[0]}'s Mentor Dashboard
-                      </button>
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-
-              <!-- Campus Ambassadors Section -->
-              <div>
-                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #818cf8; font-weight: 700; font-size: 0.95rem;">
-                  <span>🎓 Appointed Campus Ambassadors (${ambassadors.length})</span>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.75rem;">
-                  ${ambassadors.map(a => {
-                    const mentor = mentors.find(m => m.id === a.mentorId);
-                    return `
-                      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
-                          <span style="font-weight: 700; font-size: 0.92rem; color: var(--text-main);">${ui.escape(a.name)}</span>
-                          <span class="badge badge-olive" style="font-size: 0.65rem;">${a.id}</span>
-                        </div>
-                        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-                          ✉️ Email: <code style="color: #4285F4;">${ui.escape(a.email)}</code>
-                        </div>
-                        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-                          🔑 Password: <code style="color: #34A853; font-weight: 700;">${ui.escape(a.password || 'ambassador@gdg')}</code>
-                          <span style="color: var(--text-muted); font-size: 0.7rem;"> (or ambassador@gdg)</span>
-                        </div>
-                        <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-                          🛡️ Mentor: ${mentor ? mentor.name : a.mentorId} &bull; ${ui.escape(a.department || 'B.Tech')}
-                        </div>
-                        <button type="button" class="btn btn-xs btn-outline btn-quick-login-direct" data-id="${a.id}" data-role="Ambassador" style="width: 100%;">
-                          🚀 Open ${a.name.split(' ')[0]}'s Ambassador Dashboard
-                        </button>
-                      </div>
-                    `;
-                  }).join('')}
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.75rem; color: var(--text-muted);">
-                Each user can sign in using their official Gmail or ID
-              </span>
-              <button class="btn btn-sm btn-outline" data-close-modal>Close</button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      ui.openModal(modalHtml, (modalHost) => {
-        modalHost.querySelectorAll('.btn-quick-login-direct').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            const role = btn.getAttribute('data-role');
-            const target = role === 'Mentor' ? window.CC.db.getMentorById(id) : window.CC.db.getAmbassadorById(id);
-            if (target) {
-              CommunityManager.setSession(target, role);
-              ui.closeModal();
-              ui.showToast(`Switched to ${target.name}'s ${role} Dashboard!`, "success", "Dashboard Active");
-              CommunityManager.showPortalView();
-            }
-          });
-        });
-      });
     }
   };
 
   window.CC = window.CC || {};
   window.CC.community = CommunityManager;
   window.CC.openGoogleSheetsModal = () => CommunityManager.openGoogleSheetsModal();
-  window.CC.openCredentialsDirectoryModal = () => CommunityManager.openCredentialsDirectoryModal();
 
   document.addEventListener('DOMContentLoaded', () => {
     CommunityManager.init();

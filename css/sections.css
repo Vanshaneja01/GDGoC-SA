@@ -564,3 +564,108 @@
     display: flex;
   }
 }
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE OVERRIDES FOR DASHBOARD SECTIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .directory-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .profile-card {
+    padding: 1.15rem !important;
+    border-radius: 14px !important;
+  }
+
+  .sessions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .session-card {
+    padding: 1.15rem !important;
+    border-radius: 14px !important;
+  }
+
+  .labs-summary-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .comm-layout {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .comm-sidebar {
+    height: 320px !important;
+  }
+
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.85rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .section-header-left {
+    width: 100% !important;
+  }
+
+  .section-title {
+    font-size: 1.35rem !important;
+  }
+
+  .section-subtitle {
+    font-size: 0.82rem !important;
+  }
+
+  .section-header-actions {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .section-header-actions .btn {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+    padding: 0.45rem 0.75rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  .card {
+    padding: 1.15rem 1rem !important;
+    border-radius: 14px !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .card-header {
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .card-title {
+    font-size: 1.05rem !important;
+  }
+
+  .table-responsive,
+  .data-table-container,
+  .table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.65rem 0.75rem !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
+  }
+}

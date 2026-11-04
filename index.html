@@ -838,14 +838,10 @@
             <span>Community Hub</span>
           </button>
 
-          <!-- Role Quick Switch Bar -->
-          <div class="role-quick-switch" title="Toggle active role perspective">
-            <button class="role-switch-btn active" id="role-btn-mentor">
-              Mentor
-            </button>
-            <button class="role-switch-btn" id="role-btn-ambassador">
-              Ambassador
-            </button>
+          <!-- Authenticated Role Indicator Badge (Read-Only, Prevents Unauthorized Role Switching) -->
+          <div class="topbar-role-badge" id="topbar-role-badge" title="Authenticated Session Role">
+            <span class="role-live-pulse" id="topbar-role-pulse"></span>
+            <span id="topbar-role-text">Mentor Mode</span>
           </div>
 
           <!-- Notification Bell with Counter -->
@@ -865,7 +861,7 @@
           </button>
 
           <!-- User Profile Menu Trigger -->
-          <div class="user-menu-trigger" id="user-menu-trigger" title="Click to view Settings & Identity Switcher">
+          <div class="user-menu-trigger" id="user-menu-trigger" title="My Profile & Account">
             <div id="topbar-user-avatar"></div>
             <div class="user-menu-info">
               <span class="user-menu-name" id="topbar-user-name">Dr. Evelyn Vance</span>

@@ -30,60 +30,12 @@
       }
       this.applyTheme();
 
-      // Check URL search parameters for direct ID access (e.g. ?user=MTR-101, ?id=AMB-201, or ?role=ambassador)
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const userQuery = urlParams.get('user') || urlParams.get('id');
-        const roleQuery = urlParams.get('role');
-
-        if (userQuery) {
-          const upper = userQuery.toUpperCase().trim();
-          const mentor = window.CC.db.getMentorById(upper);
-          if (mentor) {
-            this.setRoleAndUser('Mentor', mentor.id);
-            return;
-          }
-          const ambassador = window.CC.db.getAmbassadorById(upper);
-          if (ambassador) {
-            this.setRoleAndUser('Ambassador', ambassador.id);
-            return;
-          }
-          // Also check by email
-          const mentorByEmail = window.CC.db.getMentors().find(m => m.email.toLowerCase() === userQuery.toLowerCase());
-          if (mentorByEmail) {
-            this.setRoleAndUser('Mentor', mentorByEmail.id);
-            return;
-          }
-          const ambByEmail = window.CC.db.getAmbassadors().find(a => a.email.toLowerCase() === userQuery.toLowerCase());
-          if (ambByEmail) {
-            this.setRoleAndUser('Ambassador', ambByEmail.id);
-            return;
-          }
-        }
-
-        if (roleQuery) {
-          const lower = roleQuery.toLowerCase().trim();
-          if (lower === 'mentor') {
-            const m = window.CC.db.getMentors()[0];
-            this.setRoleAndUser('Mentor', m.id);
-            return;
-          } else if (lower === 'ambassador') {
-            const a = window.CC.db.getAmbassadors()[0];
-            this.setRoleAndUser('Ambassador', a.id);
-            return;
-          }
-        }
-      } catch (err) {
-        console.warn("Could not parse URL query parameters:", err);
-      }
-
-      // Load or default user
-      const savedUser = localStorage.getItem(CURRENT_USER_KEY);
-      if (savedUser) {
+      // Check active authenticated session in storage (Strict Authentication, No URL Param Bypass)
+      const savedSession = localStorage.getItem('gdgconnect_session') || localStorage.getItem(CURRENT_USER_KEY);
+      if (savedSession) {
         try {
-          const parsed = JSON.parse(savedUser);
+          const parsed = JSON.parse(savedSession);
           if (parsed && parsed.id) {
-            // Verify user still exists in DB
             const userInDb = parsed.role === 'Mentor'
               ? window.CC.db.getMentorById(parsed.id)
               : window.CC.db.getAmbassadorById(parsed.id);
@@ -91,16 +43,19 @@
             if (userInDb) {
               this.currentUser = userInDb;
               this.role = parsed.role;
+              return;
             }
           }
         } catch (e) {
-          console.warn("Could not parse saved user:", e);
+          console.warn("Could not parse saved user session:", e);
         }
       }
 
-      if (!this.currentUser) {
-        // Default to Dr. Evelyn Vance (Mentor)
-        this.setRoleAndUser('Mentor', 'MTR-101');
+      // Default to first mentor only if no prior session exists
+      const defaultMentor = window.CC.db.getMentors()[0];
+      if (defaultMentor) {
+        this.currentUser = defaultMentor;
+        this.role = 'Mentor';
       }
     }
 
@@ -122,13 +77,8 @@
     }
 
     switchRole(newRole) {
-      if (newRole === 'Mentor') {
-        const defaultMentor = window.CC.db.getMentors()[0];
-        this.setRoleAndUser('Mentor', defaultMentor.id);
-      } else {
-        const defaultAmbassador = window.CC.db.getAmbassadors()[0];
-        this.setRoleAndUser('Ambassador', defaultAmbassador.id);
-      }
+      // Role switching is strictly disabled to prevent mentors/ambassadors from accessing each other's dashboards
+      console.warn("Cross-role dashboard switching is disabled for security.");
     }
 
     setSection(sectionId, extraParams = null) {

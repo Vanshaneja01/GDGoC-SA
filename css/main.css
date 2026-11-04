@@ -608,6 +608,50 @@ body.body-no-scroll {
   pointer-events: none;
 }
 
+/* Authenticated Role Indicator Badge in Topbar */
+.topbar-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  user-select: none;
+}
+
+.topbar-role-badge.badge-mentor {
+  background: rgba(52, 168, 83, 0.12);
+  border-color: rgba(52, 168, 83, 0.35);
+  color: #34A853;
+}
+
+.topbar-role-badge.badge-ambassador {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.35);
+  color: #a78bfa;
+}
+
+.role-live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--status-green);
+  box-shadow: 0 0 8px currentColor;
+  display: inline-block;
+  animation: pulseGreen 2s infinite ease-in-out;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
 /* Hamburger Menu Toggle Button for Internal Dashboard */
 #mobile-menu-btn {
   display: none;
@@ -618,10 +662,10 @@ body.body-no-scroll {
   display: none;
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 99;
+  z-index: 999;
 }
 
 /* Responsive Breakpoints */
@@ -661,7 +705,8 @@ body.body-no-scroll {
     bottom: 0;
     left: 0;
     width: 280px;
-    z-index: 100;
+    max-width: 82vw;
+    z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
@@ -684,6 +729,7 @@ body.body-no-scroll {
   .app-topbar {
     padding: 0 0.85rem;
     gap: 0.5rem;
+    height: 58px;
   }
 
   .topbar-right {
@@ -692,15 +738,6 @@ body.body-no-scroll {
 
   .user-menu-info {
     display: none;
-  }
-
-  .role-quick-switch {
-    padding: 2px;
-  }
-
-  .role-switch-btn {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.74rem;
   }
 
   .app-main {
@@ -728,6 +765,11 @@ body.body-no-scroll {
   #btn-topbar-sheets,
   #btn-open-community-hub {
     padding: 0.45rem 0.55rem;
+  }
+
+  .topbar-role-badge {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.72rem;
   }
 
   .metric-grid {

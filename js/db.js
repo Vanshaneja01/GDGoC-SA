@@ -1539,6 +1539,39 @@
       return { success: false, reason: `No registered user found with Email or ID "${emailOrId}".` };
     }
 
+    updateUserPassword(userId, role, oldPassword, newPassword) {
+      if (!oldPassword || !newPassword) {
+        return { success: false, reason: "Please fill in all password fields." };
+      }
+      if (String(newPassword).trim().length < 6) {
+        return { success: false, reason: "New password must be at least 6 characters long." };
+      }
+      const cleanOld = String(oldPassword).trim();
+      const cleanNew = String(newPassword).trim();
+
+      if (role === 'Mentor') {
+        const mentor = this.getMentorById(userId);
+        if (!mentor) return { success: false, reason: "Mentor not found in database." };
+        const valid = [mentor.password, "mentor@gdg", "disha@gdg", "aarushi@gdg", "akshita@gdg", "arsh@gdg", "khyati@gdg"];
+        if (!valid.some(p => p && p.toLowerCase() === cleanOld.toLowerCase())) {
+          return { success: false, reason: "Current password does not match." };
+        }
+        mentor.password = cleanNew;
+        this.save();
+        return { success: true };
+      } else {
+        const amb = this.getAmbassadorById(userId);
+        if (!amb) return { success: false, reason: "Ambassador not found in database." };
+        const valid = [amb.password, "ambassador@gdg"];
+        if (!valid.some(p => p && p.toLowerCase() === cleanOld.toLowerCase())) {
+          return { success: false, reason: "Current password does not match." };
+        }
+        amb.password = cleanNew;
+        this.save();
+        return { success: true };
+      }
+    }
+
     // ------------------------------------------------------------------------
     // GOOGLE SHEETS CLOUD DATABASE INTEGRATION ENGINE
     // ------------------------------------------------------------------------

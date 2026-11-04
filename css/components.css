@@ -817,3 +817,80 @@
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE OVERRIDES FOR COMPONENTS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .metric-card {
+    padding: 0.85rem 0.95rem !important;
+    border-radius: 12px !important;
+  }
+
+  .metric-value {
+    font-size: 1.4rem !important;
+  }
+
+  .metric-label {
+    font-size: 0.76rem !important;
+  }
+
+  .modal-backdrop {
+    padding: 0.5rem !important;
+  }
+
+  .modal-dialog {
+    width: 95% !important;
+    max-width: 95% !important;
+    max-height: 92vh !important;
+    margin: auto !important;
+    border-radius: 16px !important;
+  }
+
+  .modal-header {
+    padding: 1rem 1.25rem !important;
+  }
+
+  .modal-body {
+    padding: 1.15rem 1.25rem !important;
+  }
+
+  .modal-footer {
+    padding: 0.85rem 1.25rem !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .tabs-nav {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    flex-wrap: nowrap !important;
+    scrollbar-width: none !important;
+  }
+
+  .tabs-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .filter-bar {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .btn {
+    font-size: 0.82rem !important;
+    padding: 0.45rem 0.85rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .metric-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
