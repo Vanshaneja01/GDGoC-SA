@@ -81,19 +81,34 @@
           const initials = a.avatar || a.name.split(' ').map(n => n[0]).join('').substring(0, 2);
           const mentorInitials = mentor.avatar || mentor.name.split(' ').map(n => n[0]).join('').substring(0, 2);
 
+          const photoMarkup = a.photoUrl
+            ? `<img src="${a.photoUrl}" alt="${a.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" /><span style="display:none; width: 100%; height: 100%; align-items: center; justify-content: center;">${initials}</span>`
+            : `<span>${initials}</span>`;
+
+          const linkedinMarkup = (a.linkedin && a.linkedin !== 'https://linkedin.com' && !a.linkedin.includes('Not Created'))
+            ? `<a href="${a.linkedin}" target="_blank" rel="noopener noreferrer" class="ca-linkedin-btn" title="LinkedIn Profile: ${a.name}">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.9 0-1.63.73-1.63 1.63 0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63Z"/></svg>
+              </a>`
+            : '';
+
           const skillsHtml = (a.skills || ['React', 'Python', 'Cloud', 'Outreach']).slice(0, 3).map(s => `
             <span class="ca-skill-pill">${s}</span>
           `).join('');
+
+          const bioMarkup = a.bio
+            ? `<p class="ca-card-bio" title="${a.bio}">&ldquo;${a.bio}&rdquo;</p>`
+            : '';
 
           card.innerHTML = `
             <div class="ca-card-main-content">
               <!-- AMBASSADOR PROFILE (STUDENT LEADER) -->
               <div class="ca-card-header">
-                <div class="ca-avatar-circle" title="${a.name}">${initials}</div>
+                <div class="ca-avatar-circle" title="${a.name}">${photoMarkup}</div>
                 <div class="ca-card-meta">
                   <span class="ca-card-name" title="${a.name}">${a.name}</span>
-                  <span class="ca-card-dept" title="${a.department || 'B.Tech Computer Science'}">${a.department || 'B.Tech Computer Science'}</span>
+                  <span class="ca-card-dept" title="${a.department || 'B.Tech Computer Science'} • ${a.year || ''}">${a.department || 'B.Tech Computer Science'}</span>
                 </div>
+                ${linkedinMarkup}
               </div>
 
               <!-- ROLE PILL: CAMPUS AMBASSADOR -->
@@ -103,6 +118,9 @@
                   <span>Campus Ambassador</span>
                 </span>
               </div>
+
+              <!-- ONE-LINE BIO -->
+              ${bioMarkup}
 
               <!-- DEDICATED ALLOTTED MENTOR SUB-CARD -->
               <div class="ca-mentor-box" title="Allotted Senior Mentor: ${mentor.name}">
@@ -127,8 +145,8 @@
 
             <!-- PINNED BOTTOM FOOTER -->
             <div class="ca-card-footer">
-              <span class="ca-footer-status"><span class="ca-status-dot"></span> Active Ambassador</span>
-              <span class="ca-footer-year">${a.year ? a.year.split(' ')[0] : 'Year 3'}</span>
+              <span class="ca-footer-status"><span class="ca-status-dot"></span> ${a.status || 'Active Ambassador'}</span>
+              <span class="ca-footer-year">${a.year ? a.year.split(',')[0].trim() : 'Year 1'}</span>
             </div>
           `;
 

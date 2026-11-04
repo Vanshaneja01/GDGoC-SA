@@ -580,7 +580,7 @@
                 </button>
               </div>
               <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; display: block;">
-                Enter any Mentor ID (MTR-101 to 104) or Ambassador ID (AMB-201 to 206) to instantly switch dashboards.
+                Enter any Mentor ID (MTR-101 to 105) or Ambassador ID (AMB-201 to 225) to instantly switch dashboards.
               </span>
             </div>
 
@@ -615,7 +615,7 @@
                 <!-- Ambassadors Column -->
                 <div style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
                   <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.75rem; color: #7B1FA2;">
-                    ${ui.icon('award')} Student Ambassadors (6)
+                    ${ui.icon('award')} Student Ambassadors (${ambassadors.length})
                   </div>
                   <div style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 240px; overflow-y: auto;">
                     ${ambassadors.map(a => `

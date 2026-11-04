@@ -241,6 +241,7 @@
                   <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">
                     <span>${ui.icon('mail')} <a href="mailto:${ui.escape(amb.email)}" style="color: var(--color-primary);">${ui.escape(amb.email)}</a></span>
                     <span>${ui.icon('phone')} ${ui.escape(amb.phone)}</span>
+                    ${amb.linkedin ? `<span>${ui.icon('link')} <a href="${ui.escape(amb.linkedin)}" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">LinkedIn</a></span>` : ''}
                     <span>${ui.icon('calendar')} Joined ${ui.formatDate(amb.joinedDate)}</span>
                   </div>
                 </div>

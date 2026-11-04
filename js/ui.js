@@ -120,7 +120,8 @@
     },
 
     renderAvatar(initialsOrUrl, name = '', size = 'md') {
-      const initials = (initialsOrUrl && initialsOrUrl.length <= 3)
+      const isUrl = typeof initialsOrUrl === 'string' && (initialsOrUrl.startsWith('http') || initialsOrUrl.startsWith('data:') || initialsOrUrl.startsWith('/'));
+      const initials = (!isUrl && initialsOrUrl && initialsOrUrl.length <= 3)
         ? initialsOrUrl
         : (name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'CC');
 
@@ -137,6 +138,10 @@
         sum += str.charCodeAt(i);
       }
       const bg = googleColors[sum % googleColors.length];
+
+      if (isUrl) {
+        return `<div class="avatar avatar-${size}" style="background: ${bg}; position: relative; overflow: hidden;" title="${this.escape(name)}"><img src="${this.escape(initialsOrUrl)}" alt="${this.escape(name)}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" /><span style="display:none; width: 100%; height: 100%; align-items: center; justify-content: center; font-weight: 700;">${this.escape(initials)}</span></div>`;
+      }
 
       return `<div class="avatar avatar-${size}" style="background: ${bg};" title="${this.escape(name)}">${this.escape(initials)}</div>`;
     },
