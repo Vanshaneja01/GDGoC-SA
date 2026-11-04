@@ -120,6 +120,16 @@
 
       <div class="nav-section-title">Outreach & Community</div>
       ${NAV_ITEMS.slice(7).map(item => renderNavItem(item, ui)).join('')}
+
+      <div class="nav-section-title">Portals & Integrations</div>
+      <a href="#community" class="nav-item" id="sidebar-link-community-hub">
+        <span class="nav-item-icon">${ui.icon('globe')}</span>
+        <span>Community Hub</span>
+      </a>
+      <a href="#sheets" class="nav-item" id="sidebar-link-sheets-db">
+        <span class="nav-item-icon">${ui.icon('database')}</span>
+        <span>Google Sheets DB</span>
+      </a>
     `;
 
     // Bind nav click events
@@ -128,7 +138,25 @@
         e.preventDefault();
         const targetSection = link.getAttribute('data-nav-target');
         window.CC.state.setSection(targetSection);
+        closeMobileSidebar();
       });
+    });
+
+    // Quick Portal Links in Sidebar
+    document.getElementById('sidebar-link-community-hub')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeMobileSidebar();
+      if (window.CC.community) {
+        window.CC.community.showCommunityView();
+      }
+    });
+
+    document.getElementById('sidebar-link-sheets-db')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeMobileSidebar();
+      if (window.CC.openGoogleSheetsModal) {
+        window.CC.openGoogleSheetsModal();
+      }
     });
   }
 
@@ -204,10 +232,18 @@
     const topRoleText = document.getElementById('topbar-role-text');
     const topRolePulse = document.getElementById('topbar-role-pulse');
     if (topRoleBadge && topRoleText) {
-      topRoleText.textContent = role === 'Mentor' ? 'Mentor Mode' : 'Ambassador Mode';
-      topRoleBadge.className = `topbar-role-badge ${role === 'Mentor' ? 'badge-mentor' : 'badge-ambassador'}`;
-      if (topRolePulse) {
-        topRolePulse.style.backgroundColor = role === 'Mentor' ? 'var(--status-green)' : '#8b5cf6';
+      if (role === 'Admin') {
+        topRoleText.textContent = 'Master Admin';
+        topRoleBadge.className = 'topbar-role-badge badge-admin';
+        if (topRolePulse) topRolePulse.style.backgroundColor = '#f59e0b';
+      } else if (role === 'Mentor') {
+        topRoleText.textContent = 'Mentor Mode';
+        topRoleBadge.className = 'topbar-role-badge badge-mentor';
+        if (topRolePulse) topRolePulse.style.backgroundColor = 'var(--status-green)';
+      } else {
+        topRoleText.textContent = 'Ambassador Mode';
+        topRoleBadge.className = 'topbar-role-badge badge-ambassador';
+        if (topRolePulse) topRolePulse.style.backgroundColor = '#8b5cf6';
       }
     }
 

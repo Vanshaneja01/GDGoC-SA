@@ -36,9 +36,14 @@
         try {
           const parsed = JSON.parse(savedSession);
           if (parsed && parsed.id) {
-            const userInDb = parsed.role === 'Mentor'
-              ? window.CC.db.getMentorById(parsed.id)
-              : window.CC.db.getAmbassadorById(parsed.id);
+            let userInDb = null;
+            if (parsed.role === 'Admin') {
+              userInDb = window.CC.db.getAdmin();
+            } else if (parsed.role === 'Mentor') {
+              userInDb = window.CC.db.getMentorById(parsed.id);
+            } else {
+              userInDb = window.CC.db.getAmbassadorById(parsed.id);
+            }
 
             if (userInDb) {
               this.currentUser = userInDb;
@@ -61,7 +66,9 @@
 
     setRoleAndUser(role, userId) {
       this.role = role;
-      if (role === 'Mentor') {
+      if (role === 'Admin') {
+        this.currentUser = window.CC.db.getAdmin();
+      } else if (role === 'Mentor') {
         this.currentUser = window.CC.db.getMentorById(userId) || window.CC.db.getMentors()[0];
       } else {
         this.currentUser = window.CC.db.getAmbassadorById(userId) || window.CC.db.getAmbassadors()[0];

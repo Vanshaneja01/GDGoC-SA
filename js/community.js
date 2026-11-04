@@ -414,29 +414,37 @@
       // Mobile Hamburger Navigation Drawer Toggle for Public Header
       const hamburgerBtn = document.getElementById('comm-hamburger-btn');
       const navLinks = document.getElementById('comm-nav-links');
+      const navOverlay = document.getElementById('comm-nav-overlay');
+
+      const closeMobileDrawer = () => {
+        navLinks?.classList.remove('mobile-open');
+        hamburgerBtn?.classList.remove('active');
+        hamburgerBtn?.setAttribute('aria-expanded', 'false');
+        navOverlay?.classList.remove('active');
+        document.body.classList.remove('comm-drawer-open');
+      };
 
       hamburgerBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = navLinks?.classList.toggle('mobile-open');
         hamburgerBtn.classList.toggle('active', isOpen);
         hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        navOverlay?.classList.toggle('active', isOpen);
+        document.body.classList.toggle('comm-drawer-open', isOpen);
       });
+
+      // Close when clicking overlay backdrop
+      navOverlay?.addEventListener('click', closeMobileDrawer);
 
       // Close mobile nav drawer when clicking any link
       navLinks?.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('click', () => {
-          navLinks?.classList.remove('mobile-open');
-          hamburgerBtn?.classList.remove('active');
-          hamburgerBtn?.setAttribute('aria-expanded', 'false');
-        });
+        el.addEventListener('click', closeMobileDrawer);
       });
 
       // Close mobile nav drawer when clicking outside
       document.addEventListener('click', (e) => {
-        if (!e.target.closest('.comm-navbar')) {
-          navLinks?.classList.remove('mobile-open');
-          hamburgerBtn?.classList.remove('active');
-          hamburgerBtn?.setAttribute('aria-expanded', 'false');
+        if (!e.target.closest('.comm-navbar') && !e.target.closest('#comm-nav-links')) {
+          closeMobileDrawer();
         }
       });
     },

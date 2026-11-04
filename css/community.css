@@ -2242,6 +2242,30 @@
   transform: translateY(-2px);
 }
 
+/* Mobile Navigation Overlay Backdrop */
+.comm-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 8, 18, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.comm-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.comm-drawer-open {
+  overflow: hidden;
+}
+
 /* ==========================================================================
    MASTER RESPONSIVE OPTIMIZATION OVERRIDES (PORTAL MOBILE VIEWPORTS)
    Appended at the end of stylesheet to guarantee precedence over all component declarations
@@ -2251,6 +2275,7 @@
     top: 10px !important;
     width: 95% !important;
     padding: 0.65rem 1.15rem !important;
+    z-index: 1000 !important;
   }
 
   .comm-hamburger-btn {
@@ -2267,21 +2292,19 @@
     max-height: calc(100vh - 85px) !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
-    background: rgba(10, 16, 32, 0.98) !important;
-    backdrop-filter: blur(28px) !important;
-    -webkit-backdrop-filter: blur(28px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-radius: 20px !important;
-    padding: 1.15rem 1rem !important;
+    background: #080d1a !important; /* 100% SOLID opaque dark navy: prevents any text shining through */
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
+    border-radius: 18px !important;
+    padding: 1rem 0.85rem !important;
     flex-direction: column !important;
     align-items: stretch !important;
-    gap: 0.4rem !important;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(56, 189, 248, 0.25) !important;
+    gap: 0.35rem !important;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.98), 0 0 0 1px rgba(56, 189, 248, 0.3) !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    transform: translateY(-12px) !important;
-    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s !important;
+    transform: translateY(-10px) !important;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s !important;
     z-index: 1001 !important;
   }
 
@@ -2297,54 +2320,68 @@
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 0.85rem 1.15rem !important;
+    padding: 0.75rem 1rem !important;
     border-radius: 12px !important;
-    font-size: 0.92rem !important;
+    font-size: 0.9rem !important;
     font-weight: 600 !important;
     color: #e2e8f0 !important;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     text-decoration: none !important;
+  }
+
+  .comm-nav-links a.comm-nav-item:active {
+    background: rgba(56, 189, 248, 0.18) !important;
+    border-color: rgba(56, 189, 248, 0.4) !important;
+    color: #38bdf8 !important;
   }
 
   .comm-nav-links .btn-comm-portal {
     margin-left: 0 !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.4rem !important;
     width: 100% !important;
     justify-content: center !important;
-    padding: 0.85rem 1.25rem !important;
-    font-size: 0.95rem !important;
+    padding: 0.8rem 1.25rem !important;
+    font-size: 0.92rem !important;
   }
 }
 
 @media (max-width: 768px) {
   .comm-hero {
-    padding: 5.5rem 1rem 2rem !important;
+    padding: 4.85rem 0.85rem 1.75rem !important;
+  }
+
+  .comm-hero-badge {
+    font-size: 0.7rem !important;
+    padding: 0.3rem 0.75rem !important;
+    margin-bottom: 0.85rem !important;
   }
 
   .comm-hero-title {
-    font-size: 2rem !important;
-    line-height: 1.22 !important;
-    letter-spacing: -0.4px !important;
+    font-size: 1.65rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.3px !important;
+    margin-bottom: 0.65rem !important;
   }
 
   .comm-hero-desc {
-    font-size: 0.92rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 1.5rem !important;
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 1.25rem !important;
   }
 
   .comm-cta-group {
     flex-direction: column !important;
     width: 100% !important;
-    gap: 0.75rem !important;
+    gap: 0.65rem !important;
   }
 
   .btn-comm-primary,
   .btn-comm-secondary {
     width: 100% !important;
     justify-content: center !important;
-    padding: 0.85rem 1.25rem !important;
+    padding: 0.75rem 1.15rem !important;
+    font-size: 0.88rem !important;
   }
 
   /* Institutional Partners Logo Bar on Mobile: Clean Full-Width Stack */
@@ -2353,32 +2390,37 @@
     flex-direction: column !important;
     align-items: stretch !important;
     width: 100% !important;
-    max-width: 330px !important;
+    max-width: 320px !important;
     margin: 0 auto !important;
-    gap: 0.65rem !important;
+    gap: 0.55rem !important;
   }
 
   .institutional-logo-card {
-    height: 48px !important;
+    height: 44px !important;
     width: 100% !important;
-    padding: 0.4rem 1rem !important;
-    border-radius: 12px !important;
+    padding: 0.35rem 0.85rem !important;
+    border-radius: 10px !important;
     justify-content: center !important;
     box-sizing: border-box !important;
   }
 
-  /* Stats Grid */
+  .institutional-logo-img {
+    height: 24px !important;
+  }
+
+  /* Compact Stats Grid on Mobile */
   .comm-stats-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    padding: 1rem 0.75rem !important;
-    gap: 0.75rem !important;
-    margin-top: 2rem !important;
+    padding: 0.85rem 0.65rem !important;
+    gap: 0.65rem !important;
+    margin-top: 1.5rem !important;
+    border-radius: 16px !important;
   }
 
   .comm-stat-card {
     border-right: none !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 0.5rem 0.25rem !important;
+    padding: 0.4rem 0.2rem !important;
   }
 
   .comm-stat-card:nth-child(3),
@@ -2387,76 +2429,101 @@
   }
 
   .comm-stat-num {
-    font-size: 1.55rem !important;
+    font-size: 1.4rem !important;
   }
 
   .comm-stat-label {
-    font-size: 0.72rem !important;
+    font-size: 0.7rem !important;
   }
 
   .comm-section {
-    padding: 3rem 1rem !important;
+    padding: 2.25rem 0.85rem !important;
+  }
+
+  .comm-section-header {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .comm-section-badge {
+    font-size: 0.7rem !important;
+    padding: 0.25rem 0.65rem !important;
   }
 
   .comm-section-title {
-    font-size: 1.7rem !important;
+    font-size: 1.45rem !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.2px !important;
   }
 
-  /* Dedicated About GDG Section on Mobile */
+  .comm-section-desc {
+    font-size: 0.84rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Dedicated About GDG Section on Mobile: Compact Clean Layout */
   .about-gdg-lead-box {
-    padding: 1.25rem 1rem !important;
-    margin-top: 1rem !important;
-    border-radius: 14px !important;
+    padding: 1rem 0.85rem !important;
+    margin-top: 0.85rem !important;
+    border-radius: 12px !important;
   }
 
   .about-gdg-lead-text {
-    font-size: 0.92rem !important;
-    line-height: 1.65 !important;
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
   }
 
   .about-gdg-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
-    margin-top: 1.75rem !important;
+    gap: 0.85rem !important;
+    margin-top: 1.25rem !important;
   }
 
   .about-gdg-card {
-    padding: 1.5rem 1.25rem !important;
-    border-radius: 16px !important;
+    padding: 1.15rem 1rem !important;
+    border-radius: 14px !important;
   }
 
   .about-gdg-card-title {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
   }
 
   .about-gdg-card-desc {
-    font-size: 0.88rem !important;
-    line-height: 1.6 !important;
+    font-size: 0.84rem !important;
+    line-height: 1.55 !important;
   }
 
   /* CA Program Pillars Grid */
-  .ca-program-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
-  }
-
+  .ca-program-grid,
   .comm-pillars-grid,
   .comm-tracks-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
+    gap: 0.85rem !important;
+  }
+
+  .ca-program-card,
+  .comm-pillar-card,
+  .comm-track-card {
+    padding: 1.15rem 1rem !important;
+    border-radius: 14px !important;
   }
 
   /* CA Slider & Ambassador Cards on Mobile */
   .ca-filter-bar {
-    padding: 0.4rem 0.1rem 0.85rem !important;
+    padding: 0.35rem 0.1rem 0.65rem !important;
     justify-content: flex-start !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    gap: 0.4rem !important;
+  }
+
+  .ca-filter-chip {
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.76rem !important;
   }
 
   .ca-slider-container {
     flex-direction: column !important;
-    gap: 0.75rem !important;
+    gap: 0.5rem !important;
   }
 
   .ca-slider-arrow {
@@ -2465,82 +2532,95 @@
 
   .ca-slider-viewport {
     width: 100% !important;
-    padding: 0.5rem 0 1rem !important;
+    padding: 0.35rem 0 0.75rem !important;
     -webkit-overflow-scrolling: touch !important;
     scroll-snap-type: x mandatory !important;
   }
 
   .ca-slider-track {
-    gap: 1rem !important;
-    padding: 0 0.5rem !important;
+    gap: 0.85rem !important;
+    padding: 0 0.35rem !important;
   }
 
   .ca-slide-card {
-    flex: 0 0 calc(100vw - 2.8rem) !important;
-    min-width: 260px !important;
-    max-width: 330px !important;
+    flex: 0 0 calc(100vw - 2.5rem) !important;
+    min-width: 250px !important;
+    max-width: 320px !important;
     height: auto !important;
-    min-height: 480px !important;
-    padding: 1.25rem !important;
+    min-height: 440px !important;
+    padding: 1.15rem 1rem !important;
     box-sizing: border-box !important;
   }
 
   /* FAQs Accordion on Mobile */
   .comm-faq-container {
-    margin-top: 1.5rem !important;
+    margin-top: 1.25rem !important;
+    gap: 0.6rem !important;
   }
 
   .comm-faq-question {
-    padding: 1.1rem 1.25rem !important;
-    font-size: 0.95rem !important;
+    padding: 0.95rem 1.1rem !important;
+    font-size: 0.88rem !important;
   }
 
   .comm-faq-answer {
-    padding: 0 1.25rem !important;
-    font-size: 0.88rem !important;
-    line-height: 1.65 !important;
+    padding: 0 1.1rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
   }
 
   /* Footer on Mobile */
   .comm-footer {
-    padding: 2.5rem 1rem !important;
+    padding: 2rem 0.85rem !important;
   }
 
   .comm-social-hub {
     flex-direction: column !important;
     align-items: stretch !important;
-    max-width: 280px !important;
-    margin: 1.5rem auto 2rem !important;
+    max-width: 260px !important;
+    margin: 1.25rem auto 1.5rem !important;
+    gap: 0.5rem !important;
   }
 
   .comm-social-pill {
     justify-content: center !important;
     width: 100% !important;
+    padding: 0.55rem 0.85rem !important;
+    font-size: 0.8rem !important;
   }
 }
 
 @media (max-width: 480px) {
   .comm-navbar {
-    padding: 0.55rem 0.85rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .comm-brand-logo {
+    width: 34px !important;
+    height: 34px !important;
   }
 
   .comm-brand-title {
-    font-size: 0.98rem !important;
+    font-size: 0.92rem !important;
   }
 
   .comm-brand-sub {
-    font-size: 0.58rem !important;
+    font-size: 0.55rem !important;
   }
 
   .comm-hero-title {
-    font-size: 1.75rem !important;
+    font-size: 1.45rem !important;
+  }
+
+  .comm-section-title {
+    font-size: 1.3rem !important;
   }
 
   .comm-stat-num {
-    font-size: 1.4rem !important;
+    font-size: 1.25rem !important;
   }
 
   .comm-stat-label {
-    font-size: 0.68rem !important;
+    font-size: 0.65rem !important;
   }
 }

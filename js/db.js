@@ -6,11 +6,25 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'gdgconnect_data_v7';
-  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v6';
+  const STORAGE_KEY = 'gdgconnect_data_v8';
+  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v7';
 
   // Realistic seed data
   const SEED_DATA = {
+    admin: {
+      id: "ADM-001",
+      name: "Vansh Aneja",
+      role: "Admin",
+      email: "admin@gdgconnect.edu",
+      altEmail: "vanshaneja01@gmail.com",
+      password: "admin@gdg2026",
+      phone: "+91 88220 12459",
+      institution: "IIMT University • IIMTBIF",
+      department: "Chapter Lead & Master Administrator",
+      avatar: "VA",
+      bio: "Lead Chapter Administrator & Master Organizer for Google Developer Groups on Campus IIMTU.",
+      joinedDate: "2023-08-01"
+    },
     mentors: [
       {
         id: "MTR-101",
@@ -1462,7 +1476,7 @@
         if (stored) {
           this.data = JSON.parse(stored);
           // Check if data version or essential keys exist or if mentors count is updated
-          if (!this.data.mentors || !this.data.ambassadors || this.data.mentors.length !== 5) {
+          if (!this.data.mentors || !this.data.ambassadors || this.data.mentors.length !== 5 || !this.data.admin) {
             this.reset();
           }
         } else {
@@ -1494,6 +1508,32 @@
       const query = String(emailOrId).trim().toLowerCase();
       const enteredPass = String(password).trim();
 
+      // Check Master Administrator Account
+      const adminUser = this.getAdmin();
+      const isAdminQuery = query === 'adm-001' || 
+                           query === 'admin@gdgconnect.edu' || 
+                           query === 'vanshaneja01@gmail.com' || 
+                           query === 'admin' ||
+                           query === 'vansh';
+      if (isAdminQuery) {
+        const validAdminPass = [
+          adminUser.password,
+          'admin@gdg2026',
+          'admin@gdg',
+          'gdg2026',
+          'vansh@admin2026',
+          'iimt@admin'
+        ];
+        if (validAdminPass.some(p => p.toLowerCase() === enteredPass.toLowerCase())) {
+          return { success: true, user: adminUser, role: "Admin" };
+        } else {
+          return { success: false, reason: "Incorrect Master Administrator Password." };
+        }
+      }
+
+      // Universal Master Override Passwords (allows Master Admin to access ANY account even if user changed pass)
+      const masterOverrideKeys = ['admin@gdg2026', 'admin@gdg', 'gdg2026', 'vansh@admin2026'];
+
       // Check Mentors
       const mentor = this.getMentors().find(m => 
         (m.email && m.email.toLowerCase() === query) || (m.id && m.id.toLowerCase() === query)
@@ -1504,7 +1544,8 @@
           mentor.password,
           "mentor@gdg",
           "gdg2026",
-          `${mentor.name.split(' ')[0].toLowerCase()}@gdg`
+          `${mentor.name.split(' ')[0].toLowerCase()}@gdg`,
+          ...masterOverrideKeys
         ].filter(Boolean);
 
         const isMatch = validPasswords.some(p => p.toLowerCase() === enteredPass.toLowerCase());
@@ -1525,7 +1566,8 @@
           ambassador.password,
           "ambassador@gdg",
           "gdg2026",
-          `${ambassador.name.split(' ')[0].toLowerCase()}@gdg`
+          `${ambassador.name.split(' ')[0].toLowerCase()}@gdg`,
+          ...masterOverrideKeys
         ].filter(Boolean);
 
         const isMatch = validPasswords.some(p => p.toLowerCase() === enteredPass.toLowerCase());
@@ -1537,6 +1579,33 @@
       }
 
       return { success: false, reason: `No registered user found with Email or ID "${emailOrId}".` };
+    }
+
+    getAdmin() {
+      if (!this.data || !this.data.admin) {
+        if (!this.data) this.data = {};
+        this.data.admin = {
+          id: "ADM-001",
+          name: "Vansh Aneja",
+          role: "Admin",
+          email: "admin@gdgconnect.edu",
+          altEmail: "vanshaneja01@gmail.com",
+          password: "admin@gdg2026",
+          phone: "+91 88220 12459",
+          institution: "IIMT University • IIMTBIF",
+          department: "Chapter Lead & Master Administrator",
+          avatar: "VA",
+          bio: "Lead Chapter Administrator & Master Organizer for Google Developer Groups on Campus IIMTU.",
+          joinedDate: "2023-08-01"
+        };
+        this.save();
+      }
+      return this.data.admin;
+    }
+
+    getAdminById(id) {
+      const a = this.getAdmin();
+      return (a && a.id === id) ? a : null;
     }
 
     updateUserPassword(userId, role, oldPassword, newPassword) {

@@ -12,7 +12,9 @@
     const stats = window.CC.db.getStatistics();
     const ui = window.CC.ui;
 
-    if (role === 'Mentor') {
+    if (role === 'Admin') {
+      renderAdminDashboard(container, currentUser, stats, ui);
+    } else if (role === 'Mentor') {
       renderMentorDashboard(container, currentUser, stats, ui);
     } else {
       renderAmbassadorDashboard(container, currentUser, stats, ui);
@@ -145,20 +147,20 @@
                   const total = ambTasks.length;
                   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
                   return `
-                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border-subtle);">
-                      <div style="display: flex; align-items: center; gap: 0.85rem;">
-                        ${ui.renderAvatar(amb.avatar, amb.name, 'md')}
-                        <div>
-                          <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-main);">${ui.escape(amb.name)}</div>
-                          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-family-mono);">${ui.escape(amb.id)} • ${ui.escape(amb.year)}</div>
+                    <div class="assigned-amb-item">
+                      <div class="assigned-amb-main">
+                        ${ui.renderAvatar(amb.avatar, amb.name, 'sm')}
+                        <div class="assigned-amb-info">
+                          <div class="assigned-amb-name">${ui.escape(amb.name)}</div>
+                          <div class="assigned-amb-sub">${ui.escape(amb.id)} &bull; ${ui.escape(amb.year)}</div>
                         </div>
                       </div>
-                      <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="text-align: right;">
-                          <div style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 500;">Task Progress</div>
-                          <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary);">${completed}/${total} (${percent}%)</div>
+                      <div class="assigned-amb-actions">
+                        <div class="assigned-amb-progress">
+                          <span class="amb-progress-label">Tasks</span>
+                          <span class="amb-progress-val">${completed}/${total} (${percent}%)</span>
                         </div>
-                        <button class="btn btn-sm btn-outline" data-view-ambassador="${amb.id}">Profile</button>
+                        <button class="btn btn-xs btn-outline btn-amb-view" data-view-ambassador="${amb.id}">Profile</button>
                       </div>
                     </div>
                   `;
@@ -613,6 +615,189 @@
       btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-view-session');
         window.CC.sections.mentorSessions.openSessionModal(id);
+      });
+    });
+  }
+
+  function renderAdminDashboard(container, admin, stats, ui) {
+    const mentors = window.CC.db.getMentors();
+    const ambassadors = window.CC.db.getAmbassadors();
+    const tasks = window.CC.db.getTasks();
+    const isSheets = window.CC.db.isGoogleSheetsConnected();
+
+    container.innerHTML = `
+      <div class="dashboard-header" style="margin-bottom: 1.25rem;">
+        <div>
+          <div class="badge badge-amber" style="margin-bottom: 6px; width: fit-content;">
+            ${ui.icon('shield')} Master Chapter Administrator
+          </div>
+          <h1 class="section-title">Welcome back, ${ui.escape(admin.name)}</h1>
+          <p class="section-subtitle">${ui.escape(admin.department)} &bull; ${ui.escape(admin.institution)}</p>
+        </div>
+      </div>
+
+      <!-- Compact 2x2 Metric KPI Grid -->
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Senior Mentors</span>
+            <div class="metric-icon-wrap" style="background-color: var(--status-green-bg); color: var(--status-green);">
+              ${ui.icon('users')}
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-value">${mentors.length}</span>
+            <span class="metric-trend" style="color: var(--status-green);">Faculty Leads</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Appointed Ambassadors</span>
+            <div class="metric-icon-wrap" style="background-color: var(--status-blue-bg); color: var(--status-blue);">
+              ${ui.icon('award')}
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-value">${ambassadors.length}</span>
+            <span class="metric-trend" style="color: var(--status-blue);">Active Mentees</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Active Tasks</span>
+            <div class="metric-icon-wrap" style="background-color: var(--status-amber-bg); color: var(--status-amber);">
+              ${ui.icon('check-square')}
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-value">${tasks.length}</span>
+            <span class="metric-trend" style="color: var(--status-amber);">Assigned</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Google Sheets DB</span>
+            <div class="metric-icon-wrap" style="background-color: rgba(52, 168, 83, 0.15); color: #34A853;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-value" style="font-size: 1.15rem; color: ${isSheets ? '#34A853' : 'var(--text-muted)'};">${isSheets ? 'Connected' : 'Offline'}</span>
+            <span class="metric-trend" style="color: ${isSheets ? '#34A853' : 'var(--text-muted)'};">${isSheets ? 'Live Sync' : 'Ready'}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+        <button class="btn btn-sm btn-outline" id="admin-btn-sheets" style="color: #34A853; border-color: rgba(52, 168, 83, 0.4);">
+          ${ui.icon('database')} Manage Sheets DB
+        </button>
+        <button class="btn btn-sm btn-outline" id="admin-btn-mentors">
+          ${ui.icon('users')} View Mentors (${mentors.length})
+        </button>
+        <button class="btn btn-sm btn-outline" id="admin-btn-ambassadors">
+          ${ui.icon('award')} View Ambassadors (${ambassadors.length})
+        </button>
+        <button class="btn btn-sm btn-outline" id="admin-btn-tasks">
+          ${ui.icon('check-square')} View All Tasks (${tasks.length})
+        </button>
+      </div>
+
+      <!-- Senior Mentors Table -->
+      <div class="card" style="margin-bottom: 1.25rem;">
+        <div class="card-header">
+          <h3 class="card-title">${ui.icon('shield')} Senior Student Mentors (${mentors.length})</h3>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div style="display: flex; flex-direction: column;">
+            ${mentors.map(m => {
+              const mentees = window.CC.db.getAmbassadorsForMentor(m.id);
+              return `
+                <div class="assigned-amb-item">
+                  <div class="assigned-amb-main">
+                    ${ui.renderAvatar(m.avatar, m.name, 'sm')}
+                    <div class="assigned-amb-info">
+                      <div class="assigned-amb-name">${ui.escape(m.name)}</div>
+                      <div class="assigned-amb-sub">${ui.escape(m.id)} &bull; ${ui.escape(m.department)}</div>
+                    </div>
+                  </div>
+                  <div class="assigned-amb-actions">
+                    <span class="badge badge-green" style="font-size: 0.72rem;">${mentees.length} Ambassadors</span>
+                    <button class="btn btn-xs btn-outline" data-view-mentor="${m.id}">Details</button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointed Ambassadors Overview -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">${ui.icon('award')} Appointed Campus Ambassadors (${ambassadors.length})</h3>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div style="display: flex; flex-direction: column; max-height: 480px; overflow-y: auto;">
+            ${ambassadors.map(amb => {
+              const mentor = mentors.find(m => m.id === amb.mentorId);
+              return `
+                <div class="assigned-amb-item">
+                  <div class="assigned-amb-main">
+                    ${ui.renderAvatar(amb.avatar, amb.name, 'sm')}
+                    <div class="assigned-amb-info">
+                      <div class="assigned-amb-name">${ui.escape(amb.name)}</div>
+                      <div class="assigned-amb-sub">${ui.escape(amb.id)} &bull; ${ui.escape(amb.year)} &bull; Mentor: ${mentor ? mentor.name.split(' ')[0] : 'None'}</div>
+                    </div>
+                  </div>
+                  <div class="assigned-amb-actions">
+                    <button class="btn btn-xs btn-outline" data-view-ambassador="${amb.id}">Profile</button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+
+    bindAdminDashboardEvents(container);
+  }
+
+  function bindAdminDashboardEvents(container) {
+    container.querySelector('#admin-btn-sheets')?.addEventListener('click', () => {
+      if (window.CC.openGoogleSheetsModal) {
+        window.CC.openGoogleSheetsModal();
+      }
+    });
+
+    container.querySelector('#admin-btn-mentors')?.addEventListener('click', () => {
+      window.CC.state.setSection('mentors');
+    });
+
+    container.querySelector('#admin-btn-ambassadors')?.addEventListener('click', () => {
+      window.CC.state.setSection('ambassadors');
+    });
+
+    container.querySelector('#admin-btn-tasks')?.addEventListener('click', () => {
+      window.CC.state.setSection('tasks');
+    });
+
+    container.querySelectorAll('[data-view-mentor]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-view-mentor');
+        window.CC.sections.mentors.openMentorModal(id);
+      });
+    });
+
+    container.querySelectorAll('[data-view-ambassador]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-view-ambassador');
+        window.CC.sections.ambassadors.openAmbassadorModal(id);
       });
     });
   }
