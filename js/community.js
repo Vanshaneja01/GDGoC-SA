@@ -416,12 +416,12 @@
 
             <div class="auth-modal-header">
               <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <div class="comm-brand-logo" style="width: 38px; height: 38px;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 7L3 12L8 17" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 7L21 12L16 17" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.5 5L10.5 19" stroke="#34A853" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="12" cy="12" r="1.5" fill="#FBBC04"/>
+                <div class="comm-brand-logo" style="width: 42px; height: 42px;">
+                  <svg viewBox="0 0 32 24" width="28" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 5.5L5.5 12.5" stroke="#EA4335" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.5 12.5L12.5 19.5" stroke="#4285F4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.5 5.5L26.5 12.5" stroke="#34A853" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M26.5 12.5L19.5 19.5" stroke="#FBBC04" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
                 <div>
