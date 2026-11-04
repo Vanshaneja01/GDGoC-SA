@@ -6,8 +6,8 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'gdgconnect_data_v3';
-  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v2';
+  const STORAGE_KEY = 'gdgconnect_data_v4';
+  const LEGACY_STORAGE_KEY = 'gdgconnect_data_v3';
 
   // Realistic seed data
   const SEED_DATA = {
@@ -394,6 +394,81 @@
         status: "Active",
         joinedDate: "2025-09-05",
         avatar: "RYS"
+      },
+      {
+        id: "AMB-221",
+        name: "Shaurya Dixit",
+        email: "shaurya.dixit@student.gdgconnect.edu",
+        phone: "+91 98765 43240",
+        institution: "Department of Computer Science & Engineering",
+        department: "B.Tech CSE (Cloud Systems)",
+        year: "Junior (Year 3)",
+        mentorId: "MTR-101",
+        skills: ["Google Cloud", "Kubernetes", "Go", "Technical Writing"],
+        bio: "Student ambassador driving cloud computing labs, certification study circles, and DevHack technical sessions.",
+        status: "Active",
+        joinedDate: "2025-08-12",
+        avatar: "SD"
+      },
+      {
+        id: "AMB-222",
+        name: "Vanshika Jain",
+        email: "vanshika.jain@student.gdgconnect.edu",
+        phone: "+91 98765 43241",
+        institution: "School of Computer Applications",
+        department: "BCA Cyber Security",
+        year: "Sophomore (Year 2)",
+        mentorId: "MTR-102",
+        skills: ["Cyber Forensics", "Python", "Community Outreach", "Workshops"],
+        bio: "Campus ambassador spearheading privacy clinics, security awareness campaigns, and women in tech initiatives.",
+        status: "Active",
+        joinedDate: "2025-09-15",
+        avatar: "VJ"
+      },
+      {
+        id: "AMB-223",
+        name: "Devansh Goel",
+        email: "devansh.goel@student.gdgconnect.edu",
+        phone: "+91 98765 43242",
+        institution: "Department of Computer Science & Engineering",
+        department: "B.Tech AI & Data Science",
+        year: "Sophomore (Year 2)",
+        mentorId: "MTR-103",
+        skills: ["UX Design", "Wireframing", "Solution Challenge", "Public Speaking"],
+        bio: "Creative design advocate facilitating human-centric design thinking sprints and prototyping workshops.",
+        status: "Active",
+        joinedDate: "2025-08-22",
+        avatar: "DG"
+      },
+      {
+        id: "AMB-224",
+        name: "Ishita Sharma",
+        email: "ishita.sharma@student.gdgconnect.edu",
+        phone: "+91 98765 43243",
+        institution: "School of Engineering & Technology",
+        department: "B.Tech Information Technology",
+        year: "Junior (Year 3)",
+        mentorId: "MTR-104",
+        skills: ["DevOps", "Docker", "GitHub Actions", "Peer Mentoring"],
+        bio: "Open-source maintainer coordinating automated deployment clinics and Git workshops for freshmen.",
+        status: "Active",
+        joinedDate: "2025-07-10",
+        avatar: "IS"
+      },
+      {
+        id: "AMB-225",
+        name: "Pranav Singhal",
+        email: "pranav.singhal@student.gdgconnect.edu",
+        phone: "+91 98765 43244",
+        institution: "Polytechnic Wing • Engineering",
+        department: "Diploma Computer Engineering",
+        year: "Final Year (Year 3)",
+        mentorId: "MTR-105",
+        skills: ["Flutter", "IoT Prototyping", "Event Logistics", "Hardware Labs"],
+        bio: "Polytechnic wing ambassador bridging diploma engineering batches with cutting-edge mobile & IoT initiatives.",
+        status: "Active",
+        joinedDate: "2025-06-25",
+        avatar: "PS"
       }
     ],
 

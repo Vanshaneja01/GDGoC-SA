@@ -139,7 +139,7 @@
         if (dotsContainer) {
           dotsContainer.innerHTML = '';
           const cardCount = filtered.length;
-          const dotsCount = Math.min(cardCount, 6);
+          const dotsCount = Math.min(cardCount, 8);
           for (let i = 0; i < dotsCount; i++) {
             const dot = document.createElement('div');
             dot.className = `ca-slider-dot ${i === 0 ? 'active' : ''}`;

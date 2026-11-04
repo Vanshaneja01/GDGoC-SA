@@ -494,8 +494,6 @@
   margin-bottom: 1rem;
   color: #ffffff;
 }
-  color: #ffffff;
-}
 
 .comm-section-desc {
   font-size: 1.05rem;
@@ -506,7 +504,7 @@
 /* Pillars Cards ("Why Become an Ambassador?") - E-Cell style */
 .comm-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 1.75rem;
 }
 
@@ -576,6 +574,20 @@
   color: #fbbf24;
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
   border-color: rgba(251, 191, 36, 0.3);
+}
+
+.comm-pillar-icon.purple {
+  background: rgba(129, 140, 248, 0.12);
+  color: #a5b4fc;
+  box-shadow: 0 0 20px rgba(129, 140, 248, 0.25);
+  border-color: rgba(129, 140, 248, 0.3);
+}
+
+.comm-pillar-icon.red {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.25);
+  border-color: rgba(248, 113, 113, 0.3);
 }
 
 .comm-pillar-title {
@@ -832,24 +844,42 @@
   gap: 1rem;
 }
 
+.comm-faq-container {
+  max-width: 880px;
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
 .comm-faq-item {
-  background: rgba(14, 21, 38, 0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--ecell-glass-border);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
   overflow: hidden;
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .comm-faq-item:hover {
-  border-color: rgba(56, 189, 248, 0.35);
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(20, 30, 55, 0.98);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.15);
+}
+
+.comm-faq-item.open {
+  border-color: #38bdf8;
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
 .comm-faq-question {
-  padding: 1.25rem 1.5rem;
-  font-size: 1.05rem;
+  padding: 1.35rem 1.6rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #ffffff !important;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -860,51 +890,66 @@
   border: none;
   text-align: left;
   font-family: inherit;
+  transition: color 0.2s ease;
+}
+
+.comm-faq-question span {
+  color: #ffffff !important;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.comm-faq-item.open .comm-faq-question span {
+  color: #38bdf8 !important;
 }
 
 .comm-faq-toggle-icon {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(56, 189, 248, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-left: 1rem;
-  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  margin-left: 1.25rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
   color: #38bdf8;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.4);
 }
 
 .comm-faq-chevron {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #38bdf8;
 }
 
 .comm-faq-item.open .comm-faq-toggle-icon {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: #38bdf8;
+  color: #070b14;
+  border-color: #38bdf8;
+  transform: rotate(180deg);
 }
 
 .comm-faq-item.open .comm-faq-chevron {
-  transform: rotate(180deg);
+  color: #070b14;
 }
 
 .comm-faq-answer {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  padding: 0 1.5rem;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: #cbd5e1;
+  padding: 0 1.6rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #f8fafc !important;
   transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.35s ease;
 }
 
 .comm-faq-item.open .comm-faq-answer {
-  max-height: 300px;
+  max-height: 350px;
   opacity: 1;
-  padding: 0 1.5rem 1.35rem;
+  padding: 1rem 1.6rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Banner Gateway Section (ecell.in/ca signature high-voltage banner) */
