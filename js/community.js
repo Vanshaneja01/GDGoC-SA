@@ -222,6 +222,15 @@
       const userParam = urlParams.get('user') || urlParams.get('id');
       const portalParam = urlParams.get('portal');
 
+      // Check if URL specifies admin login directly
+      if (window.location.hash === '#admin' || window.location.hash === '#admin-portal' || urlParams.has('admin')) {
+        this.showCommunityView();
+        setTimeout(() => {
+          this.openAuthModal('Admin');
+        }, 350);
+        return;
+      }
+
       // If a specific user parameter or explicit portal parameter is present, enter the portal directly
       if (userParam || portalParam === 'true') {
         this.showPortalView();
@@ -371,6 +380,13 @@
           }
         }
 
+        const adminAuthBtn = e.target.closest('#btn-nav-admin-access, #btn-footer-admin-access, [data-open-admin-auth]');
+        if (adminAuthBtn) {
+          e.preventDefault();
+          this.openAuthModal('Admin');
+          return;
+        }
+
         const switchLink = e.target.closest('#link-switch-active-account');
         if (switchLink) {
           e.preventDefault();
@@ -456,7 +472,7 @@
       const modalHtml = `
         <div class="modal-backdrop">
           <div class="auth-modal-dialog">
-            <div class="auth-header-stripe"></div>
+            <div class="auth-header-stripe" style="${activeRole === 'Admin' ? 'background: linear-gradient(90deg, #f59e0b, #fbbf24, #ea580c);' : ''}"></div>
 
             <div class="auth-modal-header">
               <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -470,35 +486,38 @@
                 </div>
                 <div>
                   <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">Sign in to GDGconnect</h3>
-                  <span style="font-size: 0.75rem; color: var(--text-muted);">Campus Ambassador &amp; Mentor Management Portal</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Campus Ambassador, Mentor &amp; Admin Command Portal</span>
                 </div>
               </div>
               <button class="btn-icon" data-close-modal aria-label="Close dialog">${ui.icon('x')}</button>
             </div>
 
             <div class="modal-body" style="padding: 1.35rem 1.75rem;">
-              <!-- Role Selector Tabs -->
+              <!-- Role Selector Tabs (Ambassador, Mentor, and Master Admin) -->
               <div class="auth-role-tabs">
                 <button type="button" class="auth-role-tab ${activeRole === 'Ambassador' ? 'active' : ''}" id="tab-auth-ambassador">
-                  🎓 Campus Ambassador
+                  🎓 Ambassador
                 </button>
                 <button type="button" class="auth-role-tab ${activeRole === 'Mentor' ? 'active' : ''}" id="tab-auth-mentor">
-                  🛡️ Senior Student Mentor
+                  🛡️ Mentor
+                </button>
+                <button type="button" class="auth-role-tab tab-admin ${activeRole === 'Admin' ? 'active' : ''}" id="tab-auth-admin">
+                  ⚡ Master Admin
                 </button>
               </div>
 
-              <!-- Clean, Secure Sign In Form (No Exposed Passwords or Demo Values) -->
+              <!-- Clean, Secure Sign In Form -->
               <form id="portal-auth-form" autocomplete="on">
                 <div class="form-group" style="margin-bottom: 1.15rem;">
                   <label class="form-label" for="auth-id-input" style="font-size: 0.82rem; font-weight: 600;">
-                    <span id="label-id-type">${activeRole === 'Mentor' ? 'Mentor Email' : 'Ambassador Email'}</span> or Assigned ID
+                    <span id="label-id-type">${activeRole === 'Admin' ? 'Master Admin Email or Command ID' : activeRole === 'Mentor' ? 'Mentor Email' : 'Ambassador Email'}</span> or Assigned ID
                   </label>
                   <input 
                     type="text" 
                     id="auth-id-input" 
                     class="form-control" 
-                    placeholder="${activeRole === 'Mentor' ? 'Enter official Gmail or Mentor ID (e.g. MTR-101)' : 'Enter registered Email or Ambassador ID (e.g. AMB-201)'}"
-                    value=""
+                    placeholder="${activeRole === 'Admin' ? 'Enter admin@gdgconnect.edu or ADM-001' : activeRole === 'Mentor' ? 'Enter official Gmail or Mentor ID (e.g. MTR-101)' : 'Enter registered Email or Ambassador ID (e.g. AMB-201)'}"
+                    value="${activeRole === 'Admin' ? 'admin@gdgconnect.edu' : ''}"
                     autocomplete="username"
                     required 
                     autofocus
@@ -516,7 +535,7 @@
                       type="password" 
                       id="auth-password-input" 
                       class="form-control" 
-                      placeholder="Enter your security password"
+                      placeholder="${activeRole === 'Admin' ? 'Enter Master Admin password (admin@gdg2026)' : 'Enter your security password'}"
                       value=""
                       autocomplete="current-password"
                       required 
@@ -527,16 +546,16 @@
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block" style="padding: 0.85rem; font-size: 0.95rem; font-weight: 700; width: 100%;">
-                  ${ui.icon('log-in')} Sign In to ${activeRole} Dashboard
+                <button type="submit" class="btn ${activeRole === 'Admin' ? 'btn-primary btn-block btn-admin-submit' : 'btn-primary btn-block'}" style="padding: 0.85rem; font-size: 0.95rem; font-weight: 700; width: 100%;">
+                  ${activeRole === 'Admin' ? '⚡ Sign In as Master Administrator' : `${ui.icon('log-in')} Sign In to ${activeRole} Dashboard`}
                 </button>
               </form>
 
               <!-- Confidential Security Notice -->
               <div style="margin-top: 1.35rem; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: var(--bg-surface); border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 0.65rem;">
-                <span style="font-size: 1rem;">🔒</span>
-                <span style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.4;">
-                  <strong>Confidential Portal:</strong> Please sign in using the official email or issued ID provided during your appointment.
+                <span style="font-size: 1rem;" id="auth-security-icon">${activeRole === 'Admin' ? '⚡' : '🔒'}</span>
+                <span style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.4;" id="auth-security-notice-text">
+                  ${activeRole === 'Admin' ? '<strong>Master Administrator Access:</strong> Unrestricted operational control, universal override passkeys, and cloud database access.' : '<strong>Confidential Portal:</strong> Please sign in using the official email or issued ID provided during your appointment.'}
                 </span>
               </div>
             </div>
@@ -545,7 +564,10 @@
               <span style="font-size: 0.74rem; color: var(--text-muted);">
                 GDG on Campus IIMTU &bull; IIMTBIF
               </span>
-              <button class="btn btn-sm btn-outline" data-close-modal>Cancel</button>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button type="button" class="btn btn-xs btn-outline" id="btn-quick-admin-toggle" style="font-size: 0.72rem; color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">⚡ Master Admin Login</button>
+                <button class="btn btn-sm btn-outline" data-close-modal>Cancel</button>
+              </div>
             </div>
           </div>
         </div>
@@ -557,28 +579,70 @@
         const labelIdType = modalHost.querySelector('#label-id-type');
         const tabAmb = modalHost.querySelector('#tab-auth-ambassador');
         const tabMtr = modalHost.querySelector('#tab-auth-mentor');
+        const tabAdmin = modalHost.querySelector('#tab-auth-admin');
         const togglePassBtn = modalHost.querySelector('#btn-toggle-auth-pass');
         const submitBtn = modalHost.querySelector('button[type="submit"]');
+        const securityNotice = modalHost.querySelector('#auth-security-notice-text');
+        const securityIcon = modalHost.querySelector('#auth-security-icon');
+        const quickAdminBtn = modalHost.querySelector('#btn-quick-admin-toggle');
 
-        tabMtr.addEventListener('click', () => {
-          activeRole = 'Mentor';
-          tabMtr.classList.add('active');
-          tabAmb.classList.remove('active');
-          labelIdType.textContent = 'Mentor Email or Assigned ID';
-          idInput.placeholder = 'Enter official Gmail or Mentor ID (e.g. MTR-101)';
-          if (submitBtn) submitBtn.innerHTML = `${ui.icon('log-in')} Sign In to Mentor Dashboard`;
-          idInput.focus();
-        });
+        const selectRole = (role) => {
+          activeRole = role;
+          tabAmb?.classList.toggle('active', role === 'Ambassador');
+          tabMtr?.classList.toggle('active', role === 'Mentor');
+          tabAdmin?.classList.toggle('active', role === 'Admin');
 
-        tabAmb.addEventListener('click', () => {
-          activeRole = 'Ambassador';
-          tabAmb.classList.add('active');
-          tabMtr.classList.remove('active');
-          labelIdType.textContent = 'Ambassador Email or Assigned ID';
-          idInput.placeholder = 'Enter registered Email or Ambassador ID (e.g. AMB-201)';
-          if (submitBtn) submitBtn.innerHTML = `${ui.icon('log-in')} Sign In to Ambassador Dashboard`;
-          idInput.focus();
-        });
+          if (role === 'Admin') {
+            labelIdType.textContent = 'Master Admin Email or Command ID';
+            idInput.placeholder = 'Enter admin@gdgconnect.edu or ADM-001';
+            passInput.placeholder = 'Enter Master Admin Password (admin@gdg2026)';
+            if (!idInput.value || (idInput.value.includes('@') && !idInput.value.includes('admin') && !idInput.value.includes('vansh'))) {
+              idInput.value = 'admin@gdgconnect.edu';
+            }
+            if (submitBtn) {
+              submitBtn.innerHTML = '⚡ Sign In as Master Administrator';
+              submitBtn.className = 'btn btn-primary btn-block btn-admin-submit';
+            }
+            if (securityNotice) {
+              securityNotice.innerHTML = '<strong>Master Administrator Access:</strong> Unrestricted operational control, universal override passkeys, and cloud database access.';
+            }
+            if (securityIcon) securityIcon.textContent = '⚡';
+            passInput.focus();
+          } else if (role === 'Mentor') {
+            labelIdType.textContent = 'Mentor Email or Assigned ID';
+            idInput.placeholder = 'Enter official Gmail or Mentor ID (e.g. MTR-101)';
+            passInput.placeholder = 'Enter your security password';
+            if (idInput.value === 'admin@gdgconnect.edu') idInput.value = '';
+            if (submitBtn) {
+              submitBtn.innerHTML = `${ui.icon('log-in')} Sign In to Mentor Dashboard`;
+              submitBtn.className = 'btn btn-primary btn-block';
+            }
+            if (securityNotice) {
+              securityNotice.innerHTML = '<strong>Mentor Command Portal:</strong> Please sign in using your allotted mentor Gmail or MTR ID.';
+            }
+            if (securityIcon) securityIcon.textContent = '🛡️';
+            idInput.focus();
+          } else {
+            labelIdType.textContent = 'Ambassador Email or Assigned ID';
+            idInput.placeholder = 'Enter registered Email or Ambassador ID (e.g. AMB-201)';
+            passInput.placeholder = 'Enter your security password';
+            if (idInput.value === 'admin@gdgconnect.edu') idInput.value = '';
+            if (submitBtn) {
+              submitBtn.innerHTML = `${ui.icon('log-in')} Sign In to Ambassador Dashboard`;
+              submitBtn.className = 'btn btn-primary btn-block';
+            }
+            if (securityNotice) {
+              securityNotice.innerHTML = '<strong>Confidential Ambassador Portal:</strong> Please sign in using your registered email or assigned AMB ID.';
+            }
+            if (securityIcon) securityIcon.textContent = '🎓';
+            idInput.focus();
+          }
+        };
+
+        tabAmb?.addEventListener('click', () => selectRole('Ambassador'));
+        tabMtr?.addEventListener('click', () => selectRole('Mentor'));
+        tabAdmin?.addEventListener('click', () => selectRole('Admin'));
+        quickAdminBtn?.addEventListener('click', () => selectRole('Admin'));
 
         togglePassBtn?.addEventListener('click', () => {
           const isPass = passInput.type === 'password';
@@ -608,7 +672,7 @@
           // Complete login
           CommunityManager.setSession(authResult.user, authResult.role);
           ui.closeModal();
-          ui.showToast(`Authenticated as ${authResult.user.name}!`, "success", `Welcome to ${authResult.role} Command Center`);
+          ui.showToast(`Authenticated as ${authResult.user.name}!`, "success", `Welcome to ${authResult.role === 'Admin' ? 'Master Admin' : authResult.role} Command Center`);
           CommunityManager.showPortalView();
         });
       });

@@ -212,8 +212,16 @@
     // Sidebar user card
     const roleCardHeader = document.getElementById('sidebar-role-indicator');
     if (roleCardHeader) {
-      roleCardHeader.className = `role-pill ${role === 'Mentor' ? 'role-pill-mentor' : 'role-pill-ambassador'}`;
-      roleCardHeader.textContent = `${role} Mode`;
+      if (role === 'Admin') {
+        roleCardHeader.className = 'role-pill role-pill-admin';
+        roleCardHeader.textContent = 'Master Admin';
+      } else if (role === 'Mentor') {
+        roleCardHeader.className = 'role-pill role-pill-mentor';
+        roleCardHeader.textContent = 'Mentor Mode';
+      } else {
+        roleCardHeader.className = 'role-pill role-pill-ambassador';
+        roleCardHeader.textContent = 'Ambassador Mode';
+      }
     }
 
     const roleUserName = document.getElementById('sidebar-user-name');
